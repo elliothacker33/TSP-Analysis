@@ -5,7 +5,7 @@
  * @file CustomError.h
  */
 
-// STD library
+/**< STD headers >**/
 #include <iostream>
 #include <exception>
 

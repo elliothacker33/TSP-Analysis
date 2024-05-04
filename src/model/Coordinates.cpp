@@ -3,6 +3,7 @@
  * @brief This file contains the implementation of coordinates
  */
 
+/**< Project headers >**/
 #include "Coordinates.h"
 #include "../Exceptions/CustomError.h"
 

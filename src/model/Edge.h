@@ -67,10 +67,10 @@ public:
     void setReverseEdge(Edge* reverse);
 
 private:
-    Vertex* origin;
-    Vertex* destination;
-    double distance;
-    Edge* reverse = nullptr;
+    Vertex* origin; /**< Pointer to the origin vertex >**/
+    Vertex* destination; /**< Pointer to the destination vertex >**/
+    double distance; /**< Distance between two vertices >**/
+    Edge* reverse = nullptr;  /**< Pointer to reverse edge >**/
 };
 
 #endif //TSP_ANALYSIS_EDGE_H

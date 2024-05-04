@@ -6,15 +6,17 @@
 * @brief This file contains the Vertex header.
  */
 
+/**< Project headers >**/
+#include "Coordinates.h"
+
+/**< STD headers >**/
 #include <string>
 #include <vector>
-#include "Coordinates.h"
 using namespace std;
 
 /**
  * Initialization of other classes that operate together with vertex
  */
-class Graph;
 class Edge;
 
 /**
@@ -28,7 +30,7 @@ public:
     /**
      * @constructor Vertex constructor
      */
-    Vertex(int id, string label, Coordinate* coordinates);
+    Vertex(int id, string& label, Coordinate* coordinates);
 
     /**
      * @destructor Vertex destructor
@@ -36,98 +38,105 @@ public:
     ~Vertex();
 
     /**
+     * @brief Get vertex identification id
+     * @return id
+     */
+    [[nodiscard]] int getId() const;
+
+    /**
+     * @brief Set new identification
+     */
+    [[maybe_unused]] void setId(int _id);
+
+    /**
+     * @brief Get vertex label
+     * @return label
+     */
+    [[nodiscard]] const string& getLabel() const;
+
+    /**
+     * @brief Set new label
+     */
+     void setLabel(string& _label);
+
+    /**
+     * @brief Get vertex coordinates
+     * @return coordinate
+     */
+    [[nodiscard]] Coordinate* getCoordinates() const;
+
+    /**
      * @brief Retrieves the number of adjacent edges.
-     *
-     * Time Complexity: O(1)
-     *
      * @return Number of adjacent edges.
      */
-    int getOutDegree() const;
+    [[nodiscard]] int getOutDegree() const;
 
     /**
      * @brief Sets the number of adjacent edges.
-     *
-     * Time Complexity: O(1)
-     *
      * @param outDegree Number of adjacent edges.
      */
-    void setOutDegree(int outDegree);
+    void setOutDegree(int _outDegree);
 
     /**
     * @brief Retrieves the number of incoming edges.
-    *
-    * Time Complexity: O(1)
-    *
     * @return Number of incoming edges.
     */
-    int getInDegree() const;
+    [[nodiscard]] int getInDegree() const;
 
     /**
      * @brief Sets the number of incoming edges.
-     *
-     * Time Complexity: O(1)
-     *
-     * @param outDegree Number of incoming edges.
+     * @param inDegree Number of incoming edges.
      */
-    void setInDegree(int inDegree);
+    void setInDegree(int _inDegree);
 
     /**
     * @brief Checks if the vertex has been visited.
-    *
-    * Time Complexity: O(1)
-    *
-    * @return True if the vertex has been visited, false otherwise.
+    * @if vertex is visited
+     * @return True
+    * @else
+     * @return False
     */
-    bool isVisited() const;
+    [[nodiscard]] bool isVisited() const;
 
     /**
      * @brief Sets the visited state of the vertex.
-     *
-     * Time Complexity: O(1)
-     *
      * @param isVisited The visited state to set.
      */
-    void setVisited(bool isVisited);
+    void setVisited(bool _visited);
 
 
     /**
     * @brief Adds an edge to the vertex.
     *
-    * Time Compleity: O(E)
+    * Time Complexity: O(E)
     *
     * @param t Pointer to the target vertex.
     * @param capacity Capacity of the edge.
     * @param type Type of the edge.
     * @return Pointer to the added edge.
     */
-    Edge* addEdge(Vertex* t, double capacity);
+    Edge* addEdge(Vertex* destination, double capacity);
 
     /**
      * @brief Removes an edge from the vertex.
      *
-     * Time Compleity: O(E)
+     * Time Complexity: O(E)
      *
      * @param e Pointer to the edge to be removed.
      */
-    void removeEdge(const Edge* e);
+    void removeEdge(const Edge* edge);
 
     /**
-     * @brief Sets the path edge of the vertex.
-     *
-     * Time Complexity: O(1)
-     *
-     * @param e Pointer to the path edge.
-     */
+    * @brief Sets the path edge of the vertex.
+    * @param e Pointer to the path edge.
+    */
     void setPath(Edge* e);
 
     /**
      * @brief Gets the path edge of the vertex.
-     *
-     * Time Complexity: O(1)
-     *
      * @return Pointer to the path edge of the vertex.
      */
-    Edge* getPath() const;
+    [[nodiscard]] Edge* getPath() const;
 
 
     /**
@@ -137,7 +146,7 @@ public:
     *
     * @param e Pointer to the incoming edge to be removed.
     */
-    void removeEdgeIncoming(const Edge* e);
+    void removeEdgeIncoming(const Edge* edge);
 
     /**
      * @brief Adds an incoming edge to the vertex.
@@ -147,25 +156,19 @@ public:
      * @param e Pointer to the incoming edge to be added.
      * @return True if the edge was successfully added, false otherwise.
      */
-    bool addIncoming(Edge* e);
+    void addIncoming(Edge* edge);
 
     /**
      * @brief Gets the vector of incoming edges.
-     *
-     * Time Complexity: O(1)
-     *
      * @return Vector of incoming edges.
      */
-    vector<Edge*> getIncoming();
+    [[nodiscard]] vector<Edge*> getIncoming() const;
 
     /**
      * @brief Gets the vector of adjacent edges.
-     *
-     * Time Complexity: O(1)
-     *
      * @return Vector of adjacent edges.
      */
-    vector<Edge*> getAdj();
+    [[nodiscard]] vector<Edge*> getAdj() const;
 
 private:
     /**
@@ -178,7 +181,7 @@ private:
      * @if labels are not defined in the dataset, then label = id.
      * @else label = data set label
      */
-    string label;
+     string label;
 
     /**
      * @brief Pointer to coordinates of the vertex in the graph

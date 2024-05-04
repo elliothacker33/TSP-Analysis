@@ -3,7 +3,9 @@
 * @brief This file contains the implementation of Edge.
  */
 
+/**< Project headers >**/
 #include "Edge.h"
+#include "Vertex.h"
 
 Edge::Edge(Vertex* origin, Vertex* destination, double distance) {
     this->origin = origin;
