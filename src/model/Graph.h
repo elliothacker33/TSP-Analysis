@@ -1,49 +1,82 @@
-//
-// Created by tomas on 03-05-2024.
-//
-
 #ifndef TSP_ANALYSIS_GRAPH_H
 #define TSP_ANALYSIS_GRAPH_H
 
-class Vertex;
+/**
+* @file Graph.h
+* @brief This file contains the Graph header.
+ */
 
-class Edge {
-public:
-    Edge(Vertex* orig, Vertex* dest, double distance);
-    double getDistance() const;
-    Vertex* getDestination() const;
-    Vertex* getOrigin() const;
-    Edge* getReverseEdge() const;
-    void setReverseEdge();
-private:
-    Vertex* origin;
-    Vertex* destination;
-    double distance;
-    Edge* reverse = nullptr;
+/**< Project headers >**/
+#include "Edge.h"
+#include "Vertex.h"
 
-};
+/**< STD headers >**/
+#include <string>
+#include <vector>
+#include <iostream>
 
-class Vertex {
+using namespace std;
 
-};
-
+/**
+ * @class Graph
+ * @brief Represents a graph data structure.
+ *
+ * This class represents a graph data structure consisting of vertices and edges.
+ */
 class Graph {
 public:
+    /**
+    * @brief Destructor for the Graph class.
+    * This destructor cleans up the memory allocated for the graph's vertices and edges.
+    */
     ~Graph();
-    vector<Vertex*> getVertexSet() const;
-    int getNumberOfVertexes() const;
+
+    /**
+     * @brief Gets the vector of vertices in the graph.
+     * @return Vector containing pointers to the vertices in the graph.
+     */
+    [[nodiscard]] vector<Vertex*> getVertexSet() const;
+
+    /**
+    * @brief Gets the number of vertices in the graph.
+    * @return The number of vertices in the graph.
+    */
+    [[nodiscard]] int getNumberOfVertexes() const;
+
+    /**
+    * @brief Adds a vertex to the graph.
+    * @param v Pointer to the vertex to be added.
+    * @return True if the vertex was successfully added, false otherwise.
+    */
     bool addVertex(Vertex* v);
+
+    /**
+    * @brief Reset all visited vertices to false
+    */
+    void resetVisited() const;
+
+    /**
+    * @brief Removes a vertex from the graph.
+    * @param v Pointer to the vertex to be removed.
+    */
     void removeVertex(Vertex* v);
-    void removeEdge(const Edge* e);
-    Edge* addEdge(Vertex* orig, Vertex* dest, int capacity, const string& type);
-    static string getCode(Vertex* v);
-    static string getName(Vertex* v);
 
-protected:
-    vector<Vertex*> vertexSet;
-    int n = 0;
+    /**
+    * @brief Adds an edge between two vertices in the graph.
+    * @param orig Pointer to the origin vertex of the edge.
+    * @param dest Pointer to the destination vertex of the edge.
+    * @param capacity Capacity of the edge.
+    * @param type Type of the edge.
+    * @return Pointer to the added edge.
+    */
+    static Edge* addEdge(Vertex* origin, Vertex* destination, double distance);
+
+    static void removeEdge(const Edge *edge);
+
+
+private:
+    vector<Vertex*> vertexSet; /**< Vector containing pointers to the vertices of the graph. */
+    int n = 0; /**< The number of vertices in the graph. */
+
 };
-
-
-
 #endif //TSP_ANALYSIS_GRAPH_H
