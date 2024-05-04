@@ -9,4 +9,6 @@ add_executable(TSP_Analysis main.cpp
         src/model/Graph.cpp
         src/model/Graph.h
         src/model/Edge.cpp
-        src/model/Edge.h)
+        src/model/Edge.h
+        src/model/Vertex.cpp
+        src/model/Vertex.h)

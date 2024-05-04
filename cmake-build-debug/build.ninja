@@ -73,6 +73,12 @@ build CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o: CXX_COMPILER__TSP_Analys
   OBJECT_DIR = CMakeFiles/TSP_Analysis.dir
   OBJECT_FILE_DIR = CMakeFiles/TSP_Analysis.dir/src/model
 
+build CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o: CXX_COMPILER__TSP_Analysis_unscanned_Debug /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/src/model/Vertex.cpp || cmake_object_order_depends_target_TSP_Analysis
+  DEP_FILE = CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/TSP_Analysis.dir
+  OBJECT_FILE_DIR = CMakeFiles/TSP_Analysis.dir/src/model
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TSP_Analysis
@@ -81,7 +87,7 @@ build CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o: CXX_COMPILER__TSP_Analys
 #############################################
 # Link the executable TSP_Analysis
 
-build TSP_Analysis: CXX_EXECUTABLE_LINKER__TSP_Analysis_Debug CMakeFiles/TSP_Analysis.dir/main.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Graph.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o
+build TSP_Analysis: CXX_EXECUTABLE_LINKER__TSP_Analysis_Debug CMakeFiles/TSP_Analysis.dir/main.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Graph.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/TSP_Analysis.dir
   POST_BUILD = :
