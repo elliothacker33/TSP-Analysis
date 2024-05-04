@@ -11,4 +11,9 @@ add_executable(TSP_Analysis main.cpp
         src/model/Edge.cpp
         src/model/Edge.h
         src/model/Vertex.cpp
-        src/model/Vertex.h)
+        src/model/Vertex.h
+        src/model/Coordinates.cpp
+        src/model/Coordinates.h
+        src/Exceptions/CustomError.cpp
+        src/Exceptions/CustomError.h
+)
