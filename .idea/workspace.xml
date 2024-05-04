@@ -22,11 +22,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c32ba1fa-c61d-4cb8-9e26-98f7b6a20f2c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Coordinates.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Coordinates.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Edge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Edge.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Edge.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Edge.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Vertex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Vertex.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Vertex.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Vertex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/CustomError.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/CustomError.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Coordinates.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Coordinates.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +94,7 @@
       <workItem from="1714757433833" duration="4063000" />
       <workItem from="1714761505739" duration="798000" />
       <workItem from="1714841230819" duration="179000" />
-      <workItem from="1714842132521" duration="10611000" />
+      <workItem from="1714842132521" duration="11882000" />
     </task>
     <servers />
   </component>

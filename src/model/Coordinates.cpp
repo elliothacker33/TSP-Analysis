@@ -13,14 +13,14 @@
         this->latitude = latitude;
     }
     else {
-        throw CustomError("Semantic error: Latitude must be between values -90 and 90 (inclusive)");
+        throw CustomError("Latitude must be between values -90 and 90 (inclusive)", ERROR);
     }
 
     if (longitude >= -180.0 && longitude <= 180.0){
         this->longitude = longitude;
     }
     else{
-        throw CustomError("Semantic error: Longitude must be between values -180 and 180 (inclusive)");
+        throw CustomError("Longitude must be between values -180 and 180 (inclusive)", ERROR);
     }
 }
 
@@ -37,7 +37,7 @@ void Coordinate::setLatitude(double _latitude) {
         this->latitude = _latitude;
     }
     else{
-        throw CustomError("Semantic error: Latitude must be between values -90 and 90 (inclusive)");
+        throw CustomError("Latitude must be between values -90 and 90 (inclusive)", ERROR);
     }
 }
 
@@ -46,7 +46,7 @@ void Coordinate::setLongitude(double _longitude) {
         this->longitude = _longitude;
     }
     else{
-        throw CustomError("Semantic error: Longitude must be between values -180 and 180 (inclusive)");
+        throw CustomError("Longitude must be between values -180 and 180 (inclusive)", ERROR);
     }
 }
 

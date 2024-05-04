@@ -45,8 +45,8 @@ public:
     void setLongitude(double longitude);
 
 private:
-    double latitude; /**< Latitude field >*/
-    double longitude; /**< Longitude field >*/
+    double latitude; /**< Latitude field >**/
+    double longitude; /**< Longitude field >**/
 };
 
 

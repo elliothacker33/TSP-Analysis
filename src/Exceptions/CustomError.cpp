@@ -6,7 +6,13 @@
 /**< Project headers >**/
 #include "CustomError.h"
 
-
 const char* CustomError::what() const noexcept {
-    return this->message.c_str();
+    if (this->type == ERROR){
+        return ("ERROR: " + this->message).c_str();
+    }
+    else if (this->type == INFO){
+        return ("INFO: " + this->message).c_str();
+    }
+    return ("ERROR: " + this->message).c_str();
+
 }
