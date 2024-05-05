@@ -71,6 +71,10 @@ public:
     */
     static Edge* addEdge(Vertex* origin, Vertex* destination, double distance);
 
+    /**
+     * @brrief Remove edge from the graph
+     * @param edge
+     */
     static void removeEdge(const Edge *edge);
 
 

@@ -16,4 +16,8 @@ add_executable(TSP_Analysis main.cpp
         src/model/Coordinates.h
         src/Exceptions/CustomError.cpp
         src/Exceptions/CustomError.h
+        src/controller/Parser.cpp
+        src/controller/Parser.h
+        src/controller/HashTable.cpp
+        src/controller/HashTable.h
 )

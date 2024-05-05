@@ -22,7 +22,14 @@
   <component name="ChangeListManager">
     <list default="true" id="c32ba1fa-c61d-4cb8-9e26-98f7b6a20f2c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Graph.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Graph.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Manager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Manager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Graph.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Graph.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,12 +79,12 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="TSP_Analysis" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TSP_Analysis" TARGET_NAME="TSP_Analysis" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TSP_Analysis" RUN_TARGET_NAME="TSP_Analysis">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TSP_Analysis" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TSP_Analysis" TARGET_NAME="TSP_Analysis" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TSP_Analysis" RUN_TARGET_NAME="TSP_Analysis">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -94,7 +101,8 @@
       <workItem from="1714757433833" duration="4063000" />
       <workItem from="1714761505739" duration="798000" />
       <workItem from="1714841230819" duration="179000" />
-      <workItem from="1714842132521" duration="14405000" />
+      <workItem from="1714842132521" duration="14658000" />
+      <workItem from="1714906451672" duration="13979000" />
     </task>
     <servers />
   </component>

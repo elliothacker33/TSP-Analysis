@@ -1,3 +1,17 @@
 # ninja log v5
 252	298	1714757442026712441	TSP_Analysis	c309320d59ac360d
 0	252	1714757441982712357	CMakeFiles/TSP_Analysis.dir/main.cpp.o	dbc59ca1700e0d2a
+1	414	1714921330654342463	CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o	ed35fdd1cf44c634
+1	529	1714921330770344729	CMakeFiles/TSP_Analysis.dir/src/model/Coordinates.cpp.o	ea19530851bf9ef6
+0	529	1714921330770344729	CMakeFiles/TSP_Analysis.dir/main.cpp.o	dbc59ca1700e0d2a
+1	557	1714921330798345276	CMakeFiles/TSP_Analysis.dir/src/model/Graph.cpp.o	bf7270b6f1e98f46
+414	702	1714921330942348088	CMakeFiles/TSP_Analysis.dir/src/Exceptions/CustomError.cpp.o	89d1b41ca9bf951
+1	773	1714921331014349495	CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o	175ac8943dcc6aae
+530	806	1714921331046350121	CMakeFiles/TSP_Analysis.dir/src/controller/HashTable.cpp.o	e562abbc9e135ee
+0	403	1714921393535628324	CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o	ce9bc5517dfa0191
+0	474	1714921393603629774	CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o	b5f1c451dc1d4704
+474	578	1714921393707631992	TSP_Analysis	620047ba5fc2a7f9
+1	578	1714921405903894108	CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o	b5f1c451dc1d4704
+578	643	1714921405967895493	TSP_Analysis	620047ba5fc2a7f9
+0	299	1714921428740395274	CMakeFiles/TSP_Analysis.dir/main.cpp.o	dbc59ca1700e0d2a
+299	362	1714921428800396608	TSP_Analysis	620047ba5fc2a7f9
