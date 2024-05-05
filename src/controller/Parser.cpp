@@ -138,9 +138,8 @@ void Parser::importEdges(const string &file_path){
         Vertex* origin = vertices_table->search(origin_id);
         Vertex* destination = vertices_table->search(destination_id);
         graph->addEdge(origin,destination,distance);
-
-
     }
+    fin.close();
 }
 
 void Parser::importVerticesWithEdges(const string &file_path) {
@@ -156,6 +155,7 @@ void Parser::importVerticesWithEdges(const string &file_path) {
     string line;
     string word;
     bool firstLineToDiscard = isFirstLineToDiscard(file_path);
+    cout << firstLineToDiscard << endl;
     if (firstLineToDiscard){
         getline(fin,line); // Discard first line
     }
@@ -179,14 +179,28 @@ void Parser::importVerticesWithEdges(const string &file_path) {
             int origin_id = stoi(row[0]);
             int destination_id = stoi(row[1]);
             double distance = stod(row[2]);
-            auto* origin = new Vertex(origin_id, (row.size() == 5) ? row[3] : row[0], nullptr);
-            auto* destination = new Vertex(destination_id, (row.size() == 5) ? row[4] : row[1], nullptr);
-            graph->addVertex(origin);
-            graph->addVertex(destination);
-            graph->addEdge(origin, destination, distance);
+
+            // Origin vertex
+            Vertex* findOrigin = vertices_table->search(origin_id);
+            if (findOrigin == nullptr){
+                findOrigin = new Vertex(origin_id, (row.size() == 5) ? row[3] : row[0], nullptr);
+                graph->addVertex(findOrigin);
+                vertices_table->insertBucket(origin_id,findOrigin);
+            }
+
+            // Destination vertex
+            Vertex* findDestination = vertices_table->search(destination_id);
+            if (findDestination == nullptr){
+                findDestination = new Vertex(destination_id, (row.size() == 5) ? row[4] : row[1], nullptr);
+                graph->addVertex(findDestination);
+                vertices_table->insertBucket(destination_id,findDestination);
+            }
+
+            graph->addEdge(findOrigin, findDestination, distance);
         }
 
     }
+    fin.close();
 
 }
 
