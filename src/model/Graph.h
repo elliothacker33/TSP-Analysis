@@ -69,13 +69,13 @@ public:
     * @param type Type of the edge.
     * @return Pointer to the added edge.
     */
-    static Edge* addEdge(Vertex* origin, Vertex* destination, double distance);
+    Edge* addEdge(Vertex* origin, Vertex* destination, double distance);
 
     /**
      * @brrief Remove edge from the graph
      * @param edge
      */
-    static void removeEdge(const Edge *edge);
+    void removeEdge(const Edge *edge);
 
 
 private:

@@ -1,13 +1,13 @@
 #include "Manager.h"
 
-Manager::Manager(int n) {
+Manager::Manager(int number_of_vertices) {
     this->graph = new Graph();
-    this->vertices_table = new HashTable(n);
+    this->vertices_table = new HashTable(number_of_vertices);
     this->parser = new Parser(graph,vertices_table);
 
 }
 
-Manager::~Manager(){
+Manager::~Manager() {
     // Delete graph/parser/hash_table
     delete this->vertices_table;
     delete this->graph;
@@ -27,7 +27,7 @@ HashTable* Manager::getVerticesTable() const {
 }
 
 
-void Manager::resetManager(int n) {
+void Manager::resetManager(int number_of_vertices) {
     // Delete graph/parser/hash_table
     delete this->vertices_table;
     delete this->graph;
@@ -35,7 +35,7 @@ void Manager::resetManager(int n) {
 
     // Create new ones
     this->graph = new Graph();
-    this->vertices_table = new HashTable(n);
+    this->vertices_table = new HashTable(number_of_vertices);
     this->parser = new Parser(graph,vertices_table);
 }
 void Manager::resetGraph() {

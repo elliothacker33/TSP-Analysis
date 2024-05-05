@@ -19,7 +19,7 @@ public:
      * @constructor Constructor for class manager
      * @param n
      */
-    explicit Manager(int n);
+    explicit Manager(int number_of_vertices);
 
     /**
      * Get the graph used by the managers
