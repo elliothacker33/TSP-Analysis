@@ -84,16 +84,18 @@ void Parser::importVertices(const string &file_path, int number_of_vertices){
             continue;
         }
 
-        // Parse the data received
-        int id = stoi(row[0]);
-        double latitude = stod(row[1]);
-        double longitude = stod(row[2]);
+        if (row.size() == 3){
+            int id = stoi(row[0]);
+            double latitude = stod(row[1]);
+            double longitude = stod(row[2]);
 
-        // Add vertex
-        auto* coordinate = new Coordinate(latitude,longitude);
-        auto* v = new Vertex(id,row[0],coordinate);
-        graph->addVertex(v);
-
+            // Add vertex
+            auto* coordinate = new Coordinate(latitude,longitude);
+            auto* v = new Vertex(id,row[0],coordinate);
+            graph->addVertex(v);
+            vertices_table->insertBucket(id,v);
+        }
+        count--;
     }
     fin.close();
 }
@@ -131,13 +133,14 @@ void Parser::importEdges(const string &file_path){
         if (row.empty()){
             continue;
         }
-
-        int origin_id = stoi(row[0]);
-        int destination_id = stoi(row[1]);
-        double distance = stod(row[2]);
-        Vertex* origin = vertices_table->search(origin_id);
-        Vertex* destination = vertices_table->search(destination_id);
-        graph->addEdge(origin,destination,distance);
+        if (row.size() == 3) {
+            int origin_id = stoi(row[0]);
+            int destination_id = stoi(row[1]);
+            double distance = stod(row[2]);
+            Vertex* origin = vertices_table->search(origin_id);
+            Vertex* destination = vertices_table->search(destination_id);
+            graph->addEdge(origin, destination, distance);
+        }
     }
     fin.close();
 }
