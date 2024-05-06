@@ -77,6 +77,8 @@ public:
      */
     void removeEdge(const Edge *edge);
 
+    Edge* getEdgeFromGraph(Vertex* origin, Vertex* destination);
+
 
 private:
     vector<Vertex*> vertexSet; /**< Vector containing pointers to the vertices of the graph. */

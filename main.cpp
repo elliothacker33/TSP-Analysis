@@ -6,10 +6,10 @@ int main() {
     int size = 5;
     auto* m = new Manager(size);
     m->getParser()->importFiles("../data/Toy-Graphs/Toy-Graphs/tourism.csv",size,"",true);
-    Result r = m->getCoder()->backtracking(0);
-    cout << r.distance << " " << r.time_spent.elapsed_real << " " << r.time_spent.elapsed_cpu<< endl;
-    for(auto v : r.path){
-        cout << v->getId() << " ,";
+    vector<Vertex*> tour;
+    m->getCoder()->buildInitialRandomTour(0,tour);
+    for (auto v: tour){
+        cout << v->getId() << endl;
     }
     cout << endl;
     delete m;

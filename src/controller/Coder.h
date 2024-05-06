@@ -4,6 +4,13 @@
 /**< Project header >**/
 #include "HashTable.h"
 #include "../model/Graph.h"
+#include "../Exceptions/CustomError.h"
+
+struct KherniganCell{
+    Vertex* v; /**< Current vertex >**/
+    int i; /**< Current number of edges in trail >**/
+    double g; /**< Current trail gain >**/
+};
 
 /**
  * @struct Time
@@ -21,8 +28,9 @@ struct Time {
  * @param distance
  * @param time_spent
  */
+ typedef vector<Edge*> Tour;
 struct Result {
-    vector<Vertex*> path;
+    Tour tour;
     double distance;
     Time time_spent;
 };
@@ -64,11 +72,25 @@ public:
     Result cristofides(int start_vertex);
     Result nearestNeighbor(int start_vertex);
     Result bat_algorithm(int start_vertex);
+    Result linKhernigan(int start_vertex);
+
+
+
 
 private:
     void startTimer(timespec& start_real, timespec& start_cpu);
     Time stopTimer(timespec& start_real, timespec& start_cpu, double& elapsed_real, double& elapsed_cpu);
-    void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, vector<Vertex*>& path, vector<Vertex*>& min_path);
+    bool isGraphComplete();
+    bool isGraphSymmetric();
+    double calculateTourCost(const Tour& tour);
+    void buildInitialRandomTour(int start_vertex, Tour &initialTour);
+    bool edgeAlreadyOnTour(Edge* e, Tour& t);
+    bool isHamiltonian(const Tour& t);
+    Tour convertTrailToTour(vector<Vertex*> trail);
+    Tour unionEdgesTourTrail(const Tour& t, const Tour& trail_converted);
+    Tour differenceTour(const Tour& t1, const Tour& t2);
+    void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);
+    void branchBoundHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);
     Graph* graph;
     HashTable* vertices_table;
 };

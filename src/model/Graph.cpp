@@ -66,4 +66,13 @@ Edge* Graph::addEdge(Vertex *orig, Vertex *dest, double distance) {
     return result;
 }
 
+Edge *Graph::getEdgeFromGraph(Vertex *origin, Vertex *destination) {
+    for (auto e : origin->getAdj()){
+        if (e->getDestination() == destination){
+            return e;
+        }
+    }
+    return nullptr;
+}
+
 

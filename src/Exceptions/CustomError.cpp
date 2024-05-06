@@ -13,6 +13,9 @@ const char* CustomError::what() const noexcept {
     else if (this->type == INFO){
         return ("INFO: " + this->message).c_str();
     }
+    else if (this->type == SEMANTIC_ERROR){
+        return ("SEMANTIC ERROR: " + this->message).c_str();
+    }
     return ("ERROR: " + this->message).c_str();
 
 }
