@@ -13,12 +13,15 @@
 class Parser {
 public:
     Parser(Graph* graph, HashTable* table);
+
     /**
      * @brief This method is a interface function that builds a Graph from a file
      * @param vertices_path -> Vertices file path
      * @param edges_path -> Edges file path
+     * @param number_of_vertices -> number of vertices to process
+     * @param symmetric_or_real -> Is the graph symmetric edges, or just save what needs to be processed. (True - symmetric, False - real)
      */
-    void importFiles(const string& vertices_path, int number_of_vertices, const string& edges_path);
+    void importFiles(const string& vertices_path, int number_of_vertices, const string& edges_path, bool symmetric_or_real);
 
 private:
 
@@ -33,15 +36,17 @@ private:
      * @breif Import edges
      * @param file_path - edges path
      * @param graph - pointer to graph
+     * @param symmetric_or_real -> Is the graph symmetric edges, or just save what needs to be processed (True - symmetric, False - real).
      */
-    void importEdges(const string& file_path);
+    void importEdges(const string& file_path, bool symmetric_or_real);
 
     /**
      * Import vertices and edges at same time.
      * @param file_path - path containing both vertices and edges
      * @param graph - pointer to graph
+     * @param symmetric_or_real -> Is the graph symmetric edges, or just save what needs to be processed (True - symmetric, False - real).
      */
-    void importVerticesWithEdges(const string& file_path);
+    void importVerticesWithEdges(const string& file_path, bool symmetric_or_real);
 
     Graph* graph;
     HashTable* vertices_table;

@@ -1,11 +1,16 @@
-
 #ifndef TSP_ANALYSIS_MANAGER_H
 #define TSP_ANALYSIS_MANAGER_H
+/**
+ * @file Manager.h
+ * @brief Header for manager
+ */
 
 /**< Project headers >**/
 #include "../model/Graph.h"
 #include "Parser.h"
 #include "HashTable.h"
+#include "Coder.h"
+#include "Visualizer.h"
 /**< STD headers >**/
 #include <unordered_map>
 
@@ -34,10 +39,23 @@ public:
     [[nodiscard]] Parser* getParser() const;
 
     /**
-     * Get vertices used by manager
+     * @brief Get vertices used by manager
+     * @note Our hashtable uses open-addressing with linear probing
      * @return vertices
      */
     [[nodiscard]] HashTable* getVerticesTable() const;
+
+    /**
+     * @brief Get coder, interface for algorithms
+     */
+     [[nodiscard]] Coder* getCoder() const;
+
+     /**
+      * @brief Visualizer is used to display better the results obtained in the coder
+      * Algorithm class uses the results stored in the Coder
+      */
+     [[nodiscard]] Visualizer* getVisualizer() const;
+
 
     /**
      * @brief Reset graph
@@ -55,24 +73,11 @@ public:
      */
     ~Manager();
 
-protected:
+private:
     Parser* parser; /**< Parser >**/
     Graph* graph;  /**< Graph >**/
     HashTable* vertices_table; /**< Vertices table >**/
+    Coder* coder; /**< Coder >**/
 };
-
-
-
-
-/*
- *
-class CodeManager{
-public:
-
-};
- */
-
-
-// It's also possible the need for AnalysisDataManager
 
 #endif //TSP_ANALYSIS_MANAGER_H

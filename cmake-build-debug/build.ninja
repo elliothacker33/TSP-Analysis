@@ -103,6 +103,18 @@ build CMakeFiles/TSP_Analysis.dir/src/controller/HashTable.cpp.o: CXX_COMPILER__
   OBJECT_DIR = CMakeFiles/TSP_Analysis.dir
   OBJECT_FILE_DIR = CMakeFiles/TSP_Analysis.dir/src/controller
 
+build CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.o: CXX_COMPILER__TSP_Analysis_unscanned_Debug /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/src/controller/Coder.cpp || cmake_object_order_depends_target_TSP_Analysis
+  DEP_FILE = CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/TSP_Analysis.dir
+  OBJECT_FILE_DIR = CMakeFiles/TSP_Analysis.dir/src/controller
+
+build CMakeFiles/TSP_Analysis.dir/src/controller/Visualizer.cpp.o: CXX_COMPILER__TSP_Analysis_unscanned_Debug /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/src/controller/Visualizer.cpp || cmake_object_order_depends_target_TSP_Analysis
+  DEP_FILE = CMakeFiles/TSP_Analysis.dir/src/controller/Visualizer.cpp.o.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/TSP_Analysis.dir
+  OBJECT_FILE_DIR = CMakeFiles/TSP_Analysis.dir/src/controller
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TSP_Analysis
@@ -111,7 +123,7 @@ build CMakeFiles/TSP_Analysis.dir/src/controller/HashTable.cpp.o: CXX_COMPILER__
 #############################################
 # Link the executable TSP_Analysis
 
-build TSP_Analysis: CXX_EXECUTABLE_LINKER__TSP_Analysis_Debug CMakeFiles/TSP_Analysis.dir/main.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Graph.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Coordinates.cpp.o CMakeFiles/TSP_Analysis.dir/src/Exceptions/CustomError.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/HashTable.cpp.o
+build TSP_Analysis: CXX_EXECUTABLE_LINKER__TSP_Analysis_Debug CMakeFiles/TSP_Analysis.dir/main.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Graph.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o CMakeFiles/TSP_Analysis.dir/src/model/Coordinates.cpp.o CMakeFiles/TSP_Analysis.dir/src/Exceptions/CustomError.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/HashTable.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.o CMakeFiles/TSP_Analysis.dir/src/controller/Visualizer.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/TSP_Analysis.dir
   POST_BUILD = :

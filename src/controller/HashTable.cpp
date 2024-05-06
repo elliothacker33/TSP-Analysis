@@ -1,4 +1,30 @@
+/**
+ * @file HashTable.cpp
+ * @brief Implementation of the hashTable
+ */
+
+/**< Project headers >**/
 #include "HashTable.h"
+
+
+HashTable::HashTable(int real_capacity) {
+    capacity = real_capacity*2; // 2 factor on table capacity for better results
+    table = new HashBucket * [capacity];
+    for (int i = 0; i < capacity; i++){
+        table[i] = nullptr;
+    }
+    dummy = new HashBucket(-1, nullptr);
+}
+
+HashTable::~HashTable() {
+    for(int i = 0; i < capacity; i++){
+        if (table[i] != nullptr && table[i] != dummy) {
+            delete table[i];
+        }
+    }
+    delete [] table;
+    delete dummy;
+}
 
 bool HashBucket::operator==(const HashBucket& bucket) const {
     return this->id == bucket.getId();
@@ -12,13 +38,18 @@ Vertex* HashBucket::getVertex() const{
     return this->vertex;
 }
 
-HashTable::HashTable(int real_capacity) {
-    capacity = real_capacity*2; // 2 factor on table capacity for better results
-    table = new HashBucket * [capacity];
-    for (int i = 0; i < capacity; i++){
-        table[i] = nullptr;
-    }
-    dummy = new HashBucket(-1, nullptr);
+int HashTable::getHash(int id) const{
+    return id%capacity;
+}
+
+int HashTable::getSize() const {
+    return size;
+}
+
+bool HashTable::isEmpty() const {
+    if (size == 0)
+        return true;
+    return false;
 }
 
 void HashTable::insertBucket(int _id, Vertex* _vertex) {
@@ -68,28 +99,5 @@ Vertex* HashTable::search(int _id){
     return nullptr;
 }
 
-int HashTable::getHash(int id) const{
-    return id%capacity;
-}
-
-int HashTable::getSize() const {
-    return size;
-}
-
-bool HashTable::isEmpty() const {
-    if (size == 0)
-        return true;
-    return false;
-}
-
-HashTable::~HashTable() {
-    for(int i = 0; i < capacity; i++){
-        if (table[i] != nullptr && table[i] != dummy) {
-            delete table[i];
-        }
-    }
-    delete [] table;
-    delete dummy;
-}
 
 

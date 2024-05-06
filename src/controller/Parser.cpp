@@ -5,15 +5,14 @@ Parser::Parser(Graph *graph, HashTable *table) {
     this->vertices_table = table;
 }
 
-void Parser::importFiles(const string &vertices_path, int number_of_vertices, const string &edges_path) {
-
+void Parser::importFiles(const string &vertices_path, int number_of_vertices, const string &edges_path, bool symmetric_or_real) {
     // Build graph
     if (edges_path.empty()){
-        importVerticesWithEdges(vertices_path);
+        importVerticesWithEdges(vertices_path,symmetric_or_real);
     }
     else{
         importVertices(vertices_path,number_of_vertices);
-        importEdges(edges_path);
+        importEdges(edges_path,symmetric_or_real);
     }
 }
 
@@ -45,9 +44,6 @@ bool isFirstLineToDiscard(const string& file_path){
     return true;
 }
 
-/**
- * @note @if number_of_vertices == -1, means that we explore all file
- */
 void Parser::importVertices(const string &file_path, int number_of_vertices){
     fstream fin;
     fin.open(file_path,ios::in);
@@ -68,7 +64,7 @@ void Parser::importVertices(const string &file_path, int number_of_vertices){
         getline(fin,line); // Discard first line
     }
 
-    while(getline(fin,line) && (count > 0 || count == -1)){
+    while(getline(fin,line) && count > 0 ){
         row.clear();
         // Carriage return
         if (line.at(line.size()-1) == '\r'){
@@ -100,7 +96,7 @@ void Parser::importVertices(const string &file_path, int number_of_vertices){
     fin.close();
 }
 
-void Parser::importEdges(const string &file_path){
+void Parser::importEdges(const string &file_path, bool symmetric_or_real){
     fstream fin;
     fin.open(file_path, ios::in);
 
@@ -140,12 +136,15 @@ void Parser::importEdges(const string &file_path){
             Vertex* origin = vertices_table->search(origin_id);
             Vertex* destination = vertices_table->search(destination_id);
             graph->addEdge(origin, destination, distance);
+            if (symmetric_or_real){
+                graph->addEdge(destination,origin,distance);
+            }
         }
     }
     fin.close();
 }
 
-void Parser::importVerticesWithEdges(const string &file_path) {
+void Parser::importVerticesWithEdges(const string &file_path, bool symmetric_or_real) {
     fstream fin;
     fin.open(file_path,ios::in);
 
@@ -158,7 +157,6 @@ void Parser::importVerticesWithEdges(const string &file_path) {
     string line;
     string word;
     bool firstLineToDiscard = isFirstLineToDiscard(file_path);
-    cout << firstLineToDiscard << endl;
     if (firstLineToDiscard){
         getline(fin,line); // Discard first line
     }
@@ -200,6 +198,9 @@ void Parser::importVerticesWithEdges(const string &file_path) {
             }
 
             graph->addEdge(findOrigin, findDestination, distance);
+            if (symmetric_or_real){
+                graph->addEdge(findDestination,findOrigin,distance);
+            }
         }
 
     }
