@@ -53,40 +53,39 @@ public:
      * @Complexity -
      * @return Result
      */
-    Result backtracking(int start_vertex);
+    Result backtracking(int start_vertex = 0);
 
     /**
      * @brief Branch and Bound algorithm (more efficient than backtracking)
      * @Complexity -
      * @return Result
      */
-    Result branchBound(int start_vertex);
+    Result branchBound(int start_vertex = 0);
 
     /**
      * @brief
      * @Complexity -
      * @return
      */
-    Result triangularAproximation(int start_vertex);
-    Result held_karp(int start_vertex);
-    Result cristofides(int start_vertex);
-    Result nearestNeighbor(int start_vertex);
-    Result bat_algorithm(int start_vertex);
-    Result linKhernigan(int start_vertex);
+    Result triangularAproximation(int start_vertex = 0);
+    Result held_karp(int start_vertex = 0);
+    Result cristofides(int start_vertex = 0);
+    Result nearestNeighbor(int start_vertex = 0);
+    Result linKhernigan(int start_vertex = 0);
 
 
 
 
 private:
-    void startTimer(timespec& start_real, timespec& start_cpu);
-    Time stopTimer(timespec& start_real, timespec& start_cpu, double& elapsed_real, double& elapsed_cpu);
+    static void startTimer(timespec& start_real, timespec& start_cpu);
+    static Time stopTimer(timespec& start_real, timespec& start_cpu, double& elapsed_real, double& elapsed_cpu);
     bool isGraphComplete();
     bool isGraphSymmetric();
     double calculateTourCost(const Tour& tour);
-    void buildInitialRandomTour(int start_vertex, Tour &initialTour);
+    void buildInitialRandomTour(Tour &initialTour, int start_vertex);
     bool edgeAlreadyOnTour(Edge* e, Tour& t);
     bool isHamiltonian(const Tour& t);
-    Tour convertTrailToTour(vector<Vertex*> trail);
+    static double haversianDistance(Vertex* origin, Vertex* destination);
     Tour unionEdgesTourTrail(const Tour& t, const Tour& trail_converted);
     Tour differenceTour(const Tour& t1, const Tour& t2);
     void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);

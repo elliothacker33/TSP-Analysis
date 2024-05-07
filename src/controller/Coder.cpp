@@ -2,16 +2,56 @@
 #include <limits>
 #include <stack>
 #include <random>
+#include <cmath>
 #include <algorithm>
 
+
 Coder::Coder(Graph *graph, HashTable *vertices_table) {
-    this->graph = graph;
-    this->vertices_table = vertices_table;
+    if (graph != nullptr){
+        this->graph = graph;
+    }
+    else{
+        throw CustomError("NullPtr error - graph initialization", ERROR);
+    }
+   if (vertices_table != nullptr){
+       this->vertices_table = vertices_table;
+   }
+   else{
+       throw CustomError("NullPtr error - vertices table initialization", ERROR);
+   }
 }
+
+/**
+ * @note Distance between two vertices
+ */
+
+double Coder::haversianDistance(Vertex* origin, Vertex* destination){
+    if (origin == nullptr || destination == nullptr){
+        throw CustomError("NullPtr error - origin/destination are null ptr", ERROR);
+    }
+    Coordinate* originCoord = origin->getCoordinates();
+    Coordinate* destinationCoord = destination->getCoordinates();
+
+    if (origin->getCoordinates() == nullptr || destination->getCoordinates()){
+        throw CustomError("NullPtr error - coordinates are null ptr", ERROR);
+    }
+
+    double delta_lat = (destinationCoord->getLatitude() - originCoord->getLatitude()) * M_PI / 180;
+    double delta_lon = (destinationCoord->getLongitude() - originCoord->getLatitude()) * M_PI / 180;
+    double a = pow(sin(delta_lat / 2), 2) + pow(sin(delta_lon / 2), 2) * cos(originCoord->getLatitude()) * cos(destinationCoord->getLatitude());
+    double c = 2 * asin(sqrt(a));
+    double d = 6371.0 * c;
+    return d;
+}
+
+/**
+ * @note Timer implementation
+*/
 void Coder::startTimer(timespec& start_real, timespec& start_cpu) {
     clock_gettime(CLOCK_REALTIME, &start_real);
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start_cpu);
 }
+
 
 Time Coder::stopTimer(timespec& start_real, timespec& start_cpu, double& elapsed_real, double& elapsed_cpu) {
     timespec end_real{}, end_cpu{};
@@ -19,32 +59,48 @@ Time Coder::stopTimer(timespec& start_real, timespec& start_cpu, double& elapsed
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end_cpu);
     clock_gettime(CLOCK_REALTIME, &end_real);
 
-    elapsed_real = (end_real.tv_sec - start_real.tv_sec) +
-                   (end_real.tv_nsec - start_real.tv_nsec) / 1e9;
+    elapsed_real = static_cast<double> (end_real.tv_sec - start_real.tv_sec) +
+                   static_cast<double> (end_real.tv_nsec - start_real.tv_nsec) / 1e9;
 
-    elapsed_cpu = (end_cpu.tv_sec - start_cpu.tv_sec) +
-                  (end_cpu.tv_nsec - start_cpu.tv_nsec) / 1e9;
+    elapsed_cpu = static_cast<double> (end_cpu.tv_sec - start_cpu.tv_sec) +
+                  static_cast<double> (end_cpu.tv_nsec - start_cpu.tv_nsec) / 1e9;
 
     return {elapsed_real,elapsed_cpu};
 
 }
+
+/**
+ * @note Graph checks
+ */
 bool Coder::isGraphComplete(){
     int n = graph->getNumberOfVertexes();
-    for (Vertex* v: graph->getVertexSet()){
-        if (v->getAdj().size() != n-1){
-            return false;
+    return std::all_of(graph->getVertexSet().begin(), graph->getVertexSet().end(), [n](Vertex* v) {
+        if (v == nullptr){
+            throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
         }
-    }
-    return true;
+        return v->getAdj().size() == n - 1;
+    });
 }
+
 
 bool Coder::isGraphSymmetric(){
     for (Vertex* v : graph->getVertexSet()){
+        if (v == nullptr){
+            throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+        }
         for (Edge* e : v->getAdj()){
+            if (e == nullptr){
+                throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
+            }
             bool check = false;
             for (Edge* ed : e->getDestination()->getAdj()){
-                if (ed->getDestination() == e->getOrigin() && ed->getDistance() == e->getDistance()){
-                    check = true;
+                if (ed == nullptr){
+                    throw CustomError("NullPtr error: edge ed is a nullptr", ERROR);
+                }
+                if (ed->getDestination() == e->getOrigin()){
+                    if (ed->getDistance() == e->getDistance()){
+                        check = true;
+                    }
                     break;
                 }
             }
@@ -55,11 +111,21 @@ bool Coder::isGraphSymmetric(){
     return true;
 }
 
+/**
+  @note Backtracking implementation
+ */
 void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path) {
+    if (start == nullptr || current_vertex == nullptr){
+        throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+    }
+
     if (path.size() == graph->getNumberOfVertexes()){
 
         double distance_to_origin;
         for (Edge* e : current_vertex->getAdj()){
+            if (e == nullptr){
+                throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
+            }
             if (e->getDestination()->getId() == start->getId()){
                 distance_to_origin = e->getDistance();
                 path.push_back(e);
@@ -68,7 +134,7 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
         }
 
         double total_distance = current_distance + distance_to_origin;
-        if (total_distance< min_distance){
+        if (total_distance < min_distance){
             min_distance = total_distance;
             min_path.assign(path.begin(), path.end());
         }
@@ -77,8 +143,14 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
     }
 
     for (Edge* e : current_vertex->getAdj()){
-        // Not visited
+        if (e == nullptr){
+            throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
+        }
         Vertex* destination = e->getDestination();
+        if (destination == nullptr){
+            throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+        }
+
         if (!destination->isVisited()){
             destination->setVisited(true);
             current_distance+= e->getDistance();
@@ -91,10 +163,15 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
             path.pop_back();
         }
     }
+
 }
 
 Result Coder::backtracking(int start_vertex) {
     // Initialize Timer
+    if (!isGraphComplete()){
+
+    }
+
     timespec start_real{};
     timespec start_cpu{};
     double elapsed_real, elapsed_cpu;
@@ -102,6 +179,10 @@ Result Coder::backtracking(int start_vertex) {
 
     // Set all vertex to visited false
     for (Vertex* v : graph->getVertexSet()){
+        if (v == nullptr){
+            throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
+        }
+
         v->setVisited(false);
     }
 
@@ -110,6 +191,9 @@ Result Coder::backtracking(int start_vertex) {
 
     // Start vertex (visited)
     Vertex* start = vertices_table->search(start_vertex);
+    if (start == nullptr){
+        throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
+    }
     start->setVisited(true);
 
     // Path
@@ -125,10 +209,20 @@ Result Coder::backtracking(int start_vertex) {
 
 }
 
+/**
+ * @note Branch-bound implementation
+ */
 void Coder::branchBoundHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path) {
+    if (start == nullptr || current_vertex == nullptr){
+        throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+    }
+
     if (path.size() == graph->getNumberOfVertexes()){
         double distance_to_origin;
         for (Edge* e : current_vertex->getAdj()){
+            if (e == nullptr){
+                throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
+            }
             if (e->getDestination()->getId() == start->getId()){
                 distance_to_origin = e->getDistance();
                 path.push_back(e);
@@ -146,8 +240,13 @@ void Coder::branchBoundHelper(Vertex* start, double& min_distance, Vertex* curre
     }
 
     for (Edge* e : current_vertex->getAdj()){
-        // Not visited
+        if (e == nullptr){
+            throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
+        }
         Vertex* destination = e->getDestination();
+        if (destination == nullptr){
+            throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+        }
         if (!destination->isVisited() && current_distance + e->getDistance() < min_distance){
             destination->setVisited(true);
             current_distance+= e->getDistance();
@@ -171,6 +270,9 @@ Result Coder::branchBound(int start_vertex) {
 
     // Set all vertex to visited false
     for (Vertex* v : graph->getVertexSet()){
+        if (v == nullptr){
+            throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
+        }
         v->setVisited(false);
     }
 
@@ -179,6 +281,9 @@ Result Coder::branchBound(int start_vertex) {
 
     // Start vertex (visited)
     Vertex* start = vertices_table->search(start_vertex);
+    if (start == nullptr){
+        throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
+    }
     start->setVisited(true);
 
     // Path
@@ -195,6 +300,10 @@ Result Coder::branchBound(int start_vertex) {
 
 
 
+/**
+ * @note Lin Khernigan implementation
+ */
+
 double Coder::calculateTourCost(const Tour& tour){
     double tour_cost = 0.0;
     for (Edge* e : tour){
@@ -204,9 +313,7 @@ double Coder::calculateTourCost(const Tour& tour){
 }
 
 
-
-
-void Coder::buildInitialRandomTour(int start_vertex, Tour& initialTour) {
+void Coder::buildInitialRandomTour(Tour& initialTour, int start_vertex) {
 
     vector<Vertex*> shuffledVertices;
     for (auto v : graph->getVertexSet()){
@@ -224,10 +331,10 @@ void Coder::buildInitialRandomTour(int start_vertex, Tour& initialTour) {
     Edge* e = graph->getEdgeFromGraph(start,next_start);
     initialTour.push_back(e);
 
-    for (int i = 1; i < shuffledVertices.size() - 1; i++){
+    for (int i = 0; i < shuffledVertices.size() - 1; i++){
         Vertex* v1 = shuffledVertices[i];
         Vertex* v2 = shuffledVertices[i+1];
-        e = graph->getEdgeFromGraph(start,next_start);
+        e = graph->getEdgeFromGraph(v1,v2);
         initialTour.push_back(e);
     }
 
@@ -246,29 +353,17 @@ bool Coder::edgeAlreadyOnTour(Edge* e, Tour& t){
     return false;
 }
 
-Tour Coder::convertTrailToTour(vector<Vertex*> trail){
-    Tour t;
-    for (int i = 0; i < trail.size()-1; i++){
-        Vertex* v1 = trail[i];
-        Vertex* v2 = trail[i+1];
-        Edge* edge = graph->getEdgeFromGraph(v1,v2);
-        t.push_back(edge);
-    }
-    Edge* edge = graph->getEdgeFromGraph(trail[trail.size()-1],trail[0]);
-    t.push_back(edge);
-    return t;
-}
 
-Tour Coder::unionEdgesTourTrail(const Tour& t, const Tour& trail_converted) {
+Tour Coder::unionEdgesTourTrail(const Tour& tour, const Tour& trail) {
     Tour union_tour;
 
-    for (auto e : t) {
+    for (auto e : tour) {
         if (find(union_tour.begin(), union_tour.end(), e) == union_tour.end()) {
             union_tour.push_back(e);
         }
     }
 
-    for (auto e : trail_converted) {
+    for (auto e : trail) {
         if (find(union_tour.begin(), union_tour.end(), e) == union_tour.end()) {
             union_tour.push_back(e);
         }
@@ -279,16 +374,7 @@ Tour Coder::unionEdgesTourTrail(const Tour& t, const Tour& trail_converted) {
 
 bool Coder::isHamiltonian(const Tour& t){
     // Check empty
-    if (t.empty()){
-        return false;
-    }
-
-    for (auto to)
-
-    // Check first and last
-    if (t.back() != t.front()){
-        return false;
-    }
+    return true;
 
 
 
@@ -298,12 +384,12 @@ Tour Coder::differenceTour(const Tour& t1, const Tour& t2) {
     Tour diff_tour;
 
     for (auto e : t1) {
-        if (find(t2.begin(), t2.end(), e) != t2.end()) {
+        if (find(t2.begin(), t2.end(), e) == t2.end() && find(diff_tour.begin(),diff_tour.end(),e) == diff_tour.end()) {
             diff_tour.push_back(e);
         }
     }
     for (auto e : t2) {
-        if (find(t1.begin(), t1.end(), e) != t1.end()) {
+        if (find(t1.begin(), t1.end(), e) == t1.end() && find(diff_tour.begin(),diff_tour.end(),e) == diff_tour.end()) {
             diff_tour.push_back(e);
         }
     }
@@ -324,71 +410,90 @@ Result Coder::linKhernigan(int start_vertex){
         int p2 = 2;
         Tour tour;
 
-        buildInitialRandomTour(start_vertex, tour);
-        double initialCost = calculateTourCost(tour);
+        buildInitialRandomTour(tour, start_vertex);
         stack<KherniganCell> st;
         double gStar;
         do {
-            vector<Edge*> best_edges_to_change;
             for (auto v: graph->getVertexSet()) {
                 st.push({v, 0, 0});
             }
             gStar = 0.0;
-            vector<Vertex*> currentTrail;
-
+            Tour currentTrail;
+            Vertex* v0 = nullptr;
             while(!st.empty()){
                 KherniganCell currCell = st.top();
-                st.pop();
-                currentTrail.push_back(currCell.v);
-
+                st.pop(); // Done
+                if (currCell.i == 0){
+                    v0 = currCell.v;
+                }
                 if (currCell.i % 2 == 0){
-                    Tour trail_converted = convertTrailToTour(currentTrail);
-                    for (Vertex* v : graph->getVertexSet()){
-                        Edge* e = graph->getEdgeFromGraph(currCell.v,v);
-                        if (!edgeAlreadyOnTour(e,trail_converted) && edgeAlreadyOnTour(e,tour)){
-                            trail_converted.push_back(e);
-                            Tour union_edges = unionEdgesTourTrail(tour,trail_converted);
-                            Vertex* trail_begin = currentTrail[0]; // Used for cycle check
-                            Edge* e_cycle = graph->getEdgeFromGraph(v,trail_begin);
-                            trail_converted.push_back(e_cycle);
-                            Tour symmetric_difference_edges = differenceTour(tour,trail_converted);
+                    for (Edge* e : currCell.v->getAdj()){
 
-                            if (currCell.i <= 2 || (!edgeAlreadyOnTour(e_cycle,union_edges) && isHamiltonian(symmetric_difference_edges))){
-                                st.push({v,currCell.i + 1,currCell.g + e->getDistance()});
+                        if (!edgeAlreadyOnTour(e,currentTrail) && edgeAlreadyOnTour(e,tour)){
+                            Vertex* u = e->getDestination();
+                            Edge* cycle_edge = graph->getEdgeFromGraph(u,v0);
+
+                            currentTrail.push_back(e);
+                            Tour unionTour = unionEdgesTourTrail(tour,currentTrail);
+                            currentTrail.push_back(cycle_edge);
+
+                            Tour symmetricTour = differenceTour(tour,currentTrail);
+                            currentTrail.pop_back();
+                            currentTrail.pop_back();
+
+
+                            if (currCell.i <= p2 || (!edgeAlreadyOnTour(cycle_edge,unionTour) && isHamiltonian(symmetricTour))){
+                                st.push({u,currCell.i + 1,currCell.g + e->getDistance()});
                             }
 
                         }
                     }
                 }
+
                 else{
-                    Tour trail_converted = convertTrailToTour(currentTrail);
-                    Edge* e = graph->getEdgeFromGraph(currCell.v,currentTrail[0]);
-                    trail_converted.push_back(e);
-                    Tour symmetric_difference_edges = differenceTour(tour,trail_converted);
+                    Edge* e = graph->getEdgeFromGraph(currCell.v,v0);
+                    currentTrail.push_back(e);
+                    Tour symmetric_tour = differenceTour(tour,currentTrail);
+                    currentTrail.pop_back();
 
-                    if (currCell.g > e->getDistance() && currCell.g - e->getDistance() > gStar && isHamiltonian(symmetric_difference_edges)){
-                        best_edges_to_change = trail_converted;
+                    if (currCell.g > e->getDistance() && currCell.g - e->getDistance() > gStar && isHamiltonian(symmetric_tour)){
+                        currentTrail.push_back(e);
                         gStar = currCell.g - e->getDistance();
-                        for (auto v : graph->getVertexSet()){
-                            Edge* edge = graph->getEdgeFromGraph(currCell.v,v);
-                            trail_converted.pop_back();
-                            Tour union_edges = unionEdgesTourTrail(tour,trail_converted);
-                            if (currCell.g > edge->getDistance() && !edgeAlreadyOnTour(edge,union_edges)){
-                                st.push({v,currCell.i + 1, currCell.g - edge->getDistance()});
+
+                        for (Edge* e1 : currCell.v->getAdj()){
+                            Vertex* u = e1->getDestination();
+                            currentTrail.pop_back();
+                            Tour union_tour = unionEdgesTourTrail(tour,currentTrail);
+                            currentTrail.push_back(e);
+
+                            if (currCell.g > e1->getDistance() && !edgeAlreadyOnTour(e1,union_tour)){
+                                st.push({u,currCell.i + 1, currCell.g - e1->getDistance()});
                             }
                         }
                     }
                 }
+
                 KherniganCell topNow = st.top();
                 if (currCell.i <= topNow.i){
                     if (gStar > 0){
-                        tour = differenceTour(tour,best_edges_to_change);
+                        tour = differenceTour(tour,currentTrail);
                     }
                     else if (currCell.i > p1){
-                        // reshapeStack()
+                        stack<KherniganCell> tmpStack;
+                        // Reset stack
+                        while(!st.empty()){
+                            KherniganCell t = st.top();
+                            if (t.i <= p1){
+                                tmpStack.push(t);
+                            }
+                            st.pop();
+                        }
+                        while (!tmpStack.empty()){
+                            st.push(tmpStack.top());
+                            tmpStack.pop();
+                        }
                     }
                 }
-
             }
 
         }
@@ -403,7 +508,13 @@ Result Coder::linKhernigan(int start_vertex){
     }
 }
 
+Result Coder::cristofides(int start_vertex) {
+    return {};
+}
 
+Result Coder::triangularAproximation(int start_vertex) {
+    return {};
+}
 
 
 

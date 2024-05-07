@@ -1,18 +1,13 @@
 #include <iostream>
 #include "src/controller/Manager.h"
+#include "src/view/Menu.h"
 
 
 int main() {
-    int size = 5;
-    auto* m = new Manager(size);
-    m->getParser()->importFiles("../data/Toy-Graphs/Toy-Graphs/tourism.csv",size,"",true);
-    vector<Vertex*> tour;
-    m->getCoder()->buildInitialRandomTour(0,tour);
-    for (auto v: tour){
-        cout << v->getId() << endl;
-    }
-    cout << endl;
-    delete m;
+    auto* manager = new Manager(10);
+    Menu* menu = new Menu(manager);
+    menu->mainMenu();
+    delete menu;
     return 0;
 }
 
