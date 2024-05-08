@@ -4,10 +4,9 @@
 
 
 int main() {
-    auto* manager = new Manager(10);
+    auto* manager = new Manager();
     Menu* menu = new Menu(manager);
     menu->mainMenu();
-    delete menu;
     return 0;
 }
 

@@ -1,28 +1,49 @@
-#include "Parser.h"
 
-Parser::Parser(Graph *graph, HashTable *table) {
-    this->graph = graph;
+/**
+ * @file Parser.cpp -> Implementation file for parser
+ */
+
+/**< Project headers >**/
+#include "Parser.h"
+#include "../Exceptions/CustomError.h"
+/**< STD headers >**/
+#include <fstream>
+#include <sstream>
+
+
+void Parser::setNewTable(HashTable* table){
     this->vertices_table = table;
 }
-
+void Parser::setNewGraph(Graph* _graph){
+    this->graph = _graph;
+}
+// Import files main function
 void Parser::importFiles(const string &vertices_path, int number_of_vertices, const string &edges_path, bool symmetric_or_real) {
-    // Build graph
-    if (edges_path.empty()){
-        importVerticesWithEdges(vertices_path,symmetric_or_real);
+    try {
+        // Build graph
+        if (edges_path.empty()) {
+            importVerticesWithEdges(vertices_path, symmetric_or_real);
+        }
+        else {
+            importVertices(vertices_path, number_of_vertices);
+            importEdges(edges_path, symmetric_or_real);
+        }
     }
-    else{
-        importVertices(vertices_path,number_of_vertices);
-        importEdges(edges_path,symmetric_or_real);
+    catch (const CustomError &e){
+        cerr << e.what() << endl;
+        exit(EXIT_FAILURE);
     }
 }
 
+// Program that checks if the first line of a file is to discard
 bool isFirstLineToDiscard(const string& file_path){
+    // Open file
     fstream fin;
     fin.open(file_path);
     if (!fin.is_open()){
-        cerr << "Unable to open file " << file_path << endl;
-        exit(EXIT_FAILURE);
+        throw CustomError("Error opening file",FILE_ERROR);
     }
+    // Process file
     string line;
     string word;
     getline(fin,line);
@@ -40,21 +61,23 @@ bool isFirstLineToDiscard(const string& file_path){
             return true;
         }
     }
+    // Close file
     fin.close();
     return true;
 }
 
+// Import only vertices
 void Parser::importVertices(const string &file_path, int number_of_vertices){
+    // Open file
     fstream fin;
     fin.open(file_path,ios::in);
-
     int count = number_of_vertices;
 
     if (!fin.is_open()){
-        cerr << "Unable to open file " << file_path << endl;
-        exit(EXIT_FAILURE);
+        throw CustomError("Error opening file",FILE_ERROR);
     }
 
+    // Process file
     vector<string> row;
     string line;
     string word;
@@ -93,18 +116,20 @@ void Parser::importVertices(const string &file_path, int number_of_vertices){
         }
         count--;
     }
+    // Close file
     fin.close();
 }
 
 void Parser::importEdges(const string &file_path, bool symmetric_or_real){
+    // Open file
     fstream fin;
     fin.open(file_path, ios::in);
 
     if (!fin.is_open()){
-        cerr << "Unable to open file " << file_path << endl;
-        exit(EXIT_FAILURE);
+        throw CustomError("Error opening file",FILE_ERROR);
     }
 
+    // Process file
     vector<string> row;
     string line;
     string word;
@@ -141,18 +166,20 @@ void Parser::importEdges(const string &file_path, bool symmetric_or_real){
             }
         }
     }
+    // Close file
     fin.close();
 }
 
 void Parser::importVerticesWithEdges(const string &file_path, bool symmetric_or_real) {
+    // Open file
     fstream fin;
     fin.open(file_path,ios::in);
 
     if (!fin.is_open()){
-        cerr << "Unable to open file " << file_path << endl;
-        exit(EXIT_FAILURE);
+        throw CustomError("Error opening file",FILE_ERROR);
     }
 
+    // Process file
     vector<string> row;
     string line;
     string word;
@@ -176,6 +203,7 @@ void Parser::importVerticesWithEdges(const string &file_path, bool symmetric_or_
         if (row.empty()){
             continue;
         }
+        // In this type of files Size 5 (have labels), Size 3 (don't have labels)
         if (row.size() == 5 || row.size() == 3) {
             int origin_id = stoi(row[0]);
             int destination_id = stoi(row[1]);
@@ -204,6 +232,7 @@ void Parser::importVerticesWithEdges(const string &file_path, bool symmetric_or_
         }
 
     }
+    // Close file
     fin.close();
 
 }

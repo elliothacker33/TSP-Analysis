@@ -15,7 +15,7 @@ using namespace std;
 
 /**
  * @class Menu
- * @brief This is the view interface to access funcionalities on manager.
+ * @brief This is the view interface to access functionalities on manager.
  *
  * This class represents a view.
  */
@@ -38,10 +38,11 @@ public:
      */
     void mainMenu();
 
-    /*
-     * @brief Choose graph menu
+
+    /**
+     * @brief Choose the type of the data set
      */
-    void chooseGraphMenu();
+     void dataSetMenu();
 
     /**
      * @brief Shutdowns view.
@@ -52,6 +53,7 @@ public:
      * @brief Returns to the previous view.
      */
     void goBack();
+
 
     /**
      * @brief Choose toy graph
@@ -73,31 +75,6 @@ public:
      */
     void algorithmMenu();
 
-
-
-    /**
-     * @brief Executes exercise 4.1.
-     */
-    void exercise1();
-
-    /**
-     * @brief Executes exercise 4.2.
-     */
-    void exercise2();
-
-    /**
-     * @brief Executes exercise 4.3.
-     */
-    void exercise3();
-
-    /**
-     * @brief Executes exercise 4.4.
-     */
-    void exercise4();
-
-    /**
-     * @brief Displays the extra view with other algorithms.
-     */
     void extraMenu();
 private:
     /**
@@ -109,6 +86,7 @@ private:
      * @brief Pointer to a manager instance.
      */
     Manager* manager;
+    int mode;
 
     /**< Auxiliary functions >**/
     /**
@@ -129,7 +107,7 @@ private:
      * @param option Pointer to store the selected option.
      * @return True if the input is successfully obtained, false otherwise.
      */
-    static bool getNumberInput(int minInput, int maxInput, int* option);
+    static bool getNumberInput(int* option,int maxInput,int minInput = 1);
 
     void chooseVertex(int& vertex_id);
 

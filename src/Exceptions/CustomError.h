@@ -17,7 +17,10 @@ using namespace std;
 enum ERROR_TYPE{
     INFO,
     ERROR,
-    SEMANTIC_ERROR
+    SEMANTIC_ERROR,
+    FILE_ERROR,
+    PARSE_ERROR,
+    MENU_ERROR
 };
 
 class CustomError : public exception {

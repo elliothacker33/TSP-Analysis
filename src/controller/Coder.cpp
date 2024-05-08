@@ -5,43 +5,41 @@
 #include <cmath>
 #include <algorithm>
 
-
-Coder::Coder(Graph *graph, HashTable *vertices_table) {
-    if (graph != nullptr){
-        this->graph = graph;
-    }
-    else{
-        throw CustomError("NullPtr error - graph initialization", ERROR);
-    }
-   if (vertices_table != nullptr){
-       this->vertices_table = vertices_table;
-   }
-   else{
-       throw CustomError("NullPtr error - vertices table initialization", ERROR);
-   }
+void Coder::setNewTable(HashTable* table){
+    this->vertices_table = table;
+}
+void Coder::setNewGraph(Graph* _graph){
+    this->graph = _graph;
 }
 
 /**
  * @note Distance between two vertices
  */
 
-double Coder::haversianDistance(Vertex* origin, Vertex* destination){
-    if (origin == nullptr || destination == nullptr){
-        throw CustomError("NullPtr error - origin/destination are null ptr", ERROR);
-    }
-    Coordinate* originCoord = origin->getCoordinates();
-    Coordinate* destinationCoord = destination->getCoordinates();
+double Coder::haversineDistance(Vertex* origin, Vertex* destination) {
+    try {
+        if (origin == nullptr || destination == nullptr) {
+            throw CustomError("NullPtr error - origin/destination are null ptr", ERROR);
+        }
+        Coordinate *originCoord = origin->getCoordinates();
+        Coordinate *destinationCoord = destination->getCoordinates();
 
-    if (origin->getCoordinates() == nullptr || destination->getCoordinates()){
-        throw CustomError("NullPtr error - coordinates are null ptr", ERROR);
-    }
+        if (origin->getCoordinates() == nullptr || destination->getCoordinates()) {
+            throw CustomError("NullPtr error - coordinates are null ptr", ERROR);
+        }
 
-    double delta_lat = (destinationCoord->getLatitude() - originCoord->getLatitude()) * M_PI / 180;
-    double delta_lon = (destinationCoord->getLongitude() - originCoord->getLatitude()) * M_PI / 180;
-    double a = pow(sin(delta_lat / 2), 2) + pow(sin(delta_lon / 2), 2) * cos(originCoord->getLatitude()) * cos(destinationCoord->getLatitude());
-    double c = 2 * asin(sqrt(a));
-    double d = 6371.0 * c;
-    return d;
+        double delta_lat = (destinationCoord->getLatitude() - originCoord->getLatitude()) * M_PI / 180;
+        double delta_lon = (destinationCoord->getLongitude() - originCoord->getLatitude()) * M_PI / 180;
+        double a = pow(sin(delta_lat / 2), 2) +
+                   pow(sin(delta_lon / 2), 2) * cos(originCoord->getLatitude()) * cos(destinationCoord->getLatitude());
+        double c = 2 * asin(sqrt(a));
+        double d = 6371.0 * c;
+        return d;
+    }
+    catch (const CustomError& e){
+        cerr << e.what() << endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 /**
@@ -72,14 +70,30 @@ Time Coder::stopTimer(timespec& start_real, timespec& start_cpu, double& elapsed
 /**
  * @note Graph checks
  */
-bool Coder::isGraphComplete(){
-    int n = graph->getNumberOfVertexes();
-    return std::all_of(graph->getVertexSet().begin(), graph->getVertexSet().end(), [n](Vertex* v) {
-        if (v == nullptr){
-            throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+bool Coder::isGraphComplete() {
+    try {
+        int n = graph->getNumberOfVertexes();
+        for (Vertex *v: graph->getVertexSet()) {
+            if (v == nullptr) {
+                throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+            }
+            int adj_size = 0;
+            for (Edge *e: v->getAdj()) {
+                if (e == nullptr) {
+                    throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
+                }
+                adj_size++;
+            }
+            if (adj_size != n - 1) {
+                return false;
+            }
         }
-        return v->getAdj().size() == n - 1;
-    });
+    }
+    catch (const CustomError& e ){
+        cerr << e.what() << endl;
+        exit(EXIT_FAILURE);
+    }
+    return true;
 }
 
 
@@ -118,8 +132,7 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
     if (start == nullptr || current_vertex == nullptr){
         throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
     }
-
-    if (path.size() == graph->getNumberOfVertexes()){
+    if (path.size() == graph->getNumberOfVertexes() - 1){
 
         double distance_to_origin;
         for (Edge* e : current_vertex->getAdj()){
@@ -167,46 +180,54 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
 }
 
 Result Coder::backtracking(int start_vertex) {
-    // Initialize Timer
-    if (!isGraphComplete()){
+    try {
+        // Initialize Timer
+            timespec start_real{};
+            timespec start_cpu{};
+            double elapsed_real, elapsed_cpu;
+            startTimer(start_real, start_cpu);
 
+            // Set all vertex to visited false
+            for (Vertex *v: graph->getVertexSet()) {
+                if (v == nullptr) {
+                    throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
+                }
+
+                v->setVisited(false);
+            }
+
+            // Initialize distance
+            double min_distance = numeric_limits<double>::max();
+
+            // Start vertex (visited)
+            Vertex *start = vertices_table->search(start_vertex);
+            if (start == nullptr) {
+                throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
+            }
+            start->setVisited(true);
+
+            // Path
+            Tour min_path;
+            Tour path;
+
+            // Backtracking calculation
+            try{
+                backtrackingHelper(start, min_distance, start, 0, path, min_path);
+            }
+            catch (const CustomError& e){
+                cerr << e.what() << endl;
+                exit(EXIT_FAILURE);
+            }
+
+            // Finish Timer
+            Time t = stopTimer(start_real, start_cpu, elapsed_real, elapsed_cpu);
+            return {min_path, min_distance, t};
     }
-
-    timespec start_real{};
-    timespec start_cpu{};
-    double elapsed_real, elapsed_cpu;
-    startTimer(start_real,start_cpu);
-
-    // Set all vertex to visited false
-    for (Vertex* v : graph->getVertexSet()){
-        if (v == nullptr){
-            throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
-        }
-
-        v->setVisited(false);
+    catch (const CustomError& e){
+        cerr << e.what() << endl;
+        exit(EXIT_FAILURE);
     }
-
-    // Initialize distance
-    double min_distance = numeric_limits<double>::max();
-
-    // Start vertex (visited)
-    Vertex* start = vertices_table->search(start_vertex);
-    if (start == nullptr){
-        throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
-    }
-    start->setVisited(true);
-
-    // Path
-    Tour min_path;
-    Tour path;
-
-    // Backtracking calculation
-    backtrackingHelper(start,min_distance,start,0,path,min_path);
-
-    // Finish Timer
-    Time t = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
-    return {min_path,min_distance,t};
-
+    return {};
 }
 
 /**
@@ -511,10 +532,15 @@ Result Coder::linKhernigan(int start_vertex){
 Result Coder::cristofides(int start_vertex) {
     return {};
 }
-
 Result Coder::triangularAproximation(int start_vertex) {
     return {};
 }
+Result Coder::realWorld(int start_vertex) {
+    return {};
+}
 
+Result Coder::held_karp(int start_vertex) {
+    return {};
+}
 
 

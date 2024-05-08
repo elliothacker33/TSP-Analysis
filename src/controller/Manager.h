@@ -24,7 +24,7 @@ public:
      * @constructor Constructor for class manager
      * @param n
      */
-    explicit Manager(int number_of_vertices);
+    Manager();
 
     /**
      * Get the graph used by the managers
@@ -50,11 +50,8 @@ public:
      */
      [[nodiscard]] Coder* getCoder() const;
 
-     /**
-      * @brief Visualizer is used to display better the results obtained in the coder
-      * Algorithm class uses the results stored in the Coder
-      */
-     [[nodiscard]] Visualizer* getVisualizer() const;
+     void callParserImportFiles(const string& vertices_path, int number_of_vertices, const string& edges_path, bool symmetric_or_real);
+
 
 
     /**

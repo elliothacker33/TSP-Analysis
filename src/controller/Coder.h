@@ -40,13 +40,16 @@ struct Result {
  */
 class Coder {
 public:
-
     /**
-     * @constructor Constructor for class Coder
-     * @param graph - pointer to graph
-     * @param vertices_table - pointer to hashTable
+     * @brief  Set new table for new imports
+     * @param table -> vertices table
      */
-    Coder(Graph* graph, HashTable* vertices_table);
+    void setNewTable(HashTable* table);
+    /**
+     * @brief Set new graph
+     * @param graph -> pointer to graph
+     */
+    void setNewGraph(Graph* graph);
 
     /**
      * @brief Backtracking algorithm (more used for small graphs)
@@ -72,7 +75,7 @@ public:
     Result cristofides(int start_vertex = 0);
     Result nearestNeighbor(int start_vertex = 0);
     Result linKhernigan(int start_vertex = 0);
-
+    Result realWorld(int start_vertex = 0);
 
 
 
@@ -85,7 +88,7 @@ private:
     void buildInitialRandomTour(Tour &initialTour, int start_vertex);
     bool edgeAlreadyOnTour(Edge* e, Tour& t);
     bool isHamiltonian(const Tour& t);
-    static double haversianDistance(Vertex* origin, Vertex* destination);
+    static double haversineDistance(Vertex* origin, Vertex* destination);
     Tour unionEdgesTourTrail(const Tour& t, const Tour& trail_converted);
     Tour differenceTour(const Tour& t1, const Tour& t2);
     void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);

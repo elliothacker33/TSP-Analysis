@@ -22,15 +22,28 @@
   <component name="ChangeListManager">
     <list default="true" id="c32ba1fa-c61d-4cb8-9e26-98f7b6a20f2c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/Exceptions/CustomError.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/Exceptions/CustomError.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Coordinates.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Coordinates.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/view/Menu.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/view/Menu.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/CustomError.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/CustomError.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/CustomError.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/CustomError.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Coder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Coder.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Coder.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Coder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Manager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Manager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Parser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Parser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Menu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Menu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Menu.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Menu.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,32 +73,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake Application.TSP_Analysis.executor": "Run",
-    "CMake Debug.TSP_Analysis.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "tomas-branch",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CMake Application.TSP_Analysis.executor&quot;: &quot;Run&quot;,
+    &quot;CMake Debug.TSP_Analysis.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;tomas-branch&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="CMake Debug.TSP_Analysis">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
+}</component>
+  <component name="RunManager" selected="CMake Application.TSP_Analysis">
     <configuration name="TSP_Analysis" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
@@ -95,8 +103,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="CMake Application.TSP_Analysis" />
       <item itemvalue="CMake Debug.TSP_Analysis" />
+      <item itemvalue="CMake Application.TSP_Analysis" />
     </list>
     <recent_temporary>
       <list>
@@ -118,7 +126,10 @@
       <workItem from="1714842132521" duration="14658000" />
       <workItem from="1714906451672" duration="25483000" />
       <workItem from="1714991125821" duration="32324000" />
-      <workItem from="1715076974052" duration="18992000" />
+      <workItem from="1715076974052" duration="20438000" />
+      <workItem from="1715185699277" duration="9571000" />
+      <workItem from="1715202311686" duration="4645000" />
+      <workItem from="1715206970291" duration="2000" />
     </task>
     <servers />
   </component>
@@ -129,6 +140,17 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/view/Menu.cpp</url>
+          <line>507</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,18 +1,32 @@
 #ifndef TSP_ANALYSIS_PARSER_H
 #define TSP_ANALYSIS_PARSER_H
 
+/**
+ * @file Parser.h -> Header file for parser
+ */
+
 /**< Project headers >**/
 #include "../model/Graph.h"
 #include "HashTable.h"
 /**< STD headers >**/
 #include <string>
-#include <unordered_map>
-#include <fstream>
-#include <sstream>
 
+
+/**
+ * @class Parser -> Class parser that is used to import graphs to test TSP
+ */
 class Parser {
 public:
-    Parser(Graph* graph, HashTable* table);
+    /**
+     * @brief  Set new table for new imports
+     * @param table -> vertices table
+     */
+    void setNewTable(HashTable* table);
+    /**
+     * @brief Set new graph
+     * @param graph -> pointer to graph
+     */
+    void setNewGraph(Graph* graph);
 
     /**
      * @brief This method is a interface function that builds a Graph from a file
@@ -24,7 +38,6 @@ public:
     void importFiles(const string& vertices_path, int number_of_vertices, const string& edges_path, bool symmetric_or_real);
 
 private:
-
     /**
      * @brief Import vertices
      * @param file_path - vertices path
@@ -48,8 +61,8 @@ private:
      */
     void importVerticesWithEdges(const string& file_path, bool symmetric_or_real);
 
-    Graph* graph;
-    HashTable* vertices_table;
+    Graph* graph = nullptr; /**< Pointer to graph >**/
+    HashTable* vertices_table = nullptr; /**< Pointer to table >**/
 
 };
 
