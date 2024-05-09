@@ -6,25 +6,42 @@
 /**< Project headers >**/
 #include "CustomError.h"
 
-const char* CustomError::what() const noexcept {
-    if (this->type == ERROR){
-        return ("ERROR: " + this->message).c_str();
+const char * CustomError::what() const noexcept {
+    if (this->type == ERROR) {
+        std::string error = "ERROR: ";
+        error += this->message;
+        cerr << error << endl;
+        return nullptr;
     }
     else if (this->type == INFO){
-        return ("INFO: " + this->message).c_str();
+        std::string error = "INFO: ";
+        error += this->message;
+        cerr << error << endl;
+        return nullptr;
     }
     else if (this->type == SEMANTIC_ERROR){
-        return ("SEMANTIC ERROR: " + this->message).c_str();
+        std::string error = "SEMANTIC_ERROR: ";
+        error += this->message;
+        cerr << error << endl;
+        return nullptr;
     }
     else if (this->type == FILE_ERROR){
-        return ("FILE ERROR: " + this->message).c_str();
+        std::string error = "FILE_ERROR: ";
+        error += this->message;
+        cerr << error << endl;
+        return nullptr;
     }
     else if (this->type == PARSE_ERROR){
-        return ("PARSE ERROR: " + this->message).c_str();
+        std::string error = "PARSE_ERROR: ";
+        error += this->message;
+        cerr << error << endl;
+        return nullptr;
     }
     else if (this->type == MENU_ERROR){
-        return ("MENU ERROR: " + this->message).c_str();
+        std::string error = "MENU_ERROR: ";
+        error += this->message;
+        cerr << error << endl;
+        return nullptr;
     }
-    return ("ERROR: " + this->message).c_str();
-
+    return nullptr;
 }

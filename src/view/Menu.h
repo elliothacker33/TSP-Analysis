@@ -109,6 +109,7 @@ private:
      */
     static bool getNumberInput(int* option,int maxInput,int minInput = 1);
 
+    static bool isNumber(string number);
     void chooseVertex(int& vertex_id);
 
     /* Get examples of input */

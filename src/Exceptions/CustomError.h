@@ -35,7 +35,7 @@ public:
      * @brief Override function of exception
      * @return message of error
      */
-    [[nodiscard]] const char* what() const noexcept override;
+    const char * what() const noexcept override ;
 
 private:
     const string& message; /**< Custom error message >**/

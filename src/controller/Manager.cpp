@@ -31,24 +31,6 @@ Coder* Manager::getCoder() const {
     return this->coder;
 }
 
-
-
-
-void Manager::resetManager(int number_of_vertices) {
-    // Delete graph/parser/hash_table
-    delete this->vertices_table;
-    delete this->graph;
-    delete this->parser;
-    delete this->coder;
-
-    // Create new ones
-    this->graph = new Graph();
-    this->vertices_table = new HashTable(number_of_vertices);
-    this->parser = new Parser();
-    this->coder = new Coder();
-}
-
-
 void Manager::callParserImportFiles(const string &vertices_path, int number_of_vertices, const string &edges_path,bool symmetric_or_real) {
     delete this->vertices_table;
     delete this->graph;

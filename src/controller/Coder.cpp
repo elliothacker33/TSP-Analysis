@@ -130,11 +130,11 @@ bool Coder::isGraphSymmetric(){
  */
 void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path) {
     if (start == nullptr || current_vertex == nullptr){
-        throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+        throw CustomError("NullPtr error: vertex current/start is a nullptr", ERROR);
     }
     if (path.size() == graph->getNumberOfVertexes() - 1){
-
         double distance_to_origin;
+        bool findCycle = false;
         for (Edge* e : current_vertex->getAdj()){
             if (e == nullptr){
                 throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
@@ -142,8 +142,13 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
             if (e->getDestination()->getId() == start->getId()){
                 distance_to_origin = e->getDistance();
                 path.push_back(e);
+                findCycle = true;
                 break;
             }
+        }
+
+        if (!findCycle){
+            return;
         }
 
         double total_distance = current_distance + distance_to_origin;
@@ -180,54 +185,42 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
 }
 
 Result Coder::backtracking(int start_vertex) {
-    try {
         // Initialize Timer
-            timespec start_real{};
-            timespec start_cpu{};
-            double elapsed_real, elapsed_cpu;
-            startTimer(start_real, start_cpu);
+        timespec start_real{};
+        timespec start_cpu{};
+        double elapsed_real, elapsed_cpu;
+        startTimer(start_real, start_cpu);
 
-            // Set all vertex to visited false
-            for (Vertex *v: graph->getVertexSet()) {
-                if (v == nullptr) {
-                    throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
-                }
-
-                v->setVisited(false);
+        // Set all vertex to visited false
+        for (Vertex *v: graph->getVertexSet()) {
+            if (v == nullptr) {
+                throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
             }
 
-            // Initialize distance
-            double min_distance = numeric_limits<double>::max();
+            v->setVisited(false);
+        }
 
-            // Start vertex (visited)
-            Vertex *start = vertices_table->search(start_vertex);
-            if (start == nullptr) {
-                throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
-            }
-            start->setVisited(true);
+        // Initialize distance
+        double min_distance = numeric_limits<double>::max();
 
-            // Path
-            Tour min_path;
-            Tour path;
+        // Start vertex (visited)
+        Vertex *start = vertices_table->search(start_vertex);
+        if (start == nullptr) {
+            throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
+        }
+        start->setVisited(true);
 
-            // Backtracking calculation
-            try{
-                backtrackingHelper(start, min_distance, start, 0, path, min_path);
-            }
-            catch (const CustomError& e){
-                cerr << e.what() << endl;
-                exit(EXIT_FAILURE);
-            }
+        // Path
+        Tour min_path;
+        Tour path;
 
-            // Finish Timer
-            Time t = stopTimer(start_real, start_cpu, elapsed_real, elapsed_cpu);
-            return {min_path, min_distance, t};
-    }
-    catch (const CustomError& e){
-        cerr << e.what() << endl;
-        exit(EXIT_FAILURE);
-    }
-    return {};
+        // Backtracking calculation
+        backtrackingHelper(start, min_distance, start, 0, path, min_path);
+
+
+        // Finish Timer
+        Time t = stopTimer(start_real, start_cpu, elapsed_real, elapsed_cpu);
+        return {min_path, min_distance, t};
 }
 
 /**
@@ -235,11 +228,11 @@ Result Coder::backtracking(int start_vertex) {
  */
 void Coder::branchBoundHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path) {
     if (start == nullptr || current_vertex == nullptr){
-        throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
+        throw CustomError("NullPtr error: vertex current/start is a nullptr", ERROR);
     }
-
-    if (path.size() == graph->getNumberOfVertexes()){
+    if (path.size() == graph->getNumberOfVertexes() - 1){
         double distance_to_origin;
+        bool findCycle = false;
         for (Edge* e : current_vertex->getAdj()){
             if (e == nullptr){
                 throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
@@ -247,12 +240,17 @@ void Coder::branchBoundHelper(Vertex* start, double& min_distance, Vertex* curre
             if (e->getDestination()->getId() == start->getId()){
                 distance_to_origin = e->getDistance();
                 path.push_back(e);
+                findCycle = true;
                 break;
             }
         }
 
+        if (!findCycle){
+            return;
+        }
+
         double total_distance = current_distance + distance_to_origin;
-        if (total_distance< min_distance){
+        if (total_distance < min_distance){
             min_distance = total_distance;
             min_path.assign(path.begin(), path.end());
         }
@@ -268,6 +266,7 @@ void Coder::branchBoundHelper(Vertex* start, double& min_distance, Vertex* curre
         if (destination == nullptr){
             throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
         }
+
         if (!destination->isVisited() && current_distance + e->getDistance() < min_distance){
             destination->setVisited(true);
             current_distance+= e->getDistance();
@@ -287,13 +286,14 @@ Result Coder::branchBound(int start_vertex) {
     timespec start_real{};
     timespec start_cpu{};
     double elapsed_real, elapsed_cpu;
-    startTimer(start_real,start_cpu);
+    startTimer(start_real, start_cpu);
 
     // Set all vertex to visited false
-    for (Vertex* v : graph->getVertexSet()){
-        if (v == nullptr){
+    for (Vertex *v: graph->getVertexSet()) {
+        if (v == nullptr) {
             throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
         }
+
         v->setVisited(false);
     }
 
@@ -301,8 +301,8 @@ Result Coder::branchBound(int start_vertex) {
     double min_distance = numeric_limits<double>::max();
 
     // Start vertex (visited)
-    Vertex* start = vertices_table->search(start_vertex);
-    if (start == nullptr){
+    Vertex *start = vertices_table->search(start_vertex);
+    if (start == nullptr) {
         throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
     }
     start->setVisited(true);
@@ -312,11 +312,11 @@ Result Coder::branchBound(int start_vertex) {
     Tour path;
 
     // Backtracking calculation
-    branchBoundHelper(start,min_distance,start,0,path,min_path);
+    branchBoundHelper(start, min_distance, start, 0, path, min_path);
 
     // Finish Timer
-    Time t = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
-    return {min_path,min_distance,t};
+    Time t = stopTimer(start_real, start_cpu, elapsed_real, elapsed_cpu);
+    return {min_path, min_distance, t};
 }
 
 
