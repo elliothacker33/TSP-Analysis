@@ -91,7 +91,7 @@ private:
     static double haversineDistance(Vertex* origin, Vertex* destination);
     Tour unionEdgesTourTrail(const Tour& t, const Tour& trail_converted);
     Tour differenceTour(const Tour& t1, const Tour& t2);
-    void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);
+    void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path, bool is_complete);
     void branchBoundHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);
     Graph* graph;
     HashTable* vertices_table;

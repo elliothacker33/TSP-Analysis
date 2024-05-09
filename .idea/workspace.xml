@@ -25,11 +25,9 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/CustomError.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/CustomError.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/CustomError.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/CustomError.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Coder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Coder.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Coder.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Coder.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/Menu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Menu.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/Menu.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Menu.h" afterDir="false" />
     </list>
@@ -71,6 +69,8 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "database.data.extractors.current.export.id": "CSV-Groovy.csv.groovy",
+    "database.data.extractors.current.id": "CSV-Groovy.csv.groovy",
     "git-widget-placeholder": "tomas-branch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -81,6 +81,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/My_Graphs/myGraph1" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake Application.TSP_Analysis">
     <configuration name="TSP_Analysis" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
@@ -118,7 +123,9 @@
       <workItem from="1715185699277" duration="9571000" />
       <workItem from="1715202311686" duration="4645000" />
       <workItem from="1715206970291" duration="90000" />
-      <workItem from="1715244493013" duration="7462000" />
+      <workItem from="1715244493013" duration="8144000" />
+      <workItem from="1715255590881" duration="748000" />
+      <workItem from="1715260223679" duration="7983000" />
     </task>
     <servers />
   </component>
@@ -129,17 +136,6 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/view/Menu.cpp</url>
-          <line>443</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

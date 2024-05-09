@@ -11,6 +11,7 @@
 // Standard Library Headers
 #include <stack>
 
+typedef vector<string> Folder;
 using namespace std;
 
 /**
@@ -69,6 +70,10 @@ public:
       * @brief Choose real world graph
      */
       void realWorldMenu();
+      /**
+       * @bried Choose your own graph
+       */
+      void yourDataSetMenu();
 
     /**
      * @brief Displays the algorithm view.
@@ -98,8 +103,11 @@ private:
 
     static void displayResult(const Result& r);
 
+    static Folder getFolderContents(const string& path);
 
+    static Folder getFoldersInFolder(const string& path);
 
+    static bool askNumberOfVertices(int * n);
     /**
      * @brief Retrieves a number input within a specified range.
      * @param minInput The minimum allowed input value.

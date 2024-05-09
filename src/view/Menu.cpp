@@ -7,6 +7,8 @@
 #include "Menu.h"
 // Standard Library Headers
 #include <sstream>
+#include <filesystem>
+
 
 Menu::~Menu() {
     delete manager;
@@ -28,19 +30,38 @@ string Menu::removeLeadingTrailingSpaces(const string& input) {
     return (start != string::npos && end != string::npos) ? input.substr(start, end - start + 1) : "";
 }
 
+Folder Menu::getFolderContents(const string& path){
+    Folder files;
+    for (const auto& entry: filesystem::directory_iterator(path)){
+        if (entry.is_regular_file()){
+            files.push_back(entry.path());
+        }
+    }
+    return files;
+}
+
+Folder Menu::getFoldersInFolder(const string& path){
+    Folder folders;
+    for (const auto& entry: filesystem::directory_iterator(path)){
+        if (entry.is_directory()){
+            folders.push_back(entry.path().filename());
+        }
+    }
+    return folders;
+}
+
 /* Get Input functions */
 
 bool Menu::getNumberInput(int* option, int maxInput,int minInput) {
     cout << "Enter your choice (" << 1 << "-" << maxInput << "): ";
     string s_input;
     getline(cin, s_input);
-    stringstream ss(s_input);
+    string trimmedInput = removeLeadingTrailingSpaces(s_input);
+    stringstream ss(trimmedInput);
     int input;
     ss >> input;
 
-    string trimmedInput = removeLeadingTrailingSpaces(s_input);
-
-    if (trimmedInput.size() == 1 && input >= minInput && input <= maxInput) {
+    if (isNumber(trimmedInput) && input >= minInput && input <= maxInput) {
         *option = input;
         return true;
     }
@@ -48,6 +69,24 @@ bool Menu::getNumberInput(int* option, int maxInput,int minInput) {
     cout << "Invalid input. Please enter a number between " << 1 << " and " << maxInput << endl;
     return false;
 }
+
+bool Menu::askNumberOfVertices(int * n) {
+    cout << "Enter the number of vertices of your dataset: ";
+    string s_input;
+    getline(cin, s_input);
+    string trimmedInput = removeLeadingTrailingSpaces(s_input);
+    stringstream ss(trimmedInput);
+    int input;
+    ss >> input;
+
+    if (isNumber(trimmedInput)) {
+        *n = input;
+        return true;
+    }
+
+    return false;
+}
+
 
 
 bool Menu::isNumber(string number){
@@ -204,11 +243,64 @@ void Menu::dataSetMenu() {
             menuStack.push(&Menu::dataSetMenu);
             realWorldMenu();
             break;
+        case 4:
+            menuStack.push(&Menu::dataSetMenu);
+            yourDataSetMenu();
         case 5:
             goBack();
             break;
         default:
             throw CustomError("Menu not found", MENU_ERROR);
+    }
+}
+
+void Menu::yourDataSetMenu(){
+    int option = 0;
+    Folder f;
+    do {
+        cout << "------------------------------------------------" << endl;
+        cout << "         Menu -> Choose your own data set       " << endl;
+        f = getFoldersInFolder("../data/My_Graphs");
+        int count = 1;
+        for (const auto& file: f){
+            cout << "            " << count << ". " << file << "        " << endl;
+            count++;
+        }
+        cout << "            " << count << ". Go back" << "         " << endl;
+        cout << "------------------------------------------------" << endl;
+
+    }
+    while(!getNumberInput(&option,static_cast<int>(f.size() + 1),1));
+
+    if (option == f.size() + 1){
+        goBack();
+    }
+    else{
+        menuStack.push(&Menu::yourDataSetMenu);
+        Folder files  = getFolderContents("../data/My_Graphs/" + f[option - 1]);
+        if (files.size() == 2){
+            int n;
+            cout << "This number needs to be exactly the size to work!!!" << endl;
+            while(!askNumberOfVertices(&n)){
+                cout << "Invalid input. Enter a integer" << endl;
+            }
+            cout << "../data/My_Graphs/" + f[option - 1] + "/nodes.csv" << endl;
+
+            manager->callParserImportFiles("../data/My_Graphs/" + f[option - 1] + "/nodes.csv", n, "../data/My_Graphs/" + f[option - 1] + "/edges.csv" ,mode);
+
+        }
+        else if (files.size() == 1){
+            int n;
+            cout << "This number needs to be exactly the size to work!!!" << endl;
+            while(!askNumberOfVertices(&n)){
+                cout << "Invalid input. Enter a integer" << endl;
+            }
+            manager->callParserImportFiles("../data/My_Graphs/" + f[option - 1] + "/nodes.csv", n, "" ,mode);
+        }
+        else{
+            throw CustomError("Wrong number of files", MENU_ERROR);
+        }
+        algorithmMenu();
     }
 }
 

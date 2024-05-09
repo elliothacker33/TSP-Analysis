@@ -24,16 +24,16 @@ double Coder::haversineDistance(Vertex* origin, Vertex* destination) {
         Coordinate *originCoord = origin->getCoordinates();
         Coordinate *destinationCoord = destination->getCoordinates();
 
-        if (origin->getCoordinates() == nullptr || destination->getCoordinates()) {
+        if (originCoord == nullptr || destinationCoord == nullptr) {
             throw CustomError("NullPtr error - coordinates are null ptr", ERROR);
         }
 
         double delta_lat = (destinationCoord->getLatitude() - originCoord->getLatitude()) * M_PI / 180;
-        double delta_lon = (destinationCoord->getLongitude() - originCoord->getLatitude()) * M_PI / 180;
+        double delta_lon = (destinationCoord->getLongitude() - originCoord->getLongitude()) * M_PI / 180;
         double a = pow(sin(delta_lat / 2), 2) +
                    pow(sin(delta_lon / 2), 2) * cos(originCoord->getLatitude()) * cos(destinationCoord->getLatitude());
         double c = 2 * asin(sqrt(a));
-        double d = 6371.0 * c;
+        double d = 6371.0 * c * 1000;
         return d;
     }
     catch (const CustomError& e){
@@ -128,7 +128,7 @@ bool Coder::isGraphSymmetric(){
 /**
   @note Backtracking implementation
  */
-void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path) {
+void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path, bool is_complete) {
     if (start == nullptr || current_vertex == nullptr){
         throw CustomError("NullPtr error: vertex current/start is a nullptr", ERROR);
     }
@@ -148,7 +148,16 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
         }
 
         if (!findCycle){
-            return;
+            if (!is_complete) {
+                if (current_vertex->getCoordinates() != nullptr && start->getCoordinates() != nullptr) {
+                    distance_to_origin = haversineDistance(current_vertex, start);
+                    Edge *e = graph->addEdge(current_vertex, start, distance_to_origin);
+                    path.push_back(e);
+                }
+            }
+            else{
+                return;
+            }
         }
 
         double total_distance = current_distance + distance_to_origin;
@@ -159,11 +168,9 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
         path.pop_back();
         return;
     }
-
+    vector<Vertex*> connected;
     for (Edge* e : current_vertex->getAdj()){
-        if (e == nullptr){
-            throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
-        }
+        connected.push_back(e->getDestination());
         Vertex* destination = e->getDestination();
         if (destination == nullptr){
             throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
@@ -174,18 +181,40 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
             current_distance+= e->getDistance();
             path.push_back(e);
 
-            backtrackingHelper(start,min_distance,destination,current_distance,path,min_path);
+            backtrackingHelper(start,min_distance,destination,current_distance,path,min_path,is_complete);
 
             destination->setVisited(false);
             current_distance-= e->getDistance();
             path.pop_back();
         }
     }
+    if (!is_complete) {
+        for (Vertex *v: graph->getVertexSet()) {
+            if (!v->isVisited() && find(connected.begin(), connected.end(), v) == connected.end()) {
+                if (current_vertex->getCoordinates() == nullptr || v->getCoordinates() == nullptr) {
+                    return;
+                }
+                double haversine_dist = haversineDistance(current_vertex, v);
+                Edge *new_edge = graph->addEdge(current_vertex, v, haversine_dist);
+                current_distance += haversine_dist;
+                path.push_back(new_edge);
+                v->setVisited(true);
 
+                backtrackingHelper(start, min_distance, v, current_distance, path, min_path, is_complete);
+
+                v->setVisited(false);
+                current_distance -= haversine_dist;
+                path.pop_back();
+            }
+        }
+    }
 }
+
+
 
 Result Coder::backtracking(int start_vertex) {
         // Initialize Timer
+        bool is_complete = isGraphComplete();
         timespec start_real{};
         timespec start_cpu{};
         double elapsed_real, elapsed_cpu;
@@ -196,7 +225,6 @@ Result Coder::backtracking(int start_vertex) {
             if (v == nullptr) {
                 throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
             }
-
             v->setVisited(false);
         }
 
@@ -215,7 +243,7 @@ Result Coder::backtracking(int start_vertex) {
         Tour path;
 
         // Backtracking calculation
-        backtrackingHelper(start, min_distance, start, 0, path, min_path);
+        backtrackingHelper(start, min_distance, start, 0, path, min_path,is_complete);
 
 
         // Finish Timer
