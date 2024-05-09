@@ -151,8 +151,11 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
             if (!is_complete) {
                 if (current_vertex->getCoordinates() != nullptr && start->getCoordinates() != nullptr) {
                     distance_to_origin = haversineDistance(current_vertex, start);
-                    Edge *e = graph->addEdge(current_vertex, start, distance_to_origin);
+                    Edge* e = graph->addEdge(current_vertex, start, distance_to_origin);
                     path.push_back(e);
+                }
+                else{
+                    return;
                 }
             }
             else{
@@ -192,7 +195,7 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
         for (Vertex *v: graph->getVertexSet()) {
             if (!v->isVisited() && find(connected.begin(), connected.end(), v) == connected.end()) {
                 if (current_vertex->getCoordinates() == nullptr || v->getCoordinates() == nullptr) {
-                    return;
+                    continue;
                 }
                 double haversine_dist = haversineDistance(current_vertex, v);
                 Edge *new_edge = graph->addEdge(current_vertex, v, haversine_dist);
@@ -557,12 +560,14 @@ Result Coder::linKhernigan(int start_vertex){
     }
 }
 
+
 Result Coder::cristofides(int start_vertex) {
     return {};
 }
 Result Coder::triangularAproximation(int start_vertex) {
     return {};
 }
+
 Result Coder::realWorld(int start_vertex) {
     return {};
 }
