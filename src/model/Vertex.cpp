@@ -149,6 +149,13 @@ void Vertex::removeEdgeIncoming(const Edge* edge) {
     this->inDegree--;
 }
 
+double Vertex::getKey() const {
+    return this->key;
+}
+
+void Vertex::setKey(double _key){
+    this->key = _key;
+}
 
 
 

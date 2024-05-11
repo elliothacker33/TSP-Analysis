@@ -70,7 +70,7 @@ public:
      * @Complexity -
      * @return
      */
-    Result triangularAproximation(int start_vertex = 0);
+    Result triangularApproximation(int start_vertex = 0);
     Result held_karp(int start_vertex = 0);
     Result cristofides(int start_vertex = 0);
     Result nearestNeighbor(int start_vertex = 0);
@@ -84,6 +84,7 @@ private:
     static Time stopTimer(timespec& start_real, timespec& start_cpu, double& elapsed_real, double& elapsed_cpu);
     bool isGraphComplete();
     bool isGraphSymmetric();
+    void preOrderVisit(Vertex* current, vector<Vertex*>& t);
     double calculateTourCost(const Tour& tour);
     void buildInitialRandomTour(Tour &initialTour, int start_vertex);
     bool edgeAlreadyOnTour(Edge* e, Tour& t);
@@ -91,6 +92,7 @@ private:
     static double haversineDistance(Vertex* origin, Vertex* destination);
     Tour unionEdgesTourTrail(const Tour& t, const Tour& trail_converted);
     Tour differenceTour(const Tour& t1, const Tour& t2);
+    Tour prim(Vertex* start);
     void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path, bool is_complete);
     void branchBoundHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);
     Graph* graph;

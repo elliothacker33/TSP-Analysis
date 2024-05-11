@@ -34,7 +34,7 @@ Folder Menu::getFolderContents(const string& path){
     Folder files;
     for (const auto& entry: filesystem::directory_iterator(path)){
         if (entry.is_regular_file()){
-            files.push_back(entry.path());
+            files.push_back(entry.path().generic_string());
         }
     }
     return files;
@@ -108,10 +108,10 @@ void Menu::chooseVertex(int &vertex_id) {
         getline(cin, input);
         input = removeLeadingTrailingSpaces(input);
 
-        if (input == "STOP") {
+        if (input == "STOP" || input == "stop") {
             vertex_id = -1;
             return;
-        } else if (input == "DEFAULT") {
+        } else if (input == "DEFAULT" || input == "default") {
             vertex_id = 0;
             return;
         } else {
@@ -554,11 +554,11 @@ void Menu::algorithmMenu() {
             if (vertex_chosen == -1) {
                 algorithmMenu();
             } else if (vertex_chosen == 0) {
-                r = manager->getCoder()->triangularAproximation();
+                r = manager->getCoder()->triangularApproximation();
                 displayResult(r);
                 algorithmMenu();
             } else {
-                r = manager->getCoder()->triangularAproximation(vertex_chosen);
+                r = manager->getCoder()->triangularApproximation(vertex_chosen);
                 displayResult(r);
                 algorithmMenu();
             }

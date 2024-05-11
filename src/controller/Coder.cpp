@@ -4,6 +4,7 @@
 #include <random>
 #include <cmath>
 #include <algorithm>
+#include <queue>
 
 void Coder::setNewTable(HashTable* table){
     this->vertices_table = table;
@@ -216,42 +217,42 @@ void Coder::backtrackingHelper(Vertex* start, double& min_distance, Vertex* curr
 
 
 Result Coder::backtracking(int start_vertex) {
-        // Initialize Timer
-        bool is_complete = isGraphComplete();
-        timespec start_real{};
-        timespec start_cpu{};
-        double elapsed_real, elapsed_cpu;
-        startTimer(start_real, start_cpu);
+    // Initialize Timer
+    timespec start_real{};
+    timespec start_cpu{};
+    double elapsed_real, elapsed_cpu;
+    startTimer(start_real, start_cpu);
+    bool is_complete = isGraphComplete();
 
-        // Set all vertex to visited false
-        for (Vertex *v: graph->getVertexSet()) {
-            if (v == nullptr) {
-                throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
-            }
-            v->setVisited(false);
+    // Set all vertex to visited false
+    for (Vertex *v: graph->getVertexSet()) {
+        if (v == nullptr) {
+            throw CustomError("NullPtr: vertex v is a null ptr", ERROR);
         }
+        v->setVisited(false);
+    }
 
-        // Initialize distance
-        double min_distance = numeric_limits<double>::max();
+    // Initialize distance
+    double min_distance = numeric_limits<double>::max();
 
-        // Start vertex (visited)
-        Vertex *start = vertices_table->search(start_vertex);
-        if (start == nullptr) {
-            throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
-        }
-        start->setVisited(true);
+    // Start vertex (visited)
+    Vertex *start = vertices_table->search(start_vertex);
+    if (start == nullptr) {
+        throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
+    }
+    start->setVisited(true);
 
-        // Path
-        Tour min_path;
-        Tour path;
+    // Path
+    Tour min_path;
+    Tour path;
 
-        // Backtracking calculation
-        backtrackingHelper(start, min_distance, start, 0, path, min_path,is_complete);
+    // Backtracking calculation
+    backtrackingHelper(start, min_distance, start, 0, path, min_path,is_complete);
 
 
-        // Finish Timer
-        Time t = stopTimer(start_real, start_cpu, elapsed_real, elapsed_cpu);
-        return {min_path, min_distance, t};
+    // Finish Timer
+    Time t = stopTimer(start_real, start_cpu, elapsed_real, elapsed_cpu);
+    return {min_path, min_distance, t};
 }
 
 /**
@@ -564,8 +565,102 @@ Result Coder::linKhernigan(int start_vertex){
 Result Coder::cristofides(int start_vertex) {
     return {};
 }
-Result Coder::triangularAproximation(int start_vertex) {
-    return {};
+
+void Coder::preOrderVisit(Vertex *current, vector<Vertex*>& t) {
+    for (Edge* e : current->getAdj()){
+        if (e->getDestination()->getPath() == e  && !e->getDestination()->isVisited()){
+            t.push_back(e->getDestination());
+            e->getDestination()->setVisited(true);
+            preOrderVisit(e->getDestination(),t);
+
+        }
+    }
+}
+
+struct Comparator {
+    bool operator()(Vertex* a, Vertex* b) {
+        return a->getKey() > b->getKey();
+    }
+};
+Tour Coder::prim(Vertex* start) {
+    // Initialization
+    double max = numeric_limits<double>::max();
+    priority_queue<Vertex*, vector<Vertex*>, Comparator> pq;
+
+    for (Vertex* v : graph->getVertexSet()){
+        v->setVisited(false);
+        v->setPath(nullptr);
+        v->setKey(max);
+    }
+
+    start->setKey(0);
+    pq.push(start);
+    while(!pq.empty()){
+        Vertex* v = pq.top();
+        pq.pop();
+        if (v->isVisited()) continue;
+            v->setVisited(true);
+        for (Edge* e : v->getAdj()){
+            if(!e->getDestination()->isVisited() && e->getDistance() < e->getDestination()->getKey()){
+                e->getDestination()->setKey(e->getDistance());
+                e->getDestination()->setPath(e);
+                pq.push(e->getDestination());
+            }
+        }
+    }
+
+    // Get the result of MST
+    Tour mst;
+    for (Vertex* v : graph->getVertexSet()){
+        v->setVisited(false);
+    }
+    vector<Vertex*> v;
+    start->setVisited(true);
+    v.push_back(start);
+    preOrderVisit(start,v);
+    for (int i = 0; i < v.size() -1 ; i++){
+        Vertex* origin = v[i];
+        Vertex* destination = v[i+1];
+        for (Edge* e : origin->getAdj()) {
+            if (e->getDestination() == destination) {
+                mst.push_back(e);
+                break;
+            }
+        }
+    }
+    return mst;
+}
+
+
+Result Coder::triangularApproximation(int start_vertex) {
+    // Start timer
+    timespec start_real{};
+    timespec start_cpu{};
+    double elapsed_real, elapsed_cpu;
+    startTimer(start_real, start_cpu);
+
+    // Build MST
+    Vertex* start = vertices_table->search(start_vertex);
+    Tour t = prim(start);
+
+    // Add cycle edge
+    Vertex* last_v = t.back()->getDestination();
+    for (Edge* e : last_v->getAdj()){
+        if (e->getDestination() == start){
+            t.push_back(e);
+            break;
+        }
+    }
+
+    // Get the result
+    double distance = 0.0;
+    for (Edge* e : t){
+        distance += e->getDistance();
+    }
+
+    // Finish timer
+    Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
+    return {t,distance,time};
 }
 
 Result Coder::realWorld(int start_vertex) {
@@ -575,5 +670,6 @@ Result Coder::realWorld(int start_vertex) {
 Result Coder::held_karp(int start_vertex) {
     return {};
 }
+
 
 

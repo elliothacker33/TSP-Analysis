@@ -38,6 +38,18 @@ public:
     ~Vertex();
 
     /**
+     * @brief Get key for prim
+     * @return key
+     */
+    [[nodiscard]] double getKey() const;
+
+    /**
+     * Set new key for vertex
+     * @param _key
+     */
+    void setKey(double _key);
+
+    /**
      * @brief Get vertex identification id
      * @return id
      */
@@ -171,6 +183,11 @@ public:
     [[nodiscard]] vector<Edge*> getAdj() const;
 
 private:
+    /**
+     * @brief Key used for the distance in prim algorithm
+     */
+    double key;
+
     /**
     * @brief Indicates the identifier of this vertex on the graph
     */
