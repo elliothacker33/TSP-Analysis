@@ -38,3 +38,5 @@
 625	779	7375014974271881	TSP_Analysis.exe	ca08124294eff53c
 2	609	7375015674578368	CMakeFiles/TSP_Analysis.dir/src/view/Menu.cpp.obj	12da05732ae33304
 609	778	7375015676268372	TSP_Analysis.exe	ca08124294eff53c
+2	587	7375033214635429	CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.obj	cce7e9370cc9ad80
+587	734	7375033216095427	TSP_Analysis.exe	ca08124294eff53c

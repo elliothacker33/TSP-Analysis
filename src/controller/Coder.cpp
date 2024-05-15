@@ -564,6 +564,12 @@ Result Coder::linKhernigan(int start_vertex){
 
 Result Coder::cristofides(int start_vertex) {
 
+
+    timespec start_real{};
+    timespec start_cpu{};
+    double elapsed_real, elapsed_cpu;
+    startTimer(start_real, start_cpu);
+
     Graph* start = graph;
     Tour mst = prim(vertices_table->search(start_vertex));
 
@@ -783,10 +789,16 @@ Result Coder::cristofides(int start_vertex) {
 
     }
 
-    Result res;
-    res.tour = Fedges;
+    // Get the result
+    double distance = 0.0;
+    for (Edge* e : lastEdges){
+        distance += e->getDistance();
+    }
 
-    return res;
+    // Finish timer
+    Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
+
+    return {lastEdges, distance, time};
 }
 
 void Coder::preOrderVisit(Vertex *current, vector<Vertex*>& t) {
