@@ -574,7 +574,11 @@ Result Coder::cristofides(int start_vertex) {
 
         dest->setInDegree(0);
         dest->setOutDegree(0);
+
+        origin->setInDegree(0);
+        origin->setOutDegree(0);
     }
+
 
     for(auto a: mst){
 
@@ -582,8 +586,9 @@ Result Coder::cristofides(int start_vertex) {
         Vertex* origin = a->getOrigin();
 
         dest->setInDegree(dest->getInDegree() + 1);
-        dest->setOutDegree(dest->getOutDegree() + 1);
+        origin->setOutDegree(origin->getOutDegree() + 1);
     }
+
 
     Graph odd_graph;
 
@@ -617,6 +622,10 @@ Result Coder::cristofides(int start_vertex) {
                 break;
             }
         }
+    }
+
+    for(auto a: newEdges){
+        cout << a->getOrigin()->getId() << "|" << a->getDestination()->getId() << endl;
     }
 
     Tour nEdges;
@@ -748,6 +757,7 @@ Result Coder::cristofides(int start_vertex) {
         a->getOrigin()->setVisited(false);
 
     }
+
 
     for(auto a: lastEdges){
 
