@@ -664,7 +664,73 @@ Result Coder::triangularApproximation(int start_vertex) {
 }
 
 Result Coder::realWorld(int start_vertex) {
-    return {};
+    // Start timer
+    timespec start_real{};
+    timespec start_cpu{};
+    double elapsed_real, elapsed_cpu;
+    startTimer(start_real, start_cpu);
+
+    // Initialization
+    Vertex* start = vertices_table->search(start_vertex);
+    if (start == nullptr) {
+        throw CustomError("NullPtr: vertex start is a null ptr", ERROR);
+    }
+    start->setVisited(true);
+    Tour tour;
+    double total_distance = 0.0;
+
+    // Nearest Neighbor
+    Vertex* current = start;
+    /*while (tour.size() < graph->getNumberOfVertexes() - 1) {
+        Edge* min_edge = nullptr;
+        double min_distance = numeric_limits<double>::max();
+        for (Edge* e : current->getAdj()) {
+            if (e->getDestination()->isVisited()) {
+                continue;
+            }
+            if (e->getDistance() < min_distance) {
+                min_distance = e->getDistance();
+                min_edge = e;
+            }
+        }
+        if (min_edge == nullptr) {
+            break;
+        }
+        tour.push_back(min_edge);
+        total_distance += min_edge->getDistance();
+        current = min_edge->getDestination();
+        current->setVisited(true);
+    }*/
+    while (tour.size() < graph->getNumberOfVertexes() -1){
+        double min_distance = numeric_limits<double>::max();
+        Edge* min_edge = nullptr;
+        for (Edge* e : current->getAdj()){
+            if (!e->getDestination()->isVisited() && e->getDistance() < min_distance){
+                min_distance = e->getDistance();
+                min_edge = e;
+            }
+        }
+        if (min_edge == nullptr){
+            throw CustomError("No path exists to return to the origin while visiting all nodes.", ERROR);
+        }
+        tour.push_back(min_edge);
+        total_distance += min_distance;
+        current = min_edge->getDestination();
+        current->setVisited(true);
+    }
+
+    // Completing the Tour
+    for(Edge* e : current->getAdj()){
+        if (e->getDestination() == start){
+            tour.push_back(e);
+            total_distance += e->getDistance();
+            break;
+        }
+    }
+
+    // Finish timer
+    Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
+    return {tour, total_distance, time};
 }
 
 Result Coder::held_karp(int start_vertex) {
