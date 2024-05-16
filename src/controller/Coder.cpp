@@ -561,7 +561,6 @@ Result Coder::linKhernigan(int start_vertex){
     }
 }
 
-
 Result Coder::cristofides(int start_vertex) {
 
     timespec start_real{};
@@ -569,217 +568,88 @@ Result Coder::cristofides(int start_vertex) {
     double elapsed_real, elapsed_cpu;
     startTimer(start_real, start_cpu);
 
-    Graph* start = graph;
-    Tour mst = prim(vertices_table->search(start_vertex));
 
-    for(auto a: mst){
+    Tour res;
+    vector <Vertex*> vertices;
 
-        Vertex* dest = a->getDestination();
-        Vertex* origin = a->getOrigin();
+    Graph* stgraph = graph;
+    Vertex* start = vertices_table->search(start_vertex);
+    Vertex* current = start;
 
-        dest->setInDegree(0);
-        dest->setOutDegree(0);
+    current->setVisited(true);
+    vertices.push_back(current);
+    Edge* min;
 
-        origin->setInDegree(0);
-        origin->setOutDegree(0);
-    }
+    int count = 0;
+    bool check = false;
 
-
-    for(auto a: mst){
-
-        Vertex* dest = a->getDestination();
-        Vertex* origin = a->getOrigin();
-
-        dest->setInDegree(dest->getInDegree() + 1);
-        origin->setOutDegree(origin->getOutDegree() + 1);
-    }
-
-
-    Graph odd_graph;
-
-    for(auto a: mst){
-
-        Vertex* dest = a->getDestination();
-        Vertex* origin = a->getOrigin();
-
-        if(!((dest->getInDegree() + dest->getOutDegree()) % 2)){
-            continue;
-        }
-
-        if(!((origin->getInDegree() + origin->getOutDegree()) % 2)){
-            continue;
-        }
-
-        odd_graph.addVertex(dest);
-        odd_graph.addVertex(origin);
-    }
-
-    Tour newEdges;
-
-    for(auto a: start->getVertexSet()){
-        for(auto b: odd_graph.getVertexSet()){
-
-            if(a->getId() == b->getId()){
-
-                for(auto c: a->getAdj()){
-                   newEdges.push_back(c);
-                }
-                break;
-            }
-        }
-    }
-
-    Tour nEdges;
-
-    for(auto a: newEdges){
-
-        Vertex* dest = a->getDestination();
-        Vertex* origin = a->getOrigin();
-
-        bool ch = false;
-        bool _ch = false;
-
-        for(auto b: odd_graph.getVertexSet()){
-            if(b->getId() == dest->getId()){
-                ch = true;
-                b->setVisited(true);
-            }
-
-            if(b->getId() == origin->getId()){
-                _ch = true;
-                b->setVisited(true);
-            }
-
-            if((ch and _ch)){
-                nEdges.push_back(a);
-                break;
-            }
-        }
-    }
-
-    sort(nEdges.begin(), nEdges.end());
-
-
-    vector<Vertex*> vertices;
-    Tour finalEdges;
-
-    for(auto a: nEdges){
-
-        Vertex* dest = a->getDestination();
-        Vertex* origin = a->getOrigin();
-
-        bool ch = false;
-        bool _ch = false;
-
-        for(auto b: vertices){
-            if(b->getId() == dest->getId()){
-                ch = true;
-                b->setVisited(true);
-                break;
-            }
-
-            if(b->getId() == origin->getId()){
-                _ch = true;
-                b->setVisited(true);
-                break;
-            }
-        }
-
-        if(ch or _ch){
-            continue;
-        }
-
-        vertices.push_back(dest);
-        vertices.push_back(origin);
-
-        finalEdges.push_back(a);
-    }
-
-    for(auto a: mst){
-
-        bool check = false;
-
-        for(auto b: finalEdges){
-            if(b->getDestination() == a->getDestination() and b->getOrigin() == a->getOrigin() and b->getDistance() == a->getDistance()){
+    for(auto a: graph->getVertexSet()) {
+        check = false;
+        for(auto b: a->getAdj()){
+            if(b->getDestination()->getId() == start->getId()){
                 check = true;
                 break;
             }
         }
 
-        if(!check)finalEdges.push_back(a);
-    }
-
-    sort(finalEdges.begin(), finalEdges.end());
-
-    Tour lastEdges;
-
-    for(auto a: finalEdges){
-
-        bool check = false;
-        bool _ch = false;
-        for(auto b: lastEdges){
-
-            if(b->getDestination() == a->getDestination() and b->getDestination()->getInDegree() > 1){
-                _ch = true;
-            }
-
-            if(b->getOrigin() == a->getOrigin() and b->getOrigin()->getOutDegree() > 1){
-                check = true;
-            }
-        }
-
-        if(check and _ch)continue;
-
-
-        if(check){
-            a->getOrigin()->setOutDegree(2);
-        }
-        else
-        {
-            a->getOrigin()->setOutDegree(1);
-        }
-
-        if(_ch){
-            a->getDestination()->setInDegree(2);
-        }
-        else
-        {
-            a->getDestination()->setInDegree(1);
-        }
-
-        lastEdges.push_back(a);
-    }
-
-    Tour Fedges;
-
-    for(auto a: lastEdges){
-
-        a->getDestination()->setVisited(false);
-        a->getOrigin()->setVisited(false);
-
+        if(!check)count++;
     }
 
 
-    for(auto a: lastEdges){
+    do{
 
-        Vertex* dest = a->getDestination();
+        min = nullptr;
 
-        if(dest->isVisited()){
+        for(auto a: graph->getVertexSet()){
 
-            for(auto b: lastEdges){
+            if(a->getId() == current->getId()){
 
-                Vertex* origin = b->getOrigin();
+                for(auto b: a->getAdj()){
+                    check = false;
+                    if(b->getDestination()->isVisited()){
+                        continue;
+                    }
 
-                if(origin->getId() == dest->getId()){
-                    Fedges.push_back(new Edge(a->getOrigin(), b->getDestination(), a->getDistance() + b->getDistance()));
-                    b->getDestination()->setVisited(true);
+                    for(auto c: b->getDestination()->getAdj()){
+                        if(!c->getDestination()->isVisited()){
+                            check = true;
+                            break;
+                        }
+                    }
+
+                    if(!check)continue;
+
+                    if(min == nullptr)
+                    {
+                        min = b;
+                    }
+                    else if(min > b)
+                    {
+                        min = b;
+                    }
+
                 }
+
+                break;
             }
         }
-        else
-        {
-            Fedges.push_back(a);
-            a->getDestination()->setVisited(true);
+
+        if(min != nullptr) {
+            res.push_back(min);
+
+            vertices.push_back(min->getDestination());
+            min->getDestination()->setVisited(true);
+            current = min->getDestination();
+        }
+    }while(vertices.size() != graph->getVertexSet().size());
+
+
+    for(auto a: res.back()->getDestination()->getAdj()){
+
+        if(a->getDestination()->getId() == start->getId()){
+            res.push_back(a);
+            check = true;
+            break;
         }
 
     }
@@ -787,7 +657,7 @@ Result Coder::cristofides(int start_vertex) {
 
     // Get the result
     double distance = 0.0;
-    for (Edge* e : lastEdges){
+    for (Edge* e : res){
         distance += e->getDistance();
     }
 
@@ -795,7 +665,9 @@ Result Coder::cristofides(int start_vertex) {
     Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
 
 
-    return { lastEdges, distance, time};
+    setNewGraph(stgraph);
+
+    return { res, distance, time};
 }
 
 void Coder::preOrderVisit(Vertex *current, vector<Vertex*>& t) {
