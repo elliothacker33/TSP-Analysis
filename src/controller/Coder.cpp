@@ -564,7 +564,6 @@ Result Coder::linKhernigan(int start_vertex){
 
 Result Coder::cristofides(int start_vertex) {
 
-
     timespec start_real{};
     timespec start_cpu{};
     double elapsed_real, elapsed_cpu;
@@ -628,10 +627,6 @@ Result Coder::cristofides(int start_vertex) {
                 break;
             }
         }
-    }
-
-    for(auto a: newEdges){
-        cout << a->getOrigin()->getId() << "|" << a->getDestination()->getId() << endl;
     }
 
     Tour nEdges;
@@ -789,6 +784,7 @@ Result Coder::cristofides(int start_vertex) {
 
     }
 
+
     // Get the result
     double distance = 0.0;
     for (Edge* e : lastEdges){
@@ -798,16 +794,17 @@ Result Coder::cristofides(int start_vertex) {
     // Finish timer
     Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
 
-    return {lastEdges, distance, time};
+
+    return { lastEdges, distance, time};
 }
 
 void Coder::preOrderVisit(Vertex *current, vector<Vertex*>& t) {
+
     for (Edge* e : current->getAdj()){
         if (e->getDestination()->getPath() == e  && !e->getDestination()->isVisited()){
             t.push_back(e->getDestination());
             e->getDestination()->setVisited(true);
             preOrderVisit(e->getDestination(),t);
-
         }
     }
 }

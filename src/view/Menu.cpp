@@ -478,20 +478,20 @@ void Menu::realWorldMenu(){
 
     switch (option) {
         case 1:
-            manager->callParserImportFiles("../data/Real-world Graphs/Real-world Graphs/graph1/nodes.csv", 1000,
-                           "../data/Real-world Graphs/Real-world Graphs/graph1/edges.csv", mode);
+            manager->callParserImportFiles("../data/Real-world Graphs/graph1/nodes.csv", 1000,
+                           "../data/Real-world Graphs/graph1/edges.csv", mode);
             menuStack.push(&Menu::realWorldMenu);
             algorithmMenu();
             break;
         case 2:
-            manager->callParserImportFiles("../data/Real-world Graphs/Real-world Graphs/graph2/nodes.csv", 5000,
-                           "../data/Real-world Graphs/Real-world Graphs/graph2/edges.csv", mode);
+            manager->callParserImportFiles("../data/Real-world Graphs/graph2/nodes.csv", 5000,
+                           "../data/Real-world Graphs/graph2/edges.csv", mode);
             menuStack.push(&Menu::realWorldMenu);
             algorithmMenu();
             break;
         case 3:
-            manager->callParserImportFiles("../data/Real-world Graphs/Real-world Graphs/graph3/nodes.csv", 10000,
-                           "../data/Real-world Graphs/Real-world Graphs/graph3/edges.csv", mode);
+            manager->callParserImportFiles("../data/Real-world Graphs/graph3/nodes.csv", 10000,
+                           "../data/Real-world Graphs/graph3/edges.csv", mode);
             menuStack.push(&Menu::realWorldMenu);
             algorithmMenu();
             break;
