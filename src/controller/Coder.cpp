@@ -582,6 +582,7 @@ struct Comparator {
         return a->getKey() > b->getKey();
     }
 };
+
 Tour Coder::prim(Vertex* start) {
     // Initialization
     double max = numeric_limits<double>::max();
