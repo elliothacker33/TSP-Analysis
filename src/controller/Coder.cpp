@@ -583,18 +583,6 @@ Result Coder::cristofides(int start_vertex) {
     int count = 0;
     bool check = false;
 
-    for(auto a: graph->getVertexSet()) {
-        check = false;
-        for(auto b: a->getAdj()){
-            if(b->getDestination()->getId() == start->getId()){
-                check = true;
-                break;
-            }
-        }
-
-        if(!check)count++;
-    }
-
 
     do{
 
@@ -605,19 +593,10 @@ Result Coder::cristofides(int start_vertex) {
             if(a->getId() == current->getId()){
 
                 for(auto b: a->getAdj()){
-                    check = false;
+
                     if(b->getDestination()->isVisited()){
                         continue;
                     }
-
-                    for(auto c: b->getDestination()->getAdj()){
-                        if(!c->getDestination()->isVisited()){
-                            check = true;
-                            break;
-                        }
-                    }
-
-                    if(!check)continue;
 
                     if(min == nullptr)
                     {
@@ -641,17 +620,14 @@ Result Coder::cristofides(int start_vertex) {
             min->getDestination()->setVisited(true);
             current = min->getDestination();
         }
-    }while(vertices.size() != graph->getVertexSet().size());
-
+    }
+    while(vertices.size() != graph->getVertexSet().size() and min != nullptr);
 
     for(auto a: res.back()->getDestination()->getAdj()){
-
         if(a->getDestination()->getId() == start->getId()){
             res.push_back(a);
-            check = true;
             break;
         }
-
     }
 
 
@@ -665,7 +641,7 @@ Result Coder::cristofides(int start_vertex) {
     Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
 
 
-    setNewGraph(stgraph);
+    graph->resetVisited();
 
     return { res, distance, time};
 }
@@ -755,6 +731,8 @@ Result Coder::triangularApproximation(int start_vertex) {
             break;
         }
     }
+
+    graph->resetVisited();
 
     // Get the result
     double distance = 0.0;

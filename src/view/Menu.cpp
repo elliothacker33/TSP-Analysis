@@ -447,7 +447,7 @@ void Menu::mediumMenu(){
             break;
         case 12:
             manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 900,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_900.csv",
+                           "../data/Extra_Fully_Connected_Graphs/edges_900.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
