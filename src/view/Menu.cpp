@@ -627,11 +627,11 @@ void Menu::extraMenu() {
             if (vertex_chosen == -1) {
             extraMenu();
         } else if (vertex_chosen == 0) {
-            r = manager->getCoder()->linKhernigan();
+            r = manager->getCoder()->branchBound();
             displayResult(r);
             extraMenu();
         } else {
-            r = manager->getCoder()->linKhernigan(vertex_chosen);
+            r = manager->getCoder()->branchBound(vertex_chosen);
             displayResult(r);
             extraMenu();
         }
@@ -646,20 +646,6 @@ void Menu::extraMenu() {
                 extraMenu();
             } else {
                 r = manager->getCoder()->branchBound(vertex_chosen);
-                displayResult(r);
-                extraMenu();
-            }
-            break;
-        case 3:
-            chooseVertex(vertex_chosen);
-            if (vertex_chosen == -1) {
-                extraMenu();
-            } else if (vertex_chosen == 0) {
-                r = manager->getCoder()->held_karp();
-                displayResult(r);
-                extraMenu();
-            } else {
-                r = manager->getCoder()->held_karp(vertex_chosen);
                 displayResult(r);
                 extraMenu();
             }

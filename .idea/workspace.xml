@@ -26,19 +26,12 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Coder.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/HashTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/HashTable.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Manager.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/controller/Parser.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Edge.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Graph.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Graph.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/model/Vertex.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/view/Menu.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TSP_Analysis.dir/src/view/Menu.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TSP_Analysis" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Coder.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Coder.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Coder.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Coder.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Vertex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Vertex.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Vertex.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Vertex.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/Menu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Menu.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +132,15 @@
       <workItem from="1715260223679" duration="9292000" />
       <workItem from="1715270101525" duration="3077000" />
       <workItem from="1715333942222" duration="6119000" />
-      <workItem from="1715421686291" duration="2768000" />
+      <workItem from="1715421686291" duration="7378000" />
+      <workItem from="1715463983177" duration="96000" />
+      <workItem from="1715709431448" duration="59000" />
+      <workItem from="1715716095099" duration="5474000" />
+      <workItem from="1715767509521" duration="1355000" />
+      <workItem from="1715776881447" duration="4000" />
+      <workItem from="1715803843591" duration="3321000" />
+      <workItem from="1715894031780" duration="3000" />
+      <workItem from="1715945161331" duration="2630000" />
     </task>
     <servers />
   </component>
@@ -150,17 +151,6 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/view/Menu.cpp</url>
-          <line>324</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

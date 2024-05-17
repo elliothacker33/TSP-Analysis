@@ -16,7 +16,6 @@ void Coder::setNewGraph(Graph* _graph){
 /**
  * @note Distance between two vertices
  */
-
 double Coder::haversineDistance(Vertex* origin, Vertex* destination) {
     try {
         if (origin == nullptr || destination == nullptr) {
@@ -365,203 +364,6 @@ double Coder::calculateTourCost(const Tour& tour){
     return tour_cost;
 }
 
-
-void Coder::buildInitialRandomTour(Tour& initialTour, int start_vertex) {
-
-    vector<Vertex*> shuffledVertices;
-    for (auto v : graph->getVertexSet()){
-        if (v->getId() != start_vertex){
-            shuffledVertices.push_back(v);
-        }
-    }
-
-    auto rd = random_device {};
-    auto rng = default_random_engine { rd() };
-    shuffle(shuffledVertices.begin(), shuffledVertices.end(), rng);
-
-    Vertex* start = vertices_table->search(start_vertex);
-    Vertex* next_start = shuffledVertices[0];
-    Edge* e = graph->getEdgeFromGraph(start,next_start);
-    initialTour.push_back(e);
-
-    for (int i = 0; i < shuffledVertices.size() - 1; i++){
-        Vertex* v1 = shuffledVertices[i];
-        Vertex* v2 = shuffledVertices[i+1];
-        e = graph->getEdgeFromGraph(v1,v2);
-        initialTour.push_back(e);
-    }
-
-    Vertex* before_finish = shuffledVertices[shuffledVertices.size()-1];
-    e = graph->getEdgeFromGraph(before_finish,start);
-    initialTour.push_back(e);
-
-}
-
-bool Coder::edgeAlreadyOnTour(Edge* e, Tour& t){
-    for (auto edge : t ){
-        if (edge == e){
-            return true;
-        }
-    }
-    return false;
-}
-
-
-Tour Coder::unionEdgesTourTrail(const Tour& tour, const Tour& trail) {
-    Tour union_tour;
-
-    for (auto e : tour) {
-        if (find(union_tour.begin(), union_tour.end(), e) == union_tour.end()) {
-            union_tour.push_back(e);
-        }
-    }
-
-    for (auto e : trail) {
-        if (find(union_tour.begin(), union_tour.end(), e) == union_tour.end()) {
-            union_tour.push_back(e);
-        }
-    }
-
-    return union_tour;
-}
-
-bool Coder::isHamiltonian(const Tour& t){
-    // Check empty
-    return true;
-
-
-
-}
-
-Tour Coder::differenceTour(const Tour& t1, const Tour& t2) {
-    Tour diff_tour;
-
-    for (auto e : t1) {
-        if (find(t2.begin(), t2.end(), e) == t2.end() && find(diff_tour.begin(),diff_tour.end(),e) == diff_tour.end()) {
-            diff_tour.push_back(e);
-        }
-    }
-    for (auto e : t2) {
-        if (find(t1.begin(), t1.end(), e) == t1.end() && find(diff_tour.begin(),diff_tour.end(),e) == diff_tour.end()) {
-            diff_tour.push_back(e);
-        }
-    }
-
-    return diff_tour;
-}
-
-
-Result Coder::linKhernigan(int start_vertex){
-
-    if (isGraphSymmetric() && isGraphComplete()) {
-        timespec start_real{};
-        timespec start_cpu{};
-        double elapsed_real, elapsed_cpu;
-        startTimer(start_real, start_cpu);
-
-        int p1 = 5;
-        int p2 = 2;
-        Tour tour;
-
-        buildInitialRandomTour(tour, start_vertex);
-        stack<KherniganCell> st;
-        double gStar;
-        do {
-            for (auto v: graph->getVertexSet()) {
-                st.push({v, 0, 0});
-            }
-            gStar = 0.0;
-            Tour currentTrail;
-            Vertex* v0 = nullptr;
-            while(!st.empty()){
-                KherniganCell currCell = st.top();
-                st.pop(); // Done
-                if (currCell.i == 0){
-                    v0 = currCell.v;
-                }
-                if (currCell.i % 2 == 0){
-                    for (Edge* e : currCell.v->getAdj()){
-
-                        if (!edgeAlreadyOnTour(e,currentTrail) && edgeAlreadyOnTour(e,tour)){
-                            Vertex* u = e->getDestination();
-                            Edge* cycle_edge = graph->getEdgeFromGraph(u,v0);
-
-                            currentTrail.push_back(e);
-                            Tour unionTour = unionEdgesTourTrail(tour,currentTrail);
-                            currentTrail.push_back(cycle_edge);
-
-                            Tour symmetricTour = differenceTour(tour,currentTrail);
-                            currentTrail.pop_back();
-                            currentTrail.pop_back();
-
-
-                            if (currCell.i <= p2 || (!edgeAlreadyOnTour(cycle_edge,unionTour) && isHamiltonian(symmetricTour))){
-                                st.push({u,currCell.i + 1,currCell.g + e->getDistance()});
-                            }
-
-                        }
-                    }
-                }
-
-                else{
-                    Edge* e = graph->getEdgeFromGraph(currCell.v,v0);
-                    currentTrail.push_back(e);
-                    Tour symmetric_tour = differenceTour(tour,currentTrail);
-                    currentTrail.pop_back();
-
-                    if (currCell.g > e->getDistance() && currCell.g - e->getDistance() > gStar && isHamiltonian(symmetric_tour)){
-                        currentTrail.push_back(e);
-                        gStar = currCell.g - e->getDistance();
-
-                        for (Edge* e1 : currCell.v->getAdj()){
-                            Vertex* u = e1->getDestination();
-                            currentTrail.pop_back();
-                            Tour union_tour = unionEdgesTourTrail(tour,currentTrail);
-                            currentTrail.push_back(e);
-
-                            if (currCell.g > e1->getDistance() && !edgeAlreadyOnTour(e1,union_tour)){
-                                st.push({u,currCell.i + 1, currCell.g - e1->getDistance()});
-                            }
-                        }
-                    }
-                }
-
-                KherniganCell topNow = st.top();
-                if (currCell.i <= topNow.i){
-                    if (gStar > 0){
-                        tour = differenceTour(tour,currentTrail);
-                    }
-                    else if (currCell.i > p1){
-                        stack<KherniganCell> tmpStack;
-                        // Reset stack
-                        while(!st.empty()){
-                            KherniganCell t = st.top();
-                            if (t.i <= p1){
-                                tmpStack.push(t);
-                            }
-                            st.pop();
-                        }
-                        while (!tmpStack.empty()){
-                            st.push(tmpStack.top());
-                            tmpStack.pop();
-                        }
-                    }
-                }
-            }
-
-        }
-        while(gStar != 0); // While gStar can be improved keep doing the algorithm.
-
-        double tourCost = calculateTourCost(tour);
-        Time t = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
-        return {tour,tourCost,t};
-    }
-    else{
-        throw CustomError("Lin khernigan only works for complete and symmetric graphs", SEMANTIC_ERROR);
-    }
-}
-
-
 Result Coder::cristofides(int start_vertex) {
     return {};
 }
@@ -582,49 +384,99 @@ struct Comparator {
         return a->getKey() > b->getKey();
     }
 };
+
+
 Tour Coder::prim(Vertex* start) {
     // Initialization
     double max = numeric_limits<double>::max();
-    priority_queue<Vertex*, vector<Vertex*>, Comparator> pq;
+    priority_queue<Vertex *, vector<Vertex *>, Comparator> pq;
 
-    for (Vertex* v : graph->getVertexSet()){
+    // Mst initial values
+    for (Vertex *v: graph->getVertexSet()) {
+        if (v == nullptr) {
+            throw CustomError("Null Ptr: vertex v is a null ptr", ERROR);
+        }
         v->setVisited(false);
-        v->setPath(nullptr);
         v->setKey(max);
     }
 
     start->setKey(0);
     pq.push(start);
-    while(!pq.empty()){
-        Vertex* v = pq.top();
+
+    // Calculate mst
+    while (!pq.empty()) {
+        Vertex *v = pq.top();
         pq.pop();
         if (v->isVisited()) continue;
-            v->setVisited(true);
-        for (Edge* e : v->getAdj()){
-            if(!e->getDestination()->isVisited() && e->getDistance() < e->getDestination()->getKey()){
-                e->getDestination()->setKey(e->getDistance());
-                e->getDestination()->setPath(e);
-                pq.push(e->getDestination());
+        v->setVisited(true);
+
+        // First do a normal search, then calculate every distance to another edge if graph have coordinates.
+        if (!v->getAdj().empty()) {
+            for (Edge *e: v->getAdj()) {
+                if (!e->getDestination()->isVisited() && e->getDistance() < e->getDestination()->getKey()) {
+                    e->getDestination()->setKey(e->getDistance());
+                    e->getDestination()->setPath(e);
+                    pq.push(e->getDestination());
+                }
+            }
+        }
+        // Do search in prim with haversine
+        else {
+            for (Vertex *v1: graph->getVertexSet()) {
+                if (!v1->isVisited()) {
+                    if (v->getCoordinates() == nullptr || v1->getCoordinates() == nullptr){
+                        continue;
+                    }
+                    double distance = haversineDistance(v, v1);
+                    if (distance < v1->getKey()) {
+                        Edge* e = graph->addEdge(v, v1, distance);
+                        v1->setKey(distance);
+                        v1->setPath(e);
+                        pq.push(v1);
+                    }
+                }
             }
         }
     }
 
-    // Get the result of MST
-    Tour mst;
+    // Visit mst in pre-order visit
     for (Vertex* v : graph->getVertexSet()){
+        if (v == nullptr){
+            throw CustomError("Null Ptr: vertex v is a null ptr",ERROR);
+        }
         v->setVisited(false);
     }
-    vector<Vertex*> v;
+    vector<Vertex*> mst_v;
     start->setVisited(true);
-    v.push_back(start);
-    preOrderVisit(start,v);
-    for (int i = 0; i < v.size() -1 ; i++){
-        Vertex* origin = v[i];
-        Vertex* destination = v[i+1];
+    mst_v.push_back(start);
+    preOrderVisit(start,mst_v);
+    // Check if mst_v is a spanning tree
+    cout << mst_v.size() << endl;
+
+    // Get the mst (convert vector<Vertex*> to Tour)
+    Tour mst;
+    for (int i = 0; i < mst_v.size() - 1; i++){
+        Vertex* origin = mst_v[i];
+        Vertex* destination = mst_v[i+1];
+        if (origin == nullptr || destination == nullptr){
+            throw CustomError("Null Ptr: origin/destination is a null ptr",ERROR);
+        }
+        bool find = false;
         for (Edge* e : origin->getAdj()) {
+            if (e == nullptr){
+                throw CustomError("Null Ptr: edge is a null ptr",ERROR);
+            }
             if (e->getDestination() == destination) {
+                find = true;
                 mst.push_back(e);
                 break;
+            }
+        }
+        if (!find){
+            if (origin->getCoordinates() != nullptr || destination->getCoordinates() != nullptr) {
+                double distance = haversineDistance(origin, destination);
+                Edge *e = graph->addEdge(origin, destination, distance);
+                mst.push_back(e);
             }
         }
     }
@@ -639,37 +491,90 @@ Result Coder::triangularApproximation(int start_vertex) {
     double elapsed_real, elapsed_cpu;
     startTimer(start_real, start_cpu);
 
-    // Build MST
+    // Find first vertex
     Vertex* start = vertices_table->search(start_vertex);
-    Tour t = prim(start);
+    if (start == nullptr){
+        throw CustomError("Null Ptr: start vertex is a null ptr",ERROR);
+    }
 
-    // Add cycle edge
-    Vertex* last_v = t.back()->getDestination();
-    for (Edge* e : last_v->getAdj()){
+    // Find mst
+    Tour mst = prim(start);
+
+    // If mst is empty, there is no path found
+    if (mst.empty()){
+        Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
+        return {mst,0,time};
+    }
+
+    // The result could be an invalid spanning tree.
+    cout << mst.size() << endl;
+    if (mst.size() != graph->getNumberOfVertexes()-1){
+        return {};
+    }
+
+    for (Vertex* v : graph->getVertexSet()){
+        v->setVisited(false);
+    }
+
+    for (Edge* e : mst){
+        if (e->getOrigin()->isVisited()){
+            return {};
+        }
+        e->getOrigin()->setVisited(true);
+    }
+    Vertex* last_vertex = mst.back()->getDestination();
+    if (last_vertex->isVisited()){
+        return {};
+    }
+    last_vertex->setVisited(true);
+
+    for (Vertex* v : graph->getVertexSet()){
+        if (!v->isVisited()){
+            return {};
+        }
+        v->setVisited(false);
+    }
+
+    bool findEdge = false;
+    // Find edge for completing the cycle
+    for (Edge* e : last_vertex->getAdj()){
+        if (e == nullptr){
+            throw CustomError("Null Ptr: edge is a null ptr",ERROR);
+        }
         if (e->getDestination() == start){
-            t.push_back(e);
+            findEdge = true;
+            mst.push_back(e);
             break;
+        }
+    }
+
+    // If there is no edge try using coordinates
+    if (!findEdge){
+        if (last_vertex->getCoordinates() == nullptr || start->getCoordinates() == nullptr){
+            return {};
+        }
+        else{
+            double distance = haversineDistance(last_vertex,start);
+            Edge* cycle_edge = graph->addEdge(last_vertex,start,distance);
+            mst.push_back(cycle_edge);
         }
     }
 
     // Get the result
     double distance = 0.0;
-    for (Edge* e : t){
+    for (Edge* e : mst){
         distance += e->getDistance();
     }
 
     // Finish timer
     Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
-    return {t,distance,time};
+    return {mst,distance,time};
 }
 
 Result Coder::realWorld(int start_vertex) {
     return {};
 }
 
-Result Coder::held_karp(int start_vertex) {
-    return {};
-}
 
 
 

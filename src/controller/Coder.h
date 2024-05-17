@@ -74,7 +74,6 @@ public:
     Result held_karp(int start_vertex = 0);
     Result cristofides(int start_vertex = 0);
     Result nearestNeighbor(int start_vertex = 0);
-    Result linKhernigan(int start_vertex = 0);
     Result realWorld(int start_vertex = 0);
 
 
@@ -86,12 +85,8 @@ private:
     bool isGraphSymmetric();
     void preOrderVisit(Vertex* current, vector<Vertex*>& t);
     double calculateTourCost(const Tour& tour);
-    void buildInitialRandomTour(Tour &initialTour, int start_vertex);
-    bool edgeAlreadyOnTour(Edge* e, Tour& t);
-    bool isHamiltonian(const Tour& t);
     static double haversineDistance(Vertex* origin, Vertex* destination);
-    Tour unionEdgesTourTrail(const Tour& t, const Tour& trail_converted);
-    Tour differenceTour(const Tour& t1, const Tour& t2);
+    bool cycleCheck(Tour mst);
     Tour prim(Vertex* start);
     void backtrackingHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path, bool is_complete);
     void branchBoundHelper(Vertex* start, double& min_distance, Vertex* current_vertex, double current_distance, Tour& path, Tour& min_path);
