@@ -1,0 +1,121 @@
+\hypertarget{classHashBucket}{}\doxysection{Hash\+Bucket Class Reference}
+\label{classHashBucket}\index{HashBucket@{HashBucket}}
+
+
+{\ttfamily \#include $<$Hash\+Table.\+h$>$}
+
+
+
+Collaboration diagram for Hash\+Bucket\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{classHashBucket__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHashBucket_a9b6fa97fcced981bb0237aafd59b3e05}{Hash\+Bucket}} (int \+\_\+id, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$\+\_\+vertex)
+\item 
+bool \mbox{\hyperlink{classHashBucket_a5b01b312f1adfa5998d0a9df2ef37130}{operator==}} (const \mbox{\hyperlink{classHashBucket}{Hash\+Bucket}} \&bucket) const
+\begin{DoxyCompactList}\small\item\em Equal operator to compare buckets. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classHashBucket_aa01a9eb941996a495a194c4d35c203ae}{get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Get identification of this hash bucket (key) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classHashBucket_a4496a44c2eb641b68736876e69fc6ffc}{get\+Vertex}} () const
+\begin{DoxyCompactList}\small\item\em Get vertex (value) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classHashBucket_aeb49929a14cf8f154aafe9c241f7d23d}{id}}
+\item 
+\mbox{\hyperlink{classVertex}{Vertex}} $\ast$ \mbox{\hyperlink{classHashBucket_a686e8e885237c1712e71cefaa7ec3f8a}{vertex}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+$<$\+Project headers $>$ buckets contain an id for key and \mbox{\hyperlink{classVertex}{Vertex}} for value 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHashBucket_a9b6fa97fcced981bb0237aafd59b3e05}\label{classHashBucket_a9b6fa97fcced981bb0237aafd59b3e05}} 
+\index{HashBucket@{HashBucket}!HashBucket@{HashBucket}}
+\index{HashBucket@{HashBucket}!HashBucket@{HashBucket}}
+\doxysubsubsection{\texorpdfstring{HashBucket()}{HashBucket()}}
+{\footnotesize\ttfamily Hash\+Bucket\+::\+Hash\+Bucket (\begin{DoxyParamCaption}\item[{int}]{\+\_\+id,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{\+\_\+vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+@constructor Constructor for \mbox{\hyperlink{classHashBucket}{Hash\+Bucket}} 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+id} & -\/ id for identification \\
+\hline
+{\em \+\_\+vertex} & -\/ pointer to vertex \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classHashBucket_aa01a9eb941996a495a194c4d35c203ae}\label{classHashBucket_aa01a9eb941996a495a194c4d35c203ae}} 
+\index{HashBucket@{HashBucket}!getId@{getId}}
+\index{getId@{getId}!HashBucket@{HashBucket}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily int Hash\+Bucket\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get identification of this hash bucket (key) 
+
+\begin{DoxyReturn}{Returns}
+id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHashBucket_a4496a44c2eb641b68736876e69fc6ffc}\label{classHashBucket_a4496a44c2eb641b68736876e69fc6ffc}} 
+\index{HashBucket@{HashBucket}!getVertex@{getVertex}}
+\index{getVertex@{getVertex}!HashBucket@{HashBucket}}
+\doxysubsubsection{\texorpdfstring{getVertex()}{getVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ Hash\+Bucket\+::get\+Vertex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get vertex (value) 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classHashBucket_a5b01b312f1adfa5998d0a9df2ef37130}\label{classHashBucket_a5b01b312f1adfa5998d0a9df2ef37130}} 
+\index{HashBucket@{HashBucket}!operator==@{operator==}}
+\index{operator==@{operator==}!HashBucket@{HashBucket}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Hash\+Bucket\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classHashBucket}{Hash\+Bucket}} \&}]{bucket }\end{DoxyParamCaption}) const}
+
+
+
+Equal operator to compare buckets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bucket} & -\/ reference to another bucket \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if equal buckets else false 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classHashBucket_aeb49929a14cf8f154aafe9c241f7d23d}\label{classHashBucket_aeb49929a14cf8f154aafe9c241f7d23d}} 
+\index{HashBucket@{HashBucket}!id@{id}}
+\index{id@{id}!HashBucket@{HashBucket}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily int Hash\+Bucket\+::id\hspace{0.3cm}{\ttfamily [private]}}
+
+identification $>$ \mbox{\Hypertarget{classHashBucket_a686e8e885237c1712e71cefaa7ec3f8a}\label{classHashBucket_a686e8e885237c1712e71cefaa7ec3f8a}} 
+\index{HashBucket@{HashBucket}!vertex@{vertex}}
+\index{vertex@{vertex}!HashBucket@{HashBucket}}
+\doxysubsubsection{\texorpdfstring{vertex}{vertex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVertex}{Vertex}}$\ast$ Hash\+Bucket\+::vertex\hspace{0.3cm}{\ttfamily [private]}}
+
+pointer to vertex $>$ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/controller/\mbox{\hyperlink{HashTable_8h}{Hash\+Table.\+h}}\item 
+src/controller/\mbox{\hyperlink{HashTable_8cpp}{Hash\+Table.\+cpp}}\end{DoxyCompactItemize}

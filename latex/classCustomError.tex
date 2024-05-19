@@ -1,0 +1,97 @@
+\hypertarget{classCustomError}{}\doxysection{Custom\+Error Class Reference}
+\label{classCustomError}\index{CustomError@{CustomError}}
+
+
+This class provides a simple interface for custom errors in my program.  
+
+
+
+
+{\ttfamily \#include $<$Custom\+Error.\+h$>$}
+
+
+
+Inheritance diagram for Custom\+Error\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classCustomError__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Custom\+Error\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classCustomError__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCustomError_a487cdf220db6e3b9893f0539a3a755a6}{Custom\+Error}} (const string \&\+\_\+message, \mbox{\hyperlink{CustomError_8h_ac08bb67be4b97cae8b7d5bf3b66fb688}{E\+R\+R\+O\+R\+\_\+\+T\+Y\+PE}} \+\_\+type)
+\item 
+const char $\ast$ \mbox{\hyperlink{classCustomError_ad6b3c2a3c0ed488bde1b91c1ba74b0ff}{what}} () const noexcept override
+\begin{DoxyCompactList}\small\item\em Override function of exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \& \mbox{\hyperlink{classCustomError_a3537be0be89acf76a18681a8a559ffb6}{message}}
+\item 
+\mbox{\hyperlink{CustomError_8h_ac08bb67be4b97cae8b7d5bf3b66fb688}{E\+R\+R\+O\+R\+\_\+\+T\+Y\+PE}} \mbox{\hyperlink{classCustomError_a5a86e764c26cb401448c6911e91f0705}{type}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class provides a simple interface for custom errors in my program. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCustomError_a487cdf220db6e3b9893f0539a3a755a6}\label{classCustomError_a487cdf220db6e3b9893f0539a3a755a6}} 
+\index{CustomError@{CustomError}!CustomError@{CustomError}}
+\index{CustomError@{CustomError}!CustomError@{CustomError}}
+\doxysubsubsection{\texorpdfstring{CustomError()}{CustomError()}}
+{\footnotesize\ttfamily Custom\+Error\+::\+Custom\+Error (\begin{DoxyParamCaption}\item[{const string \&}]{\+\_\+message,  }\item[{\mbox{\hyperlink{CustomError_8h_ac08bb67be4b97cae8b7d5bf3b66fb688}{E\+R\+R\+O\+R\+\_\+\+T\+Y\+PE}}}]{\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+@constructor \mbox{\hyperlink{classCustomError}{Custom\+Error}} 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+message} & error message \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCustomError_ad6b3c2a3c0ed488bde1b91c1ba74b0ff}\label{classCustomError_ad6b3c2a3c0ed488bde1b91c1ba74b0ff}} 
+\index{CustomError@{CustomError}!what@{what}}
+\index{what@{what}!CustomError@{CustomError}}
+\doxysubsubsection{\texorpdfstring{what()}{what()}}
+{\footnotesize\ttfamily const char $\ast$ Custom\+Error\+::what (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [noexcept]}}
+
+
+
+Override function of exception. 
+
+\begin{DoxyReturn}{Returns}
+message of error
+\end{DoxyReturn}
+$<$ Project headers $>$ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCustomError_a3537be0be89acf76a18681a8a559ffb6}\label{classCustomError_a3537be0be89acf76a18681a8a559ffb6}} 
+\index{CustomError@{CustomError}!message@{message}}
+\index{message@{message}!CustomError@{CustomError}}
+\doxysubsubsection{\texorpdfstring{message}{message}}
+{\footnotesize\ttfamily const string\& Custom\+Error\+::message\hspace{0.3cm}{\ttfamily [private]}}
+
+Custom error message $>$ \mbox{\Hypertarget{classCustomError_a5a86e764c26cb401448c6911e91f0705}\label{classCustomError_a5a86e764c26cb401448c6911e91f0705}} 
+\index{CustomError@{CustomError}!type@{type}}
+\index{type@{type}!CustomError@{CustomError}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{CustomError_8h_ac08bb67be4b97cae8b7d5bf3b66fb688}{E\+R\+R\+O\+R\+\_\+\+T\+Y\+PE}} Custom\+Error\+::type\hspace{0.3cm}{\ttfamily [private]}}
+
+Error type $>$ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Exceptions/\mbox{\hyperlink{CustomError_8h}{Custom\+Error.\+h}}\item 
+src/\+Exceptions/\mbox{\hyperlink{CustomError_8cpp}{Custom\+Error.\+cpp}}\end{DoxyCompactItemize}

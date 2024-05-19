@@ -1,0 +1,415 @@
+\hypertarget{classCoder}{}\doxysection{Coder Class Reference}
+\label{classCoder}\index{Coder@{Coder}}
+
+
+{\ttfamily \#include $<$Coder.\+h$>$}
+
+
+
+Collaboration diagram for Coder\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{classCoder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classCoder_a99e240f019f7c0f08870ffddee08a618}{set\+New\+Table}} (\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Set new table for new imports. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCoder_a781d942ef8089d28fa36cec88336cfe9}{set\+New\+Graph}} (\mbox{\hyperlink{classGraph}{Graph}} $\ast$\mbox{\hyperlink{classCoder_a1445c216b1c68d789be7fb8448b2a495}{graph}})
+\begin{DoxyCompactList}\small\item\em Set new graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structResult}{Result}} \mbox{\hyperlink{classCoder_ae04c18a74a2be38e39529cdb9973b128}{backtracking}} (int start\+\_\+vertex=0)
+\begin{DoxyCompactList}\small\item\em Backtracking algorithm (more used for small graphs) @\+Complexity -\/ O(b$^\wedge$d), where b is the branching factor and d is the depth of the recursion tree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structResult}{Result}} \mbox{\hyperlink{classCoder_afd28e5ab10c3053efd96ea17fcba31fd}{branch\+Bound}} (int start\+\_\+vertex=0)
+\begin{DoxyCompactList}\small\item\em Branch and Bound algorithm (more efficient than backtracking) @\+Complexity -\/O(\+V) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structResult}{Result}} \mbox{\hyperlink{classCoder_a88ed58a0ea446805b18b2634b89f1c26}{triangular\+Approximation}} (int start\+\_\+vertex=0)
+\begin{DoxyCompactList}\small\item\em Approximates the shortest Hamiltonian cycle using triangular approximation algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structResult}{Result}} \mbox{\hyperlink{classCoder_a4ea63f7fff73cbc3f780ef650964af0e}{nearest\+Neighbor}} (int start\+\_\+vertex=0)
+\begin{DoxyCompactList}\small\item\em This algorithm chooses the always the nearest vertex in the graph, so is greedy. It\textquotesingle{}s results are normally in the range of 1.\+5 to 2 times worst than the optimal solution given for example with backtracking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structResult}{Result}} \mbox{\hyperlink{classCoder_a9e97b0b4afab6f6100236c842ca78b33}{real\+World}} (int start\+\_\+vertex=0)
+\begin{DoxyCompactList}\small\item\em -\/$>$ The real world algorithm is very similar to nearest neighbor, but if a real path is not found, the result is gives no solution found, instead of trying to find new fake paths. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classCoder_ae6f74a564157353da3cc8fac91d6dc1d}{is\+Graph\+Complete}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the graph is complete. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCoder_ab1bf7d8748cc7909b3836e97b31f4dd7}{pre\+Order\+Visit}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$current, vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&t)
+\begin{DoxyCompactList}\small\item\em Visits vertices in pre-\/order traversal starting from the given vertex. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \mbox{\hyperlink{classCoder_a6462e2818b2b3e87b068708ab5957962}{prim}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$start)
+\begin{DoxyCompactList}\small\item\em Implements Prim\textquotesingle{}s algorithm to find the Minimum Spanning Tree (M\+ST) starting from a specified vertex. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCoder_a0a3418dc5a3c36dcd3d3f66400ba2359}{backtracking\+Helper}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$start, double \&min\+\_\+distance, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$current\+\_\+vertex, double current\+\_\+distance, \mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&path, \mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&min\+\_\+path, bool is\+\_\+complete)
+\begin{DoxyCompactList}\small\item\em Recursive helper function for the backtracking algorithm to find the shortest tour. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCoder_acf60211e4e7981b5a6ee6d9781246e9d}{branch\+Bound\+Helper}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$start, double \&min\+\_\+distance, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$current\+\_\+vertex, double current\+\_\+distance, \mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&path, \mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&min\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Recursive helper function for the Branch and Bound algorithm to find the shortest tour. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classCoder_aa2fbee127fff6c2678d66fbb0479fd1d}{start\+Timer}} (timespec \&start\+\_\+real, timespec \&start\+\_\+cpu)
+\begin{DoxyCompactList}\small\item\em Starts a timer to measure real and C\+PU time. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structTime}{Time}} \mbox{\hyperlink{classCoder_ad7e886ca4dcf9b8eeaa002c700fbdc5a}{stop\+Timer}} (timespec \&start\+\_\+real, timespec \&start\+\_\+cpu, double \&elapsed\+\_\+real, double \&elapsed\+\_\+cpu)
+\begin{DoxyCompactList}\small\item\em Stops the timer and calculates the elapsed real and C\+PU time. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classCoder_adbfee0170d84781c3e3f436775550fcc}{haversine\+Distance}} (\mbox{\hyperlink{classVertex}{Vertex}} $\ast$origin, \mbox{\hyperlink{classVertex}{Vertex}} $\ast$destination)
+\begin{DoxyCompactList}\small\item\em Calculates the Haversine distance between two vertices on the Earth\textquotesingle{}s surface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraph}{Graph}} $\ast$ \mbox{\hyperlink{classCoder_a1445c216b1c68d789be7fb8448b2a495}{graph}}
+\item 
+\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$ \mbox{\hyperlink{classCoder_a7c80c9143d61736fd9fcdef5bedb54ed}{vertices\+\_\+table}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+that contains the algorithms 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCoder_ae04c18a74a2be38e39529cdb9973b128}\label{classCoder_ae04c18a74a2be38e39529cdb9973b128}} 
+\index{Coder@{Coder}!backtracking@{backtracking}}
+\index{backtracking@{backtracking}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{backtracking()}{backtracking()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structResult}{Result}} Coder\+::backtracking (\begin{DoxyParamCaption}\item[{int}]{start\+\_\+vertex = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Backtracking algorithm (more used for small graphs) @\+Complexity -\/ O(b$^\wedge$d), where b is the branching factor and d is the depth of the recursion tree. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structResult}{Result}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCoder_a0a3418dc5a3c36dcd3d3f66400ba2359}\label{classCoder_a0a3418dc5a3c36dcd3d3f66400ba2359}} 
+\index{Coder@{Coder}!backtrackingHelper@{backtrackingHelper}}
+\index{backtrackingHelper@{backtrackingHelper}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{backtrackingHelper()}{backtrackingHelper()}}
+{\footnotesize\ttfamily void Coder\+::backtracking\+Helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{start,  }\item[{double \&}]{min\+\_\+distance,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{current\+\_\+vertex,  }\item[{double}]{current\+\_\+distance,  }\item[{\mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&}]{path,  }\item[{\mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&}]{min\+\_\+path,  }\item[{bool}]{is\+\_\+complete }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Recursive helper function for the backtracking algorithm to find the shortest tour. 
+
+This function is a recursive helper for the backtracking algorithm to find the shortest tour starting from a specified vertex. It explores all possible paths and backtracks when necessary.
+
+@complexity -\/ O(V!) in the worst case
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The starting vertex of the tour. \\
+\hline
+{\em min\+\_\+distance} & Reference to the minimum distance found so far. \\
+\hline
+{\em current\+\_\+vertex} & The current vertex being visited. \\
+\hline
+{\em current\+\_\+distance} & The current distance of the tour. \\
+\hline
+{\em path} & The current path being explored. \\
+\hline
+{\em min\+\_\+path} & Reference to the path representing the shortest tour found so far. \\
+\hline
+{\em is\+\_\+complete} & Flag indicating whether the graph is complete.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Backtracking implementation 
+\end{DoxyNote}
+\mbox{\Hypertarget{classCoder_afd28e5ab10c3053efd96ea17fcba31fd}\label{classCoder_afd28e5ab10c3053efd96ea17fcba31fd}} 
+\index{Coder@{Coder}!branchBound@{branchBound}}
+\index{branchBound@{branchBound}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{branchBound()}{branchBound()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structResult}{Result}} Coder\+::branch\+Bound (\begin{DoxyParamCaption}\item[{int}]{start\+\_\+vertex = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Branch and Bound algorithm (more efficient than backtracking) @\+Complexity -\/O(\+V) 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structResult}{Result}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCoder_acf60211e4e7981b5a6ee6d9781246e9d}\label{classCoder_acf60211e4e7981b5a6ee6d9781246e9d}} 
+\index{Coder@{Coder}!branchBoundHelper@{branchBoundHelper}}
+\index{branchBoundHelper@{branchBoundHelper}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{branchBoundHelper()}{branchBoundHelper()}}
+{\footnotesize\ttfamily void Coder\+::branch\+Bound\+Helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{start,  }\item[{double \&}]{min\+\_\+distance,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{current\+\_\+vertex,  }\item[{double}]{current\+\_\+distance,  }\item[{\mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&}]{path,  }\item[{\mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} \&}]{min\+\_\+path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Recursive helper function for the Branch and Bound algorithm to find the shortest tour. 
+
+This function is a recursive helper for the Branch and Bound algorithm to find the shortest tour starting from a specified vertex. It explores all possible paths using backtracking and prunes branches based on a lower bound on the tour length.
+
+@complexity -\/ O(V!) in the worst case
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The starting vertex of the tour. \\
+\hline
+{\em min\+\_\+distance} & Reference to the minimum distance found so far. \\
+\hline
+{\em current\+\_\+vertex} & The current vertex being visited in the tour. \\
+\hline
+{\em current\+\_\+distance} & The current distance of the tour. \\
+\hline
+{\em path} & The current path being explored. \\
+\hline
+{\em min\+\_\+path} & Reference to the path representing the shortest tour found so far.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Branch-\/bound implementation 
+\end{DoxyNote}
+\mbox{\Hypertarget{classCoder_adbfee0170d84781c3e3f436775550fcc}\label{classCoder_adbfee0170d84781c3e3f436775550fcc}} 
+\index{Coder@{Coder}!haversineDistance@{haversineDistance}}
+\index{haversineDistance@{haversineDistance}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{haversineDistance()}{haversineDistance()}}
+{\footnotesize\ttfamily double Coder\+::haversine\+Distance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{origin,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{destination }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Calculates the Haversine distance between two vertices on the Earth\textquotesingle{}s surface. 
+
+This function calculates the Haversine distance, which is the shortest distance over the earth\textquotesingle{}s surface given the longitude and latitude coordinates of two points.
+
+@\+Complexity -\/ O(1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & Pointer to the origin vertex. \\
+\hline
+{\em destination} & Pointer to the destination vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Haversine distance between the origin and destination vertices in meters.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Distance between two vertices 
+\end{DoxyNote}
+\mbox{\Hypertarget{classCoder_ae6f74a564157353da3cc8fac91d6dc1d}\label{classCoder_ae6f74a564157353da3cc8fac91d6dc1d}} 
+\index{Coder@{Coder}!isGraphComplete@{isGraphComplete}}
+\index{isGraphComplete@{isGraphComplete}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{isGraphComplete()}{isGraphComplete()}}
+{\footnotesize\ttfamily bool Coder\+::is\+Graph\+Complete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the graph is complete. 
+
+This function checks if the graph is complete, meaning each vertex is adjacent to every other vertex.
+
+@\+Complexity -\/ O(\+V$^\wedge$2)
+
+\begin{DoxyReturn}{Returns}
+True if the graph is complete, otherwise false.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+\mbox{\hyperlink{classGraph}{Graph}} checks 
+\end{DoxyNote}
+\mbox{\Hypertarget{classCoder_a4ea63f7fff73cbc3f780ef650964af0e}\label{classCoder_a4ea63f7fff73cbc3f780ef650964af0e}} 
+\index{Coder@{Coder}!nearestNeighbor@{nearestNeighbor}}
+\index{nearestNeighbor@{nearestNeighbor}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{nearestNeighbor()}{nearestNeighbor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structResult}{Result}} Coder\+::nearest\+Neighbor (\begin{DoxyParamCaption}\item[{int}]{start\+\_\+vertex = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+This algorithm chooses the always the nearest vertex in the graph, so is greedy. It\textquotesingle{}s results are normally in the range of 1.\+5 to 2 times worst than the optimal solution given for example with backtracking. 
+
+@\+Complexity -\/ O(n$^\wedge$2)
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+vertex} & -\/ The vertex from which to start building the Hamiltonian cycle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Result\+Coder object containing the Hamiltonian cycle, its total distance, and the time taken for computation. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCoder_ab1bf7d8748cc7909b3836e97b31f4dd7}\label{classCoder_ab1bf7d8748cc7909b3836e97b31f4dd7}} 
+\index{Coder@{Coder}!preOrderVisit@{preOrderVisit}}
+\index{preOrderVisit@{preOrderVisit}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{preOrderVisit()}{preOrderVisit()}}
+{\footnotesize\ttfamily void Coder\+::pre\+Order\+Visit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{current,  }\item[{vector$<$ \mbox{\hyperlink{classVertex}{Vertex}} $\ast$ $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Visits vertices in pre-\/order traversal starting from the given vertex. 
+
+This function performs a pre-\/order traversal starting from the given vertex. It visits each vertex and its adjacent vertices in pre-\/order, adding them to the provided vector.
+
+@\+Complexity -\/ O(\+V)
+
+
+\begin{DoxyParams}{Parameters}
+{\em current} & The current vertex being visited. \\
+\hline
+{\em t} & Reference to a vector to store the vertices visited in pre-\/order. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCoder_a6462e2818b2b3e87b068708ab5957962}\label{classCoder_a6462e2818b2b3e87b068708ab5957962}} 
+\index{Coder@{Coder}!prim@{prim}}
+\index{prim@{prim}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{prim()}{prim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{Coder_8h_a6a73b1cbf014f4f775aa4971a68e503e}{Tour}} Coder\+::prim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}} $\ast$}]{start }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Implements Prim\textquotesingle{}s algorithm to find the Minimum Spanning Tree (M\+ST) starting from a specified vertex. 
+
+This function implements Prim\textquotesingle{}s algorithm to find the Minimum Spanning Tree (M\+ST) of the graph, starting from the specified start vertex. It returns the M\+ST as a tour.
+
+@\+Complexity -\/ O(V log V + E)
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & Pointer to the start vertex from which the algorithm begins. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Minimum Spanning Tree (M\+ST) represented as a tour. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCoder_a9e97b0b4afab6f6100236c842ca78b33}\label{classCoder_a9e97b0b4afab6f6100236c842ca78b33}} 
+\index{Coder@{Coder}!realWorld@{realWorld}}
+\index{realWorld@{realWorld}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{realWorld()}{realWorld()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structResult}{Result}} Coder\+::real\+World (\begin{DoxyParamCaption}\item[{int}]{start\+\_\+vertex = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+-\/$>$ The real world algorithm is very similar to nearest neighbor, but if a real path is not found, the result is gives no solution found, instead of trying to find new fake paths. 
+
+@\+Complexity -\/ O(n$^\wedge$2)
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+vertex} & -\/ The vertex from which to start building the Hamiltonian cycle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Result\+Coder object containing the Hamiltonian cycle, its total distance, and the time taken for computation. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCoder_a781d942ef8089d28fa36cec88336cfe9}\label{classCoder_a781d942ef8089d28fa36cec88336cfe9}} 
+\index{Coder@{Coder}!setNewGraph@{setNewGraph}}
+\index{setNewGraph@{setNewGraph}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{setNewGraph()}{setNewGraph()}}
+{\footnotesize\ttfamily void Coder\+::set\+New\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}} $\ast$}]{graph }\end{DoxyParamCaption})}
+
+
+
+Set new graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & -\/$>$ pointer to graph \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCoder_a99e240f019f7c0f08870ffddee08a618}\label{classCoder_a99e240f019f7c0f08870ffddee08a618}} 
+\index{Coder@{Coder}!setNewTable@{setNewTable}}
+\index{setNewTable@{setNewTable}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{setNewTable()}{setNewTable()}}
+{\footnotesize\ttfamily void Coder\+::set\+New\+Table (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$}]{table }\end{DoxyParamCaption})}
+
+
+
+Set new table for new imports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & -\/$>$ vertices table \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classCoder_aa2fbee127fff6c2678d66fbb0479fd1d}\label{classCoder_aa2fbee127fff6c2678d66fbb0479fd1d}} 
+\index{Coder@{Coder}!startTimer@{startTimer}}
+\index{startTimer@{startTimer}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{startTimer()}{startTimer()}}
+{\footnotesize\ttfamily void Coder\+::start\+Timer (\begin{DoxyParamCaption}\item[{timespec \&}]{start\+\_\+real,  }\item[{timespec \&}]{start\+\_\+cpu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Starts a timer to measure real and C\+PU time. 
+
+This function starts a timer to measure both real and C\+PU time. Real time is measured using C\+L\+O\+C\+K\+\_\+\+R\+E\+A\+L\+T\+I\+ME, which represents the actual time elapsed. C\+PU time is measured using C\+L\+O\+C\+K\+\_\+\+P\+R\+O\+C\+E\+S\+S\+\_\+\+C\+P\+U\+T\+I\+M\+E\+\_\+\+ID, which represents the C\+PU time consumed by the calling process.
+
+@\+Complexity -\/ O(1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+real} & Reference to a timespec structure to store the start time of real time. \\
+\hline
+{\em start\+\_\+cpu} & Reference to a timespec structure to store the start time of C\+PU time.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Timer implementation 
+\end{DoxyNote}
+\mbox{\Hypertarget{classCoder_ad7e886ca4dcf9b8eeaa002c700fbdc5a}\label{classCoder_ad7e886ca4dcf9b8eeaa002c700fbdc5a}} 
+\index{Coder@{Coder}!stopTimer@{stopTimer}}
+\index{stopTimer@{stopTimer}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{stopTimer()}{stopTimer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structTime}{Time}} Coder\+::stop\+Timer (\begin{DoxyParamCaption}\item[{timespec \&}]{start\+\_\+real,  }\item[{timespec \&}]{start\+\_\+cpu,  }\item[{double \&}]{elapsed\+\_\+real,  }\item[{double \&}]{elapsed\+\_\+cpu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Stops the timer and calculates the elapsed real and C\+PU time. 
+
+This function stops the timer, retrieves the end time for both real and C\+PU time, and calculates the elapsed time for both real and C\+PU time.
+
+@\+Complexity -\/ O(1)
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+real} & The start time of real time. \\
+\hline
+{\em start\+\_\+cpu} & The start time of C\+PU time. \\
+\hline
+{\em elapsed\+\_\+real} & Reference to a double variable to store the elapsed real time. \\
+\hline
+{\em elapsed\+\_\+cpu} & Reference to a double variable to store the elapsed C\+PU time. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{structTime}{Time}} object containing the elapsed real and C\+PU time. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classCoder_a88ed58a0ea446805b18b2634b89f1c26}\label{classCoder_a88ed58a0ea446805b18b2634b89f1c26}} 
+\index{Coder@{Coder}!triangularApproximation@{triangularApproximation}}
+\index{triangularApproximation@{triangularApproximation}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{triangularApproximation()}{triangularApproximation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structResult}{Result}} Coder\+::triangular\+Approximation (\begin{DoxyParamCaption}\item[{int}]{start\+\_\+vertex = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Approximates the shortest Hamiltonian cycle using triangular approximation algorithm. 
+
+This function calculates an approximation of the shortest Hamiltonian cycle starting from the specified vertex. It employs Prim\textquotesingle{}s algorithm to build a minimum spanning tree (M\+ST) and then adds a cycle edge to complete the cycle. The total distance of the cycle and the time taken for the computation are returned.
+
+@\+Complexity -\/ O(\+V$^\wedge$2)
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+vertex} & -\/ The vertex from which to start building the Hamiltonian cycle. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Result\+Coder object containing the Hamiltonian cycle, its total distance, and the time taken for computation. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classCoder_a1445c216b1c68d789be7fb8448b2a495}\label{classCoder_a1445c216b1c68d789be7fb8448b2a495}} 
+\index{Coder@{Coder}!graph@{graph}}
+\index{graph@{graph}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}}$\ast$ Coder\+::graph\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\hyperlink{classGraph}{Graph}} $>$ \mbox{\Hypertarget{classCoder_a7c80c9143d61736fd9fcdef5bedb54ed}\label{classCoder_a7c80c9143d61736fd9fcdef5bedb54ed}} 
+\index{Coder@{Coder}!vertices\_table@{vertices\_table}}
+\index{vertices\_table@{vertices\_table}!Coder@{Coder}}
+\doxysubsubsection{\texorpdfstring{vertices\_table}{vertices\_table}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHashTable}{Hash\+Table}}$\ast$ Coder\+::vertices\+\_\+table\hspace{0.3cm}{\ttfamily [private]}}
+
+Vertices table $>$ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/controller/\mbox{\hyperlink{Coder_8h}{Coder.\+h}}\item 
+src/controller/\mbox{\hyperlink{Coder_8cpp}{Coder.\+cpp}}\end{DoxyCompactItemize}

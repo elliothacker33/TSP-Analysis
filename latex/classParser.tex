@@ -1,0 +1,166 @@
+\hypertarget{classParser}{}\doxysection{Parser Class Reference}
+\label{classParser}\index{Parser@{Parser}}
+
+
+{\ttfamily \#include $<$Parser.\+h$>$}
+
+
+
+Collaboration diagram for Parser\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{classParser__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classParser_a3aab07b00bb3bd73f440e240074212b2}{set\+New\+Table}} (\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Set new table for new imports. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classParser_a38af3dbd7e63a164c041666e4907aee6}{set\+New\+Graph}} (\mbox{\hyperlink{classGraph}{Graph}} $\ast$\mbox{\hyperlink{classParser_a87363b989f556b5fcd642cfac12d2078}{graph}})
+\begin{DoxyCompactList}\small\item\em Set new graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classParser_a4fa8ec37f0bb767426180adbcd12963f}{import\+Files}} (const string \&vertices\+\_\+path, int number\+\_\+of\+\_\+vertices, const string \&edges\+\_\+path, bool symmetric\+\_\+or\+\_\+real)
+\begin{DoxyCompactList}\small\item\em This method is a interface function that builds a \mbox{\hyperlink{classGraph}{Graph}} from a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classParser_acbd0e86ae6c04475ed43c21562f62eaf}{import\+Vertices}} (const string \&file\+\_\+path, int number\+\_\+of\+\_\+vertices)
+\begin{DoxyCompactList}\small\item\em Import vertices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classParser_ab8248fed3d819146468bba2bea8f9979}{import\+Edges}} (const string \&file\+\_\+path, bool symmetric\+\_\+or\+\_\+real)
+\item 
+void \mbox{\hyperlink{classParser_a4525c501a947cb892a132b0a6225d8b6}{import\+Vertices\+With\+Edges}} (const string \&file\+\_\+path, bool symmetric\+\_\+or\+\_\+real)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraph}{Graph}} $\ast$ \mbox{\hyperlink{classParser_a87363b989f556b5fcd642cfac12d2078}{graph}} = nullptr
+\item 
+\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$ \mbox{\hyperlink{classParser_a4514a8a20534134042bf0a42b77a64ca}{vertices\+\_\+table}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+$<$ Project headers $>$ $<$ S\+TD headers $>$ Class parser that is used to import graphs to test T\+SP 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classParser_ab8248fed3d819146468bba2bea8f9979}\label{classParser_ab8248fed3d819146468bba2bea8f9979}} 
+\index{Parser@{Parser}!importEdges@{importEdges}}
+\index{importEdges@{importEdges}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{importEdges()}{importEdges()}}
+{\footnotesize\ttfamily void Parser\+::import\+Edges (\begin{DoxyParamCaption}\item[{const string \&}]{file\+\_\+path,  }\item[{bool}]{symmetric\+\_\+or\+\_\+real }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+@breif Import edges 
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & -\/ edges path \\
+\hline
+{\em graph} & -\/ pointer to graph \\
+\hline
+{\em symmetric\+\_\+or\+\_\+real} & -\/$>$ Is the graph symmetric edges, or just save what needs to be processed (True -\/ symmetric, False -\/ real). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParser_a4fa8ec37f0bb767426180adbcd12963f}\label{classParser_a4fa8ec37f0bb767426180adbcd12963f}} 
+\index{Parser@{Parser}!importFiles@{importFiles}}
+\index{importFiles@{importFiles}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{importFiles()}{importFiles()}}
+{\footnotesize\ttfamily void Parser\+::import\+Files (\begin{DoxyParamCaption}\item[{const string \&}]{vertices\+\_\+path,  }\item[{int}]{number\+\_\+of\+\_\+vertices,  }\item[{const string \&}]{edges\+\_\+path,  }\item[{bool}]{symmetric\+\_\+or\+\_\+real }\end{DoxyParamCaption})}
+
+
+
+This method is a interface function that builds a \mbox{\hyperlink{classGraph}{Graph}} from a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices\+\_\+path} & -\/$>$ Vertices file path \\
+\hline
+{\em edges\+\_\+path} & -\/$>$ Edges file path \\
+\hline
+{\em number\+\_\+of\+\_\+vertices} & -\/$>$ number of vertices to process \\
+\hline
+{\em symmetric\+\_\+or\+\_\+real} & -\/$>$ Is the graph symmetric edges, or just save what needs to be processed. (True -\/ symmetric, False -\/ real) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParser_acbd0e86ae6c04475ed43c21562f62eaf}\label{classParser_acbd0e86ae6c04475ed43c21562f62eaf}} 
+\index{Parser@{Parser}!importVertices@{importVertices}}
+\index{importVertices@{importVertices}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{importVertices()}{importVertices()}}
+{\footnotesize\ttfamily void Parser\+::import\+Vertices (\begin{DoxyParamCaption}\item[{const string \&}]{file\+\_\+path,  }\item[{int}]{number\+\_\+of\+\_\+vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Import vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & -\/ vertices path \\
+\hline
+{\em graph} & -\/ pointer to graph \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParser_a4525c501a947cb892a132b0a6225d8b6}\label{classParser_a4525c501a947cb892a132b0a6225d8b6}} 
+\index{Parser@{Parser}!importVerticesWithEdges@{importVerticesWithEdges}}
+\index{importVerticesWithEdges@{importVerticesWithEdges}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{importVerticesWithEdges()}{importVerticesWithEdges()}}
+{\footnotesize\ttfamily void Parser\+::import\+Vertices\+With\+Edges (\begin{DoxyParamCaption}\item[{const string \&}]{file\+\_\+path,  }\item[{bool}]{symmetric\+\_\+or\+\_\+real }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Import vertices and edges at same time. 
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+path} & -\/ path containing both vertices and edges \\
+\hline
+{\em graph} & -\/ pointer to graph \\
+\hline
+{\em symmetric\+\_\+or\+\_\+real} & -\/$>$ Is the graph symmetric edges, or just save what needs to be processed (True -\/ symmetric, False -\/ real). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParser_a38af3dbd7e63a164c041666e4907aee6}\label{classParser_a38af3dbd7e63a164c041666e4907aee6}} 
+\index{Parser@{Parser}!setNewGraph@{setNewGraph}}
+\index{setNewGraph@{setNewGraph}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{setNewGraph()}{setNewGraph()}}
+{\footnotesize\ttfamily void Parser\+::set\+New\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}} $\ast$}]{graph }\end{DoxyParamCaption})}
+
+
+
+Set new graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & -\/$>$ pointer to graph \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classParser_a3aab07b00bb3bd73f440e240074212b2}\label{classParser_a3aab07b00bb3bd73f440e240074212b2}} 
+\index{Parser@{Parser}!setNewTable@{setNewTable}}
+\index{setNewTable@{setNewTable}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{setNewTable()}{setNewTable()}}
+{\footnotesize\ttfamily void Parser\+::set\+New\+Table (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$}]{table }\end{DoxyParamCaption})}
+
+
+
+Set new table for new imports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & -\/$>$ vertices table\\
+\hline
+\end{DoxyParams}
+$<$ Project headers $>$ $<$ S\+TD headers $>$ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classParser_a87363b989f556b5fcd642cfac12d2078}\label{classParser_a87363b989f556b5fcd642cfac12d2078}} 
+\index{Parser@{Parser}!graph@{graph}}
+\index{graph@{graph}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}}$\ast$ Parser\+::graph = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+Pointer to graph $>$ \mbox{\Hypertarget{classParser_a4514a8a20534134042bf0a42b77a64ca}\label{classParser_a4514a8a20534134042bf0a42b77a64ca}} 
+\index{Parser@{Parser}!vertices\_table@{vertices\_table}}
+\index{vertices\_table@{vertices\_table}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{vertices\_table}{vertices\_table}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHashTable}{Hash\+Table}}$\ast$ Parser\+::vertices\+\_\+table = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+Pointer to table $>$ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/controller/\mbox{\hyperlink{Parser_8h}{Parser.\+h}}\item 
+src/controller/\mbox{\hyperlink{Parser_8cpp}{Parser.\+cpp}}\end{DoxyCompactItemize}

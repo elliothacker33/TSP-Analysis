@@ -1,0 +1,156 @@
+\hypertarget{classManager}{}\doxysection{Manager Class Reference}
+\label{classManager}\index{Manager@{Manager}}
+
+
+{\ttfamily \#include $<$Manager.\+h$>$}
+
+
+
+Collaboration diagram for Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{Manager}} ()
+\item 
+\mbox{\hyperlink{classGraph}{Graph}} $\ast$ \mbox{\hyperlink{classManager_ab1d20d37fe54190c329c5c3e4bd505c2}{get\+Graph}} () const
+\item 
+\mbox{\hyperlink{classParser}{Parser}} $\ast$ \mbox{\hyperlink{classManager_a385d6f0558c5aad919be547c30f056e8}{get\+Parser}} () const
+\item 
+\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$ \mbox{\hyperlink{classManager_adf96bcf81a65394da584446406d097b3}{get\+Vertices\+Table}} () const
+\begin{DoxyCompactList}\small\item\em Get vertices used by manager. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCoder}{Coder}} $\ast$ \mbox{\hyperlink{classManager_a5e22c44d905383105dc0a06ddef71411}{get\+Coder}} () const
+\begin{DoxyCompactList}\small\item\em Get coder, interface for algorithms. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classManager_a06c5f263d2786baabd887b9dd661ebbd}{call\+Parser\+Import\+Files}} (const string \&vertices\+\_\+path, int number\+\_\+of\+\_\+vertices, const string \&edges\+\_\+path, bool symmetric\+\_\+or\+\_\+real)
+\item 
+\mbox{\hyperlink{classManager_a322cad25d7007438b3a043ad02253d29}{$\sim$\+Manager}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classParser}{Parser}} $\ast$ \mbox{\hyperlink{classManager_a43ec478bbd80bfa07b64993a4a76b40d}{parser}}
+\item 
+\mbox{\hyperlink{classGraph}{Graph}} $\ast$ \mbox{\hyperlink{classManager_a0b625d7d11ab782a335286d0e9175e83}{graph}}
+\item 
+\mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$ \mbox{\hyperlink{classManager_ab0b54146a38d9773593185c1de9d5fa4}{vertices\+\_\+table}}
+\item 
+\mbox{\hyperlink{classCoder}{Coder}} $\ast$ \mbox{\hyperlink{classManager_acb3f8cc32ca57d94fc8dd48bee00e8f2}{coder}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+$<$ Project headers $>$ $<$ S\+TD headers $>$ \begin{DoxyNote}{Note}
+Our way of doing multiple managers, respects the S\+R\+P-\/ Single responsibility principle 
+\end{DoxyNote}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}\label{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}} 
+\index{Manager@{Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{Manager()}{Manager()}}
+{\footnotesize\ttfamily Manager\+::\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+@constructor Constructor for class manager 
+\begin{DoxyParams}{Parameters}
+{\em n} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classManager_a322cad25d7007438b3a043ad02253d29}\label{classManager_a322cad25d7007438b3a043ad02253d29}} 
+\index{Manager@{Manager}!````~Manager@{$\sim$Manager}}
+\index{````~Manager@{$\sim$Manager}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{$\sim$Manager()}{~Manager()}}
+{\footnotesize\ttfamily Manager\+::$\sim$\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+@destructor Destructor for class manager 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classManager_a06c5f263d2786baabd887b9dd661ebbd}\label{classManager_a06c5f263d2786baabd887b9dd661ebbd}} 
+\index{Manager@{Manager}!callParserImportFiles@{callParserImportFiles}}
+\index{callParserImportFiles@{callParserImportFiles}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{callParserImportFiles()}{callParserImportFiles()}}
+{\footnotesize\ttfamily void Manager\+::call\+Parser\+Import\+Files (\begin{DoxyParamCaption}\item[{const string \&}]{vertices\+\_\+path,  }\item[{int}]{number\+\_\+of\+\_\+vertices,  }\item[{const string \&}]{edges\+\_\+path,  }\item[{bool}]{symmetric\+\_\+or\+\_\+real }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classManager_a5e22c44d905383105dc0a06ddef71411}\label{classManager_a5e22c44d905383105dc0a06ddef71411}} 
+\index{Manager@{Manager}!getCoder@{getCoder}}
+\index{getCoder@{getCoder}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{getCoder()}{getCoder()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCoder}{Coder}} $\ast$ Manager\+::get\+Coder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get coder, interface for algorithms. 
+
+\mbox{\Hypertarget{classManager_ab1d20d37fe54190c329c5c3e4bd505c2}\label{classManager_ab1d20d37fe54190c329c5c3e4bd505c2}} 
+\index{Manager@{Manager}!getGraph@{getGraph}}
+\index{getGraph@{getGraph}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}} $\ast$ Manager\+::get\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Get the graph used by the managers \begin{DoxyReturn}{Returns}
+graph 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classManager_a385d6f0558c5aad919be547c30f056e8}\label{classManager_a385d6f0558c5aad919be547c30f056e8}} 
+\index{Manager@{Manager}!getParser@{getParser}}
+\index{getParser@{getParser}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{getParser()}{getParser()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classParser}{Parser}} $\ast$ Manager\+::get\+Parser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Get parser used by manager \begin{DoxyReturn}{Returns}
+parser 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classManager_adf96bcf81a65394da584446406d097b3}\label{classManager_adf96bcf81a65394da584446406d097b3}} 
+\index{Manager@{Manager}!getVerticesTable@{getVerticesTable}}
+\index{getVerticesTable@{getVerticesTable}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{getVerticesTable()}{getVerticesTable()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHashTable}{Hash\+Table}} $\ast$ Manager\+::get\+Vertices\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get vertices used by manager. 
+
+\begin{DoxyNote}{Note}
+Our hashtable uses open-\/addressing with linear probing 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+vertices 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classManager_acb3f8cc32ca57d94fc8dd48bee00e8f2}\label{classManager_acb3f8cc32ca57d94fc8dd48bee00e8f2}} 
+\index{Manager@{Manager}!coder@{coder}}
+\index{coder@{coder}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{coder}{coder}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCoder}{Coder}}$\ast$ Manager\+::coder\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\hyperlink{classCoder}{Coder}} $>$ \mbox{\Hypertarget{classManager_a0b625d7d11ab782a335286d0e9175e83}\label{classManager_a0b625d7d11ab782a335286d0e9175e83}} 
+\index{Manager@{Manager}!graph@{graph}}
+\index{graph@{graph}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}}$\ast$ Manager\+::graph\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\hyperlink{classGraph}{Graph}} $>$ \mbox{\Hypertarget{classManager_a43ec478bbd80bfa07b64993a4a76b40d}\label{classManager_a43ec478bbd80bfa07b64993a4a76b40d}} 
+\index{Manager@{Manager}!parser@{parser}}
+\index{parser@{parser}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{parser}{parser}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classParser}{Parser}}$\ast$ Manager\+::parser\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\hyperlink{classParser}{Parser}} $>$ \mbox{\Hypertarget{classManager_ab0b54146a38d9773593185c1de9d5fa4}\label{classManager_ab0b54146a38d9773593185c1de9d5fa4}} 
+\index{Manager@{Manager}!vertices\_table@{vertices\_table}}
+\index{vertices\_table@{vertices\_table}!Manager@{Manager}}
+\doxysubsubsection{\texorpdfstring{vertices\_table}{vertices\_table}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classHashTable}{Hash\+Table}}$\ast$ Manager\+::vertices\+\_\+table\hspace{0.3cm}{\ttfamily [private]}}
+
+Vertices table $>$ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/controller/\mbox{\hyperlink{Manager_8h}{Manager.\+h}}\item 
+src/controller/\mbox{\hyperlink{Manager_8cpp}{Manager.\+cpp}}\end{DoxyCompactItemize}
