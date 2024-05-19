@@ -351,23 +351,6 @@ Result Coder::branchBound(int start_vertex) {
 }
 
 
-
-/**
- * @note Lin Khernigan implementation
- */
-
-double Coder::calculateTourCost(const Tour& tour){
-    double tour_cost = 0.0;
-    for (Edge* e : tour){
-       tour_cost += e->getDistance();
-    }
-    return tour_cost;
-}
-
-Result Coder::cristofides(int start_vertex) {
-    return {};
-}
-
 void Coder::preOrderVisit(Vertex *current, vector<Vertex*>& t) {
     for (Edge* e : current->getAdj()){
         if (e->getDestination()->getPath() == e  && !e->getDestination()->isVisited()){
@@ -409,7 +392,6 @@ Tour Coder::prim(Vertex* start) {
         if (v->isVisited()) continue;
         v->setVisited(true);
 
-        // First do a normal search, then calculate every distance to another edge if graph have coordinates.
         if (!v->getAdj().empty()) {
             for (Edge *e: v->getAdj()) {
                 if (!e->getDestination()->isVisited() && e->getDistance() < e->getDestination()->getKey()) {
@@ -449,8 +431,6 @@ Tour Coder::prim(Vertex* start) {
     start->setVisited(true);
     mst_v.push_back(start);
     preOrderVisit(start,mst_v);
-    // Check if mst_v is a spanning tree
-    cout << mst_v.size() << endl;
 
     // Get the mst (convert vector<Vertex*> to Tour)
     Tour mst;
@@ -506,7 +486,6 @@ Result Coder::triangularApproximation(int start_vertex) {
     }
 
     // The result could be an invalid spanning tree.
-    cout << mst.size() << endl;
     if (mst.size() != graph->getNumberOfVertexes()-1){
         return {};
     }
@@ -588,26 +567,6 @@ Result Coder::realWorld(int start_vertex) {
 
     // Nearest Neighbor
     Vertex* current = start;
-    /*while (tour.size() < graph->getNumberOfVertexes() - 1) {
-        Edge* min_edge = nullptr;
-        double min_distance = numeric_limits<double>::max();
-        for (Edge* e : current->getAdj()) {
-            if (e->getDestination()->isVisited()) {
-                continue;
-            }
-            if (e->getDistance() < min_distance) {
-                min_distance = e->getDistance();
-                min_edge = e;
-            }
-        }
-        if (min_edge == nullptr) {
-            break;
-        }
-        tour.push_back(min_edge);
-        total_distance += min_edge->getDistance();
-        current = min_edge->getDestination();
-        current->setVisited(true);
-    }*/
     while (tour.size() < graph->getNumberOfVertexes() -1){
         double min_distance = numeric_limits<double>::max();
         Edge* min_edge = nullptr;
@@ -640,6 +599,72 @@ Result Coder::realWorld(int start_vertex) {
     return {tour, total_distance, time};
 }
 
+Result Coder::nearestNeighbor(int start_vertex) {
+    return {};
+}
+
+Result Coder::cristofides(int start_vertex) {
+    if (isGraphComplete()){
+        timespec start_real{};
+        timespec start_cpu{};
+        double elapsed_real, elapsed_cpu;
+        startTimer(start_real, start_cpu);
+
+        // Get a minimum spanning tree and validate it.
+        Vertex* start = vertices_table->search(start_vertex);
+        if (start == nullptr){
+            throw CustomError("Null Ptr: start vertex is a null ptr",ERROR);
+        }
+
+        Tour mst = prim(start);
+
+        // If mst is empty, there is no path found
+        if (mst.empty()){
+            Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
+            return {mst,0,time};
+        }
+
+        // The result could be an invalid spanning tree.
+        if (mst.size() != graph->getNumberOfVertexes()-1){
+            return {};
+        }
+
+        for (Vertex* v : graph->getVertexSet()){
+            v->setVisited(false);
+        }
+
+        for (Edge* e : mst){
+            if (e->getOrigin()->isVisited()){
+                return {};
+            }
+            e->getOrigin()->setVisited(true);
+        }
+        Vertex* last_vertex = mst.back()->getDestination();
+        if (last_vertex->isVisited()){
+            return {};
+        }
+        last_vertex->setVisited(true);
+
+        for (Vertex* v : graph->getVertexSet()){
+            if (!v->isVisited()){
+                return {};
+            }
+            v->setVisited(false);
+        }
+
+        unordered_map<Vertex*, int> degree;
+
+        // Find vertices with odd degree in spanning tree.
+        for (int i = 0; i < mst.size(); i++){
+
+        }
+
+
+    }
+    // Start timer
+    cout << "Graph is not complete" << endl;
+    return {};
+}
 
 
 

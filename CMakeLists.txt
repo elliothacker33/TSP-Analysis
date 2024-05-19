@@ -22,8 +22,6 @@ add_executable(TSP_Analysis main.cpp
         src/controller/HashTable.h
         src/controller/Coder.cpp
         src/controller/Coder.h
-        src/controller/Visualizer.cpp
-        src/controller/Visualizer.h
         src/view/Menu.cpp
         src/view/Menu.h
 )

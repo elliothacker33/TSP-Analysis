@@ -101,13 +101,35 @@ private:
     */
     static string removeLeadingTrailingSpaces(const string& input);
 
+    /**
+     * @brief Display Results: including Tour, Time, and ond tour cost
+     * @param r
+     */
     static void displayResult(const Result& r);
 
+    /**
+     * @bried Used for getting files inside a folder
+     * @param path -> path of the folder
+     * @return Folder with path files
+     */
     static Folder getFolderContents(const string& path);
 
+    /**
+     * @brief Used for getting files inside a folder
+     * @param path -> path of the folder
+     * @return Folder with folder paths
+     */
     static Folder getFoldersInFolder(const string& path);
 
-    static bool askNumberOfVertices(int * n);
+    /**
+     * @brief Get the number of vertices in the graph
+     * @remark Only used for hashTable purposes
+     * @param n - number of vertices.
+     * @return number of vertices.
+     */
+
+    static bool askNumberOfVertices(int* n);
+
     /**
      * @brief Retrieves a number input within a specified range.
      * @param minInput The minimum allowed input value.
@@ -117,13 +139,24 @@ private:
      */
     static bool getNumberInput(int* option,int maxInput,int minInput = 1);
 
+    /**
+     * @brief Checks if a string is numeric
+     * @param number
+     * @return true @if numeric @else false
+     */
     static bool isNumber(string number);
+
+    /**
+     * @brief Choose a vertex from the graph using vertex_id
+     * @remark Checks if this vertex is in the hash_table
+     * @param vertex_id
+     */
     void chooseVertex(int& vertex_id);
 
     /* Get examples of input */
     /**
      * @brief Retrieves examples of vertices.
-     */
+    */
     void getVertexExamples();
 
 

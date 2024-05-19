@@ -6,12 +6,6 @@
 #include "../model/Graph.h"
 #include "../Exceptions/CustomError.h"
 
-struct KherniganCell{
-    Vertex* v; /**< Current vertex >**/
-    int i; /**< Current number of edges in trail >**/
-    double g; /**< Current trail gain >**/
-};
-
 /**
  * @struct Time
  * @param elapsed_real
@@ -87,16 +81,6 @@ public:
      * @param start_vertex -
      * @return
      */
-    Result held_karp(int start_vertex = 0);
-
-    /**
-     * @brief
-     *
-     * @Complexity
-     *
-     * @param start_vertex -
-     * @return
-     */
     Result cristofides(int start_vertex = 0);
 
     /**
@@ -109,18 +93,6 @@ public:
      */
     Result nearestNeighbor(int start_vertex = 0);
 
-    /**
-     * @brief Computes an approximate solution to the Traveling Salesman Problem using the Lin-Kernighan algorithm.
-     *
-     * This function computes an approximate solution to the Traveling Salesman Problem (TSP) using the Lin-Kernighan algorithm.
-     * The algorithm is designed for complete and symmetric graphs.
-     *
-     * @Complexity -
-     *
-     * @param start_vertex The vertex from which to start the tour.
-     * @return A ResultCoder object containing the computed tour, its total cost, and the time taken for computation.
-     */
-    Result linKhernigan(int start_vertex = 0);
 
     /**
      * @brief
@@ -182,7 +154,7 @@ private:
      * This function checks if the graph is symmetric, meaning for each edge from vertex A to vertex B,
      * there is a corresponding edge from vertex B to vertex A with the same weight.
      *
-     * @Complexity -  O(V * E^2
+     * @Complexity -  O(V * E^2)
      *
      * @return True if the graph is symmetric, otherwise false.
      */
@@ -213,45 +185,8 @@ private:
      * @return The total cost of traversing the tour.
      */
     double calculateTourCost(const Tour& tour);
-    static double haversineDistance(Vertex* origin, Vertex* destination);
-    bool cycleCheck(Tour mst);
 
-    /**
-     * @brief Builds an initial random tour starting from a specified vertex.
-     *
-     * This function constructs an initial random tour for the Traveling Salesman Problem (TSP),
-     * starting from the specified start vertex. The tour includes all vertices in the graph exactly once,
-     * except for the start vertex, which is visited first and last.
-     *
-     * @complexity - O(V log V)
-     *
-     * @param initialTour Reference to a Tour object to store the initial random tour.
-     * @param start_vertex The ID of the vertex from which to start the tour.
-     */
-    void buildInitialRandomTour(Tour &initialTour, int start_vertex);
 
-    /**
-     * @brief Checks if an edge is already present in a tour.
-     *
-     * This function checks if a given edge is already present in the specified tour.
-     *
-     * @complexity - O(n), where n is the number of edges in the tour t.
-     *
-     * @param e Pointer to the edge to be checked.
-     * @param t Reference to the tour where the presence of the edge is checked.
-     * @return True if the edge is already present in the tour, otherwise false.
-     */
-    bool edgeAlreadyOnTour(Edge* e, Tour& t);
-
-    /**
-     * @brief Checks if a given tour represents a Hamiltonian cycle.
-     *
-     * @Complexity - O(1)
-     *
-     * @param t The tour to be checked for Hamiltonian cycle property.
-     * @return True if the tour represents a Hamiltonian cycle, otherwise false.
-     */
-    bool isHamiltonian(const Tour& t);
 
     /**
      * @brief Calculates the Haversine distance between two vertices on the Earth's surface.
@@ -267,34 +202,6 @@ private:
      */
     static double haversineDistance(Vertex* origin, Vertex* destination);
 
-    /**
-     * @brief Creates a union tour from two input tours by combining their edges.
-     *
-     * This function creates a union tour from two input tours by combining their edges.
-     * It ensures that no duplicate edges are added to the resulting union tour.
-     *
-     * @complexity - O(m + n), where m and n are the sizes of the input tours respectively.
-     *
-     * @param t The first tour.
-     * @param trail_converted The second tour.
-     * @return The union tour containing all unique edges from both input tours.
-     */
-    Tour unionEdgesTourTrail(const Tour& t, const Tour& trail_converted);
-
-    /**
-     * @brief Computes the difference between two tours.
-     *
-     * This function finds the difference between two tours by identifying the edges that are present
-     * in one tour but not in the other. It ensures that no duplicate edges are added to the resulting
-     * difference tour.
-     *
-     * @complexity - O(m + n), where m and n are the sizes of the input tours respectively.
-     *
-     * @param t1 The first tour.
-     * @param t2 The second tour.
-     * @return The difference tour containing edges present in one tour but not in the other.
-     */
-    Tour differenceTour(const Tour& t1, const Tour& t2);
 
     /**
      * @brief Implements Prim's algorithm to find the Minimum Spanning Tree (MST) starting from a specified vertex.

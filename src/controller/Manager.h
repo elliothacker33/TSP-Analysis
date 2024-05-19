@@ -10,7 +10,6 @@
 #include "Parser.h"
 #include "HashTable.h"
 #include "Coder.h"
-#include "Visualizer.h"
 /**< STD headers >**/
 #include <unordered_map>
 
@@ -52,18 +51,6 @@ public:
 
      void callParserImportFiles(const string& vertices_path, int number_of_vertices, const string& edges_path, bool symmetric_or_real);
 
-
-
-    /**
-     * @brief Reset graph
-     */
-    void resetGraph();
-
-    /**
-     * @brief Reset manager
-     * @if manager is not initialized don't reset it.
-     */
-    void resetManager(int n);
 
     /**
      * @destructor Destructor for class manager
