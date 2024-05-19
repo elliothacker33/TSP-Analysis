@@ -322,17 +322,17 @@ void Menu::toyMenu(){
 
     switch (option) {
         case 1:
-            manager->callParserImportFiles("../data/Toy-Graphs/Toy-Graphs/shipping.csv", 14, "", mode);
+            manager->callParserImportFiles("../data/Toy-Graphs/shipping.csv", 14, "", mode);
             menuStack.push(&Menu::toyMenu);
             algorithmMenu();
             break;
         case 2:
-            manager->callParserImportFiles("../data/Toy-Graphs/Toy-Graphs/stadiums.csv", 10, "", mode);
+            manager->callParserImportFiles("../data/Toy-Graphs/stadiums.csv", 10, "", mode);
             menuStack.push(&Menu::toyMenu);
             algorithmMenu();
             break;
         case 3:
-            manager->callParserImportFiles("../data/Toy-Graphs/Toy-Graphs/tourism.csv", 5, "", mode);
+            manager->callParserImportFiles("../data/Toy-Graphs/tourism.csv", 5, "", mode);
             menuStack.push(&Menu::toyMenu);
             algorithmMenu();
             break;
@@ -372,82 +372,82 @@ void Menu::mediumMenu(){
 
     switch (option) {
         case 1:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 25,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_25.csv", mode);
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 25,
+                           "../data/Extra_Fully_Connected_Graphs/edges_25.csv", mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 2:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 50,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_50.csv", mode);
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 50,
+                           "../data/Extra_Fully_Connected_Graphs/edges_50.csv", mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 3:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 75,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_75.csv", mode);
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 75,
+                           "../data/Extra_Fully_Connected_Graphs/edges_75.csv", mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 4:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 100,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_100.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 100,
+                           "../data/Extra_Fully_Connected_Graphs/edges_100.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 5:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 200,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_200.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 200,
+                           "../data/Extra_Fully_Connected_Graphs/edges_200.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 6:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 300,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_300.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 300,
+                           "../data/Extra_Fully_Connected_Graphs/edges_300.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 7:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 400,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_400.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 400,
+                           "../data/Extra_Fully_Connected_Graphs/edges_400.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 8:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 500,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_500.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 500,
+                           "../data/Extra_Fully_Connected_Graphs/edges_500.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 9:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 600,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_600.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 600,
+                           "../data/Extra_Fully_Connected_Graphs/edges_600.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 10:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 700,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_700.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 700,
+                           "../data/Extra_Fully_Connected_Graphs/edges_700.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 11:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 800,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_800.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 800,
+                           "../data/Extra_Fully_Connected_Graphs/edges_800.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
             break;
         case 12:
-            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/nodes.csv", 900,
-                           "../data/Extra_Fully_Connected_Graphs/Extra_Fully_Connected_Graphs/edges_900.csv",
+            manager->callParserImportFiles("../data/Extra_Fully_Connected_Graphs/nodes.csv", 900,
+                           "../data/Extra_Fully_Connected_Graphs/edges_900.csv",
                            mode);
             menuStack.push(&Menu::mediumMenu);
             algorithmMenu();
@@ -478,20 +478,20 @@ void Menu::realWorldMenu(){
 
     switch (option) {
         case 1:
-            manager->callParserImportFiles("../data/Real-world Graphs/Real-world Graphs/graph1/nodes.csv", 1000,
-                           "../data/Real-world Graphs/Real-world Graphs/graph1/edges.csv", mode);
+            manager->callParserImportFiles("../data/Real-world Graphs/graph1/nodes.csv", 1000,
+                           "../data/Real-world Graphs/graph1/edges.csv", mode);
             menuStack.push(&Menu::realWorldMenu);
             algorithmMenu();
             break;
         case 2:
-            manager->callParserImportFiles("../data/Real-world Graphs/Real-world Graphs/graph2/nodes.csv", 5000,
-                           "../data/Real-world Graphs/Real-world Graphs/graph2/edges.csv", mode);
+            manager->callParserImportFiles("../data/Real-world Graphs/graph2/nodes.csv", 5000,
+                           "../data/Real-world Graphs/graph2/edges.csv", mode);
             menuStack.push(&Menu::realWorldMenu);
             algorithmMenu();
             break;
         case 3:
-            manager->callParserImportFiles("../data/Real-world Graphs/Real-world Graphs/graph3/nodes.csv", 10000,
-                           "../data/Real-world Graphs/Real-world Graphs/graph3/edges.csv", mode);
+            manager->callParserImportFiles("../data/Real-world Graphs/graph3/nodes.csv", 10000,
+                           "../data/Real-world Graphs/graph3/edges.csv", mode);
             menuStack.push(&Menu::realWorldMenu);
             algorithmMenu();
             break;

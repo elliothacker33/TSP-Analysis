@@ -549,7 +549,7 @@ Result Coder::realWorld(int start_vertex) {
             }
         }
         if (min_edge == nullptr){
-            throw CustomError("No path exists to return to the origin while visiting all nodes.", ERROR);
+            return {};
         }
         tour.push_back(min_edge);
         total_distance += min_distance;
