@@ -589,7 +589,6 @@ Result Coder::nearestNeighbor(int start_vertex) {
     Edge* min;
 
     do {
-
         min = nullptr;
         for (auto b : current->getAdj()){
             if (b->getDestination()->isVisited()){
@@ -637,7 +636,7 @@ Result Coder::nearestNeighbor(int start_vertex) {
             }
         }
 
-    } while(vertices.size() != graph->getVertexSet().size() and min != nullptr);
+    } while(vertices.size() != graph->getVertexSet().size());
 
     bool findCycle = false;
     for (auto a: res.back()->getDestination()->getAdj()){
