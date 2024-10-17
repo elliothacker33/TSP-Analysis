@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /home/tomas/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/233.14475.31/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis -B /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/cmake-build-debug
+=======
+/home/tomas/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis -B /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/cmake-build-debug
+>>>>>>> adaac58... Project to main
 CMake Deprecation Warning:
   Support for "Extra Generators" like
 
@@ -9,6 +13,7 @@ CMake Deprecation Warning:
   use the cmake-file-api(7) to view CMake-generated project build trees.
 
 
+<<<<<<< HEAD
 -- Configuring done (0.1s)
 -- Generating done (0.0s)
 -- Build files have been written to: /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/cmake-build-debug
@@ -27,6 +32,9 @@ CMake Deprecation Warning:
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Configuring done (1.2s)
+=======
+-- Configuring done (0.0s)
+>>>>>>> adaac58... Project to main
 -- Generating done (0.0s)
 -- Build files have been written to: C:/Users/Utilizador/Documents/ES/ES/TSP-Analysis/cmake-build-debug
 >>>>>>> origin/greed
