@@ -21,6 +21,13 @@ class Vertex;
  */
 class Edge {
 public:
+
+    // Overloading < operator
+    bool operator<(const Edge& obj) const
+    {
+        return distance < obj.getDistance();
+    }
+
     /**
      * @brief Constructs an edge between two locations with an origin-destination with a distance.
      * @param origin - Pointer to the origin vertex

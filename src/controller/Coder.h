@@ -73,34 +73,27 @@ public:
      */
     Result triangularApproximation(int start_vertex = 0);
 
-    /**
-     * @brief
-     *
-     * @Complexity
-     *
-     * @param start_vertex -
-     * @return
-     */
-    Result cristofides(int start_vertex = 0);
 
     /**
-     * @brief
+     * @brief This algorithm chooses the always the nearest vertex in the graph, so is greedy.
+     * It's results are normally in the range of 1.5 to 2 times worst than the optimal solution given for example with backtracking.
      *
-     * @Complexity
+     * @Complexity - O(n^2)
      *
-     * @param start_vertex -
-     * @return
+     * @param start_vertex - The vertex from which to start building the Hamiltonian cycle.
+     * @return A ResultCoder object containing the Hamiltonian cycle, its total distance, and the time taken for computation.
      */
     Result nearestNeighbor(int start_vertex = 0);
 
 
     /**
-     * @brief
+     * @brief -> The real world algorithm is very similar to nearest neighbor, but if a real path is not found, the
+     * result is gives no solution found, instead of trying to find new fake paths.
      *
-     * @Complexity
+     * @Complexity - O(n^2)
      *
-     * @param start_vertex -
-     * @return
+     * @param start_vertex - The vertex from which to start building the Hamiltonian cycle.
+     * @return A ResultCoder object containing the Hamiltonian cycle, its total distance, and the time taken for computation.
      */
     Result realWorld(int start_vertex = 0);
 
@@ -148,17 +141,6 @@ private:
      */
     bool isGraphComplete();
 
-    /**
-     * @brief Checks if the graph is symmetric.
-     *
-     * This function checks if the graph is symmetric, meaning for each edge from vertex A to vertex B,
-     * there is a corresponding edge from vertex B to vertex A with the same weight.
-     *
-     * @Complexity -  O(V * E^2)
-     *
-     * @return True if the graph is symmetric, otherwise false.
-     */
-    bool isGraphSymmetric();
 
     /**
      * @brief Visits vertices in pre-order traversal starting from the given vertex.
@@ -173,18 +155,6 @@ private:
      */
     void preOrderVisit(Vertex* current, vector<Vertex*>& t);
 
-    /**
-     * @brief Calculates the total cost of a tour.
-     *
-     *  This function calculates the total cost of traversing a tour, which is the sum of distances
-     *  of all edges in the tour.
-     *
-     * @complexity - O(n), where n is the number of edges in the tour.
-     *
-     * @param tour The tour for which to calculate the total cost.
-     * @return The total cost of traversing the tour.
-     */
-    double calculateTourCost(const Tour& tour);
 
 
 

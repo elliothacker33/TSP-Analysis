@@ -27,6 +27,12 @@ class Edge;
 
 class Vertex {
 public:
+
+
+    void setAdj(vector<Edge*> ad){
+        adj = ad;
+    }
+
     /**
      * @constructor Vertex constructor
      */
@@ -115,7 +121,6 @@ public:
      * @param isVisited The visited state to set.
      */
     void setVisited(bool _visited);
-
 
     /**
     * @brief Adds an edge to the vertex.

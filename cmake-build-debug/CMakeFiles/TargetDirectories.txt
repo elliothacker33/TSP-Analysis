@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/cmake-build-debug/CMakeFiles/TSP_Analysis.dir
 /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/tomas/Documentos/3_2semestre/algoritmos/TSP-Analysis/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+=======
+C:/Users/Utilizador/Documents/ES/ES/TSP-Analysis/cmake-build-debug/CMakeFiles/TSP_Analysis.dir
+C:/Users/Utilizador/Documents/ES/ES/TSP-Analysis/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Utilizador/Documents/ES/ES/TSP-Analysis/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+>>>>>>> origin/greed

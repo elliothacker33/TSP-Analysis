@@ -97,34 +97,6 @@ bool Coder::isGraphComplete() {
 }
 
 
-bool Coder::isGraphSymmetric(){
-    for (Vertex* v : graph->getVertexSet()){
-        if (v == nullptr){
-            throw CustomError("NullPtr error: vertex v is a nullptr", ERROR);
-        }
-        for (Edge* e : v->getAdj()){
-            if (e == nullptr){
-                throw CustomError("NullPtr error: edge e is a nullptr", ERROR);
-            }
-            bool check = false;
-            for (Edge* ed : e->getDestination()->getAdj()){
-                if (ed == nullptr){
-                    throw CustomError("NullPtr error: edge ed is a nullptr", ERROR);
-                }
-                if (ed->getDestination() == e->getOrigin()){
-                    if (ed->getDistance() == e->getDistance()){
-                        check = true;
-                    }
-                    break;
-                }
-            }
-            if (!check)
-                return false;
-        }
-    }
-    return true;
-}
-
 /**
   @note Backtracking implementation
  */
@@ -599,71 +571,106 @@ Result Coder::realWorld(int start_vertex) {
     return {tour, total_distance, time};
 }
 
+
 Result Coder::nearestNeighbor(int start_vertex) {
-    return {};
-}
+    timespec start_real{};
+    timespec start_cpu{};
+    double elapsed_real, elapsed_cpu;
+    startTimer(start_real, start_cpu);
 
-Result Coder::cristofides(int start_vertex) {
-    if (isGraphComplete()){
-        timespec start_real{};
-        timespec start_cpu{};
-        double elapsed_real, elapsed_cpu;
-        startTimer(start_real, start_cpu);
+    Tour res;
+    vector <Vertex*> vertices;
 
-        // Get a minimum spanning tree and validate it.
-        Vertex* start = vertices_table->search(start_vertex);
-        if (start == nullptr){
-            throw CustomError("Null Ptr: start vertex is a null ptr",ERROR);
-        }
+    Vertex* start = vertices_table->search(start_vertex);
+    Vertex* current = start;
 
-        Tour mst = prim(start);
+    current->setVisited(true);
+    vertices.push_back(current);
+    Edge* min;
 
-        // If mst is empty, there is no path found
-        if (mst.empty()){
-            Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
-            return {mst,0,time};
-        }
+    do {
 
-        // The result could be an invalid spanning tree.
-        if (mst.size() != graph->getNumberOfVertexes()-1){
-            return {};
-        }
-
-        for (Vertex* v : graph->getVertexSet()){
-            v->setVisited(false);
-        }
-
-        for (Edge* e : mst){
-            if (e->getOrigin()->isVisited()){
-                return {};
+        min = nullptr;
+        for (auto b : current->getAdj()){
+            if (b->getDestination()->isVisited()){
+                continue;
             }
-            e->getOrigin()->setVisited(true);
-        }
-        Vertex* last_vertex = mst.back()->getDestination();
-        if (last_vertex->isVisited()){
-            return {};
-        }
-        last_vertex->setVisited(true);
-
-        for (Vertex* v : graph->getVertexSet()){
-            if (!v->isVisited()){
-                return {};
+            if (min == nullptr){
+                min = b;
             }
-            v->setVisited(false);
+            else if (min > b){
+                min = b;
+            }
         }
 
-        unordered_map<Vertex*, int> degree;
-
-        // Find vertices with odd degree in spanning tree.
-        for (int i = 0; i < mst.size(); i++){
-
+        if(min != nullptr) {
+            res.push_back(min);
+            vertices.push_back(min->getDestination());
+            min->getDestination()->setVisited(true);
+            current = min->getDestination();
+        }
+        else{
+            double min_distance = INT32_MAX;
+            Vertex* dest = nullptr;
+            for (auto a : graph->getVertexSet()){
+                if (!a->isVisited()){
+                    if (a->getCoordinates() == nullptr || current->getCoordinates() == nullptr){
+                        continue;
+                    }
+                    else{
+                        double distance = haversineDistance(current,a);
+                        if (distance < min_distance ){
+                            min_distance = distance;
+                            dest = a;
+                        }
+                    }
+                }
+            }
+            if (dest == nullptr){
+                return {}; // No solution found
+            }
+            else{
+                graph->addEdge(current,dest,min_distance);
+                vertices.push_back(dest);
+                dest->setVisited(true);
+                current = dest;
+            }
         }
 
+    } while(vertices.size() != graph->getVertexSet().size() and min != nullptr);
 
+    bool findCycle = false;
+    for (auto a: res.back()->getDestination()->getAdj()){
+        if(a->getDestination()->getId() == start->getId()){
+            findCycle = true;
+            res.push_back(a);
+            break;
+        }
     }
-    // Start timer
-    cout << "Graph is not complete" << endl;
-    return {};
+
+    if (!findCycle) {
+        if (res.back()->getDestination()->getCoordinates() == nullptr || start->getCoordinates() == nullptr) {
+            return {}; // No solution found
+        } else {
+            double distance = haversineDistance(res.back()->getDestination(), start);
+            Edge *cycle = graph->addEdge(res.back()->getDestination(), start, distance);
+            res.push_back(cycle);
+        }
+    }
+
+    // Get the result
+    double distance = 0.0;
+    for (Edge* e : res){
+        distance += e->getDistance();
+    }
+
+    // Finish timer
+    Time time = stopTimer(start_real,start_cpu,elapsed_real,elapsed_cpu);
+
+    graph->resetVisited();
+
+    return { res, distance, time };
+
 }
 
 

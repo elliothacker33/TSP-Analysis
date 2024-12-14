@@ -519,10 +519,10 @@ void Menu::algorithmMenu() {
         cout << "    Algorithms (Recommended for Large Graphs) " << endl;
         cout << "                                              " << endl;
         cout << "         2. Triangular Approximation - Prim   " << endl;
-        cout << "         3. Other Heuristic (Cristofides)     " << endl;
-        cout << "         4. TSP in real World                 " << endl;
-        cout << "                                              " << endl;
-        cout << "          Extra Algorithms and Metrics       " << endl;
+        cout << "         3. Other Heuristic (Nearest Neighbor) " << endl;
+        cout << "         4. TSP in real World                  " << endl;
+        cout << "                                               " << endl;
+        cout << "          Extra Algorithms and Metrics        " << endl;
         cout << "                                              " << endl;
         cout << "                   5. Extra                   " << endl;
         cout << "                                              " << endl;
@@ -568,11 +568,11 @@ void Menu::algorithmMenu() {
             if (vertex_chosen == -1) {
                 algorithmMenu();
             } else if (vertex_chosen == 0) {
-                r = manager->getCoder()->cristofides();
+                r = manager->getCoder()->nearestNeighbor();
                 displayResult(r);
                 algorithmMenu();
             } else {
-                r = manager->getCoder()->cristofides(vertex_chosen);
+                r = manager->getCoder()->nearestNeighbor(vertex_chosen);
                 displayResult(r);
                 algorithmMenu();
             }
@@ -611,32 +611,16 @@ void Menu::extraMenu() {
         cout << "----------------------------------------------" << endl;
         cout << "              Menu -> Extra algorithm         " << endl;
         cout << "                                              " << endl;
-        cout << "              1. Lin Khernigan heuristic      " << endl;
-        cout << "              2. Branch and bound             " << endl;
-        cout << "              3. Held-Karp algorithm          " << endl;
-        cout << "              4. Go back                      " << endl;
+        cout << "              1. Branch and bound             " << endl;
+        cout << "              2. Go back                      " << endl;
         cout << "                                              " << endl;
         cout << "----------------------------------------------" << endl;
-    } while (!getNumberInput(&option,4,1));
+    } while (!getNumberInput(&option,2,1));
     Result r;
     int vertex_chosen;
 
     switch(option){
         case 1:
-            chooseVertex(vertex_chosen);
-            if (vertex_chosen == -1) {
-            extraMenu();
-        } else if (vertex_chosen == 0) {
-            r = manager->getCoder()->branchBound();
-            displayResult(r);
-            extraMenu();
-        } else {
-            r = manager->getCoder()->branchBound(vertex_chosen);
-            displayResult(r);
-            extraMenu();
-        }
-        break;
-        case 2:
             chooseVertex(vertex_chosen);
             if (vertex_chosen == -1) {
                 extraMenu();
@@ -650,7 +634,7 @@ void Menu::extraMenu() {
                 extraMenu();
             }
             break;
-        case 4:
+        case 2:
             goBack();
             break;
         default:
