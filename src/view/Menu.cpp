@@ -246,6 +246,7 @@ void Menu::dataSetMenu() {
         case 4:
             menuStack.push(&Menu::dataSetMenu);
             yourDataSetMenu();
+            break;
         case 5:
             goBack();
             break;

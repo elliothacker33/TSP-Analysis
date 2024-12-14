@@ -1,2 +1,6 @@
-data/*
+data/__MACOSX 
+data/Extra_Fully_Connected_Graphs
+data/Real-world Graphs
+data/Toy-Graphs
 .idea/*
+
