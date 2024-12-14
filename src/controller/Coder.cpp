@@ -485,9 +485,8 @@ Result Coder::triangularApproximation(int start_vertex) {
         v->setVisited(false);
     }
 
-    // Find edge for completing the cycle
-
     bool findEdge = false;
+    // Find edge for completing the cycle
     for (Edge* e : last_vertex->getAdj()){
         if (e == nullptr){
             throw CustomError("Null Ptr: edge is a null ptr",ERROR);
@@ -672,6 +671,3 @@ Result Coder::nearestNeighbor(int start_vertex) {
     return { res, distance, time };
 
 }
-
-
-
